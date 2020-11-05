@@ -24,6 +24,7 @@ import 'package:flutter_tools/src/convert.dart';
 import 'package:flutter_tools/src/devfs.dart';
 import 'package:flutter_tools/src/device.dart';
 import 'package:flutter_tools/src/globals.dart' as globals;
+import 'package:flutter_tools/src/project.dart';
 import 'package:flutter_tools/src/reporting/reporting.dart';
 import 'package:flutter_tools/src/resident_runner.dart';
 import 'package:flutter_tools/src/run_cold.dart';
@@ -56,7 +57,6 @@ final vm_service.Isolate fakeUnpausedIsolate = vm_service.Isolate(
   pauseOnExit: false,
   runnable: true,
   startTime: 0,
-  isSystemIsolate: false,
 );
 
 final vm_service.Isolate fakePausedIsolate = vm_service.Isolate(
@@ -84,7 +84,6 @@ final vm_service.Isolate fakePausedIsolate = vm_service.Isolate(
   pauseOnExit: false,
   runnable: true,
   startTime: 0,
-  isSystemIsolate: false,
 );
 
 final vm_service.VM fakeVM = vm_service.VM(
@@ -98,8 +97,6 @@ final vm_service.VM fakeVM = vm_service.VM(
   architectureBits: 64,
   operatingSystem: '',
   version: '',
-  systemIsolateGroups: <vm_service.IsolateGroupRef>[],
-  systemIsolates: <vm_service.IsolateRef>[],
 );
 
 final FlutterView fakeFlutterView = FlutterView(
@@ -114,15 +111,6 @@ final FakeVmServiceRequest listViews = FakeVmServiceRequest(
       fakeFlutterView.toJson(),
     ],
   },
-);
-
-const FakeVmServiceRequest setAssetBundlePath = FakeVmServiceRequest(
-  method: '_flutter.setAssetBundlePath',
-  args: <String, Object>{
-    'viewId': 'a',
-    'assetDirectory': 'build/flutter_assets',
-    'isolateId': '1',
-  }
 );
 
 void main() {
@@ -181,7 +169,7 @@ void main() {
       return UpdateFSReport(
         success: true,
         syncedBytes: 0,
-        invalidatedSourcesCount: 1,
+        invalidatedSourcesCount: 0,
       );
     });
     when(mockFlutterDevice.devFS).thenReturn(mockDevFS);
@@ -207,7 +195,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     final Completer<DebugConnectionInfo> onConnectionInfo = Completer<DebugConnectionInfo>.sync();
     final Completer<void> onAppStart = Completer<void>.sync();
@@ -233,7 +220,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     final MockResidentCompiler residentCompiler = MockResidentCompiler();
     residentRunner = HotRunner(
@@ -360,7 +346,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     final MockResidentCompiler residentCompiler = MockResidentCompiler();
     residentRunner = HotRunner(
@@ -403,7 +388,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
       listViews,
       FakeVmServiceRequest(
         method: 'getIsolate',
@@ -482,7 +466,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
       listViews,
     ]);
     when(mockDevice.sdkNameAndVersion).thenAnswer((Invocation invocation) async {
@@ -532,66 +515,10 @@ void main() {
     Usage: () => MockUsage(),
   }));
 
-  testUsingContext('ResidentRunner can handle an reload-barred exception from hot reload', () => testbed.run(() async {
-    fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
-      listViews,
-      listViews,
-      setAssetBundlePath,
-      listViews,
-    ]);
-    when(mockDevice.sdkNameAndVersion).thenAnswer((Invocation invocation) async {
-      return 'Example';
-    });
-    when(mockDevice.targetPlatform).thenAnswer((Invocation invocation) async {
-      return TargetPlatform.android_arm;
-    });
-    when(mockDevice.isLocalEmulator).thenAnswer((Invocation invocation) async {
-      return false;
-    });
-    final Completer<DebugConnectionInfo> onConnectionInfo = Completer<DebugConnectionInfo>.sync();
-    final Completer<void> onAppStart = Completer<void>.sync();
-    unawaited(residentRunner.attach(
-      appStartedCompleter: onAppStart,
-      connectionInfoCompleter: onConnectionInfo,
-    ));
-    await onAppStart.future;
-    when(mockFlutterDevice.updateDevFS(
-      mainUri: anyNamed('mainUri'),
-      target: anyNamed('target'),
-      bundle: anyNamed('bundle'),
-      firstBuildTime: anyNamed('firstBuildTime'),
-      bundleFirstUpload: anyNamed('bundleFirstUpload'),
-      bundleDirty: anyNamed('bundleDirty'),
-      fullRestart: anyNamed('fullRestart'),
-      projectRootPath: anyNamed('projectRootPath'),
-      pathToReload: anyNamed('pathToReload'),
-      invalidatedFiles: anyNamed('invalidatedFiles'),
-      dillOutputPath: anyNamed('dillOutputPath'),
-      packageConfig: anyNamed('packageConfig'),
-    )).thenThrow(vm_service.RPCError('something bad happened', kIsolateReloadBarred, ''));
-
-    final OperationResult result = await residentRunner.restart(fullRestart: false);
-    expect(result.fatal, true);
-    expect(result.code, kIsolateReloadBarred);
-    expect(result.message, contains('Unable to hot reload application due to an unrecoverable error'));
-    verify(globals.flutterUsage.sendEvent('hot', 'reload-barred', parameters: <String, String>{
-      cdKey(CustomDimensions.hotEventTargetPlatform):
-        getNameForTargetPlatform(TargetPlatform.android_arm),
-      cdKey(CustomDimensions.hotEventSdkName): 'Example',
-      cdKey(CustomDimensions.hotEventEmulator): 'false',
-      cdKey(CustomDimensions.hotEventFullRestart): 'false',
-      cdKey(CustomDimensions.nullSafety): 'false',
-    })).called(1);
-    expect(fakeVmServiceHost.hasRemainingExpectations, false);
-  }, overrides: <Type, Generator>{
-    Usage: () => MockUsage(),
-  }));
-
   testUsingContext('ResidentRunner reports hot reload event with null safety analytics', () => testbed.run(() async {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
       listViews,
     ]);
     residentRunner = HotRunner(
@@ -652,78 +579,20 @@ void main() {
     Usage: () => MockUsage(),
   }));
 
-  testUsingContext('ResidentRunner does not reload sources if no sources changed', () => testbed.run(() async {
-    fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
-     listViews,
-      listViews,
-      setAssetBundlePath,
-      listViews,
-      FakeVmServiceRequest(
-        method: 'getIsolate',
-        args: <String, Object>{
-          'isolateId': '1',
-        },
-        jsonResponse: fakeUnpausedIsolate.toJson(),
-      ),
-      FakeVmServiceRequest(
-        method: 'ext.flutter.reassemble',
-        args: <String, Object>{
-          'isolateId': fakeUnpausedIsolate.id,
-        },
-      ),
-    ]);
-    residentRunner = HotRunner(
-      <FlutterDevice>[
-        mockFlutterDevice,
-      ],
-      stayResident: false,
-      debuggingOptions: DebuggingOptions.enabled(BuildInfo.debug),
-    );
-    when(mockDevice.sdkNameAndVersion).thenAnswer((Invocation invocation) async {
-      return 'Example';
-    });
-    when(mockDevice.targetPlatform).thenAnswer((Invocation invocation) async {
-      return TargetPlatform.android_arm;
-    });
-    when(mockDevice.isLocalEmulator).thenAnswer((Invocation invocation) async {
-      return false;
-    });
-    final Completer<DebugConnectionInfo> onConnectionInfo = Completer<DebugConnectionInfo>.sync();
-    final Completer<void> onAppStart = Completer<void>.sync();
-    unawaited(residentRunner.attach(
-      appStartedCompleter: onAppStart,
-      connectionInfoCompleter: onConnectionInfo,
-    ));
-    await onAppStart.future;
-    when(mockFlutterDevice.updateDevFS(
-      mainUri: anyNamed('mainUri'),
-      target: anyNamed('target'),
-      bundle: anyNamed('bundle'),
-      firstBuildTime: anyNamed('firstBuildTime'),
-      bundleFirstUpload: anyNamed('bundleFirstUpload'),
-      bundleDirty: anyNamed('bundleDirty'),
-      fullRestart: anyNamed('fullRestart'),
-      projectRootPath: anyNamed('projectRootPath'),
-      pathToReload: anyNamed('pathToReload'),
-      invalidatedFiles: anyNamed('invalidatedFiles'),
-      dillOutputPath: anyNamed('dillOutputPath'),
-      packageConfig: anyNamed('packageConfig'),
-    )).thenAnswer((Invocation _) async {
-      return UpdateFSReport(success: true, invalidatedSourcesCount: 0);
-    });
-
-    final OperationResult result = await residentRunner.restart(fullRestart: false);
-
-    expect(result.code, 0);
-    expect(fakeVmServiceHost.hasRemainingExpectations, false);
-  }));
-
   testUsingContext('ResidentRunner reports error with missing entrypoint file', () => testbed.run(() async {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
       listViews,
+      listViews,
+      const FakeVmServiceRequest(
+        method: '_flutter.setAssetBundlePath',
+        args: <String, Object>{
+          'viewId': 'a',
+          'assetDirectory': 'build/flutter_assets',
+          'isolateId': '1',
+        }
+      ),
       FakeVmServiceRequest(
         method: 'getVM',
         jsonResponse: vm_service.VM.parse(<String, Object>{
@@ -747,6 +616,7 @@ void main() {
           },
         },
       ),
+      listViews,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -791,7 +661,7 @@ void main() {
       dillOutputPath: anyNamed('dillOutputPath'),
       packageConfig: anyNamed('packageConfig'),
     )).thenAnswer((Invocation invocation) async {
-      return UpdateFSReport(success: true, invalidatedSourcesCount: 1);
+      return UpdateFSReport(success: true);
     });
 
     final OperationResult result = await residentRunner.restart(fullRestart: false);
@@ -806,8 +676,16 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
       listViews,
+      listViews,
+      const FakeVmServiceRequest(
+        method: '_flutter.setAssetBundlePath',
+        args: <String, Object>{
+          'viewId': 'a',
+          'assetDirectory': 'build/flutter_assets',
+          'isolateId': '1',
+        }
+      ),
       FakeVmServiceRequest(
         method: 'getVM',
         jsonResponse: vm_service.VM.parse(<String, Object>{
@@ -879,7 +757,7 @@ void main() {
       dillOutputPath: anyNamed('dillOutputPath'),
       packageConfig: anyNamed('packageConfig'),
     )).thenAnswer((Invocation invocation) async {
-      return UpdateFSReport(success: true, invalidatedSourcesCount: 1);
+      return UpdateFSReport(success: true);
     });
 
     final OperationResult result = await residentRunner.restart(fullRestart: false);
@@ -895,7 +773,15 @@ void main() {
       listViews,
       listViews,
       listViews,
-      setAssetBundlePath,
+      listViews,
+      const FakeVmServiceRequest(
+        method: '_flutter.setAssetBundlePath',
+        args: <String, Object>{
+          'viewId': 'a',
+          'assetDirectory': 'build/flutter_assets',
+          'isolateId': '1',
+        }
+      ),
       FakeVmServiceRequest(
         method: 'getVM',
         jsonResponse: vm_service.VM.parse(<String, Object>{
@@ -919,6 +805,7 @@ void main() {
           },
         },
       ),
+      listViews,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -970,11 +857,19 @@ void main() {
       ),
       listViews,
       listViews,
+      listViews,
+      const FakeVmServiceRequest(
+        method: '_flutter.setAssetBundlePath',
+        args: <String, Object>{
+          'viewId': 'a',
+          'assetDirectory': 'build/flutter_assets',
+          'isolateId': '1',
+        }
+      ),
       FakeVmServiceRequest(
         method: 'getVM',
         jsonResponse: fakeVM.toJson(),
       ),
-      setAssetBundlePath,
       const FakeVmServiceRequest(
         method: 'reloadSources',
         args: <String, Object>{
@@ -990,6 +885,7 @@ void main() {
           },
         },
       ),
+      listViews,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -1043,11 +939,7 @@ void main() {
       invalidatedFiles: anyNamed('invalidatedFiles'),
       packageConfig: anyNamed('packageConfig'),
     )).thenAnswer((Invocation invocation) async {
-      return UpdateFSReport(
-        success: true,
-        fastReassembleClassName: 'FOO',
-        invalidatedSourcesCount: 1,
-      );
+      return UpdateFSReport(success: true, fastReassembleClassName: 'FOO');
     });
 
     final Completer<DebugConnectionInfo> onConnectionInfo = Completer<DebugConnectionInfo>.sync();
@@ -1078,7 +970,6 @@ void main() {
       listViews,
       listViews,
       listViews,
-      setAssetBundlePath,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -1148,7 +1039,6 @@ void main() {
       listViews,
       listViews,
       listViews,
-      setAssetBundlePath,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -1224,7 +1114,6 @@ void main() {
       listViews,
       listViews,
       listViews,
-      setAssetBundlePath,
       FakeVmServiceRequest(
         method: 'getIsolate',
         args: <String, Object>{
@@ -1355,7 +1244,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     when(mockDevice.sdkNameAndVersion).thenAnswer((Invocation invocation) async {
       return 'Example';
@@ -1431,8 +1319,7 @@ void main() {
   testUsingContext('ResidentRunner can run source generation', () => testbed.run(() async {
     final File arbFile = globals.fs.file(globals.fs.path.join('lib', 'l10n', 'app_en.arb'))
       ..createSync(recursive: true);
-    arbFile.writeAsStringSync('''
-{
+    arbFile.writeAsStringSync('''{
   "helloWorld": "Hello, World!",
   "@helloWorld": {
     "description": "Sample description"
@@ -1452,8 +1339,7 @@ void main() {
     // to app_en.arb.
     final File arbFile = globals.fs.file(globals.fs.path.join('lib', 'l10n', 'foo.arb'))
       ..createSync(recursive: true);
-    arbFile.writeAsStringSync('''
-{
+    arbFile.writeAsStringSync('''{
   "helloWorld": "Hello, World!",
   "@helloWorld": {
     "description": "Sample description"
@@ -1547,6 +1433,13 @@ void main() {
           ''
         ].join('\n')
     ));
+  }));
+
+  testUsingContext('ResidentRunner does support CanvasKit', () => testbed.run(() async {
+    fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[]);
+
+    expect(residentRunner.toggleCanvaskit,
+      throwsA(isA<Exception>()));
   }));
 
   testUsingContext('ResidentRunner handles writeSkSL returning no data', () => testbed.run(() async {
@@ -2218,7 +2111,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2244,7 +2136,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2271,7 +2162,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2306,7 +2196,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2341,7 +2230,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2369,7 +2257,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     setWsAddress(testUri, fakeVmServiceHost.vmService);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
@@ -2397,45 +2284,11 @@ void main() {
     expect(await globals.fs.file(globals.fs.path.join('build', 'cache.dill.track.dill')).readAsString(), 'ABC');
   }));
 
-  testUsingContext('HotRunner copies compiled app.dill to cache during startup with --sound-null-safety', () => testbed.run(() async {
-    fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
-      listViews,
-      listViews,
-      setAssetBundlePath,
-    ]);
-    setWsAddress(testUri, fakeVmServiceHost.vmService);
-    globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
-    residentRunner = HotRunner(
-      <FlutterDevice>[
-        mockFlutterDevice,
-      ],
-      stayResident: false,
-      debuggingOptions: DebuggingOptions.enabled(const BuildInfo(
-        BuildMode.debug,
-        '',
-        treeShakeIcons: false,
-        trackWidgetCreation: true,
-        nullSafetyMode: NullSafetyMode.sound,
-      )),
-    );
-    residentRunner.artifactDirectory.childFile('app.dill').writeAsStringSync('ABC');
-    when(mockFlutterDevice.runHot(
-      hotRunner: anyNamed('hotRunner'),
-      route: anyNamed('route'),
-    )).thenAnswer((Invocation invocation) async {
-      return 0;
-    });
-    await residentRunner.run();
-
-    expect(await globals.fs.file(globals.fs.path.join('build', 'cache.dill.sound.track.dill')).readAsString(), 'ABC');
-  }));
-
 
   testUsingContext('HotRunner unforwards device ports', () => testbed.run(() async {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     final MockDevicePortForwarder mockPortForwarder = MockDevicePortForwarder();
     when(mockDevice.portForwarder).thenReturn(mockPortForwarder);
@@ -2467,7 +2320,6 @@ void main() {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[
       listViews,
       listViews,
-      setAssetBundlePath,
     ]);
     globals.fs.file(globals.fs.path.join('lib', 'main.dart')).createSync(recursive: true);
     residentRunner = HotRunner(
@@ -2532,6 +2384,7 @@ void main() {
         treeShakeIcons: false,
         nullSafetyMode: NullSafetyMode.unsound,
       ),
+      flutterProject: FlutterProject.current(),
       target: null,
       platform: FakePlatform(operatingSystem: 'linux'),
     )).generator as DefaultResidentCompiler;
@@ -2566,6 +2419,7 @@ void main() {
         treeShakeIcons: false,
         extraFrontEndOptions: <String>['--enable-experiment=non-nullable'],
       ),
+      flutterProject: FlutterProject.current(),
       target: null,
       platform: FakePlatform(operatingSystem: 'linux'),
     )).generator as DefaultResidentCompiler;
@@ -2583,7 +2437,7 @@ void main() {
     Artifacts: () => Artifacts.test(),
     FileSystem: () => MemoryFileSystem.test(),
     ProcessManager: () => FakeProcessManager.any(),
-  }, skip: true); // TODO(jonahwilliams): null safe autodetection does not work on the web.
+  });
 
   testUsingContext('FlutterDevice passes flutter-widget-cache flag when feature is enabled', () async {
     fakeVmServiceHost = FakeVmServiceHost(requests: <VmServiceExpectation>[]);
@@ -2600,6 +2454,7 @@ void main() {
         treeShakeIcons: false,
         extraFrontEndOptions: <String>[],
       ),
+      flutterProject: FlutterProject.current(),
       target: null, platform: null,
     )).generator as DefaultResidentCompiler;
 

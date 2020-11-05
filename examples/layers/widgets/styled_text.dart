@@ -78,7 +78,13 @@ class StyledTextDemo extends StatefulWidget {
 }
 
 class _StyledTextDemoState extends State<StyledTextDemo> {
-  _TextTransformer _toText = toStyledText;
+  @override
+  void initState() {
+    super.initState();
+    _toText = toStyledText;
+  }
+
+  _TextTransformer _toText;
 
   void _handleTap() {
     setState(() {

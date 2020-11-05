@@ -2,14 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/src/rendering/sliver.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/widgets.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   final Widget child;
@@ -20,8 +22,8 @@ class Wrapper extends StatelessWidget {
 
 class StatefulWrapper extends StatefulWidget {
   const StatefulWrapper({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   final Widget child;
@@ -52,7 +54,7 @@ void main() {
     );
     await tester.pumpWidget(
       LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-        key.currentState!.trigger();
+        key.currentState.trigger();
         return StatefulWrapper(key: key, child: Container(height: 100.0));
       }),
     );
@@ -87,7 +89,7 @@ void main() {
           slivers: <Widget>[
             SliverLayoutBuilder(
               builder: (BuildContext context, SliverConstraints constraint) {
-                key.currentState!.trigger();
+                key.currentState.trigger();
                 return SliverToBoxAdapter(
                   child: StatefulWrapper(key: key, child: Container(height: 100.0)),
                 );

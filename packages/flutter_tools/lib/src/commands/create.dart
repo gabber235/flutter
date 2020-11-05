@@ -546,10 +546,7 @@ To edit platform code in an IDE see https://flutter.dev/developing-packages/#edi
         generateSyntheticPackage: false,
       );
       final FlutterProject project = FlutterProject.fromDirectory(directory);
-      await project.ensureReadyForPlatformSpecificTooling(
-        androidPlatform: true,
-        iosPlatform: true,
-      );
+      await project.ensureReadyForPlatformSpecificTooling(checkProjects: false);
     }
     return generatedCount;
   }
@@ -644,6 +641,7 @@ https://flutter.dev/docs/development/packages-and-plugins/developing-packages#pl
       }
     }
 
+
     final FlutterProject project = FlutterProject.fromDirectory(directory);
     final bool generateAndroid = templateContext['android'] == true;
     if (generateAndroid) {
@@ -682,15 +680,7 @@ https://flutter.dev/docs/development/packages-and-plugins/developing-packages#pl
         offline: boolArg('offline'),
         generateSyntheticPackage: false,
       );
-
-      await project.ensureReadyForPlatformSpecificTooling(
-        androidPlatform: templateContext['android'] as bool ?? false,
-        iosPlatform: templateContext['ios'] as bool ?? false,
-        linuxPlatform: templateContext['linux'] as bool ?? false,
-        macOSPlatform: templateContext['macos'] as bool ?? false,
-        windowsPlatform: templateContext['windows'] as bool ?? false,
-        webPlatform: templateContext['web'] as bool ?? false,
-      );
+      await project.ensureReadyForPlatformSpecificTooling(checkProjects: pluginExampleApp);
     }
     if (templateContext['android'] == true) {
       gradle.updateLocalProperties(project: project, requireAndroidSdk: false);
@@ -796,6 +786,7 @@ https://flutter.dev/docs/development/packages-and-plugins/developing-packages#pl
       logger: globals.logger,
       templateRenderer: globals.templateRenderer,
       templateManifest: templateManifest,
+      pub: pub,
     );
     return template.render(directory, context, overwriteExisting: overwrite);
   }
@@ -1022,14 +1013,16 @@ String _validateProjectDir(String dirPath, { String flutterRoot, bool overwrite 
 
   final FileSystemEntityType type = globals.fs.typeSync(dirPath);
 
-  switch (type) {
-    case FileSystemEntityType.file:
-      // Do not overwrite files.
-      return "Invalid project name: '$dirPath' - file exists.";
-    case FileSystemEntityType.link:
-      // Do not overwrite links.
-      return "Invalid project name: '$dirPath' - refers to a link.";
-    default:
-      return null;
+  if (type != FileSystemEntityType.notFound) {
+    switch (type) {
+      case FileSystemEntityType.file:
+        // Do not overwrite files.
+        return "Invalid project name: '$dirPath' - file exists.";
+      case FileSystemEntityType.link:
+        // Do not overwrite links.
+        return "Invalid project name: '$dirPath' - refers to a link.";
+    }
   }
+
+  return null;
 }

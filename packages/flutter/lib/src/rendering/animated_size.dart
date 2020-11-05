@@ -143,7 +143,7 @@ class RenderAnimatedSize extends RenderAligningShiftedBox {
     _animation.curve = value;
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
   Clip get clipBehavior => _clipBehavior;

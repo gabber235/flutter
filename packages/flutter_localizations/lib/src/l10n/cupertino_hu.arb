@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Beillesztés",
   "selectAllButtonLabel": "Összes kijelölése",
   "tabSemanticsLabel": "$tabCount/$tabIndex. lap",
-  "modalBarrierDismissLabel": "Elvetés",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Elvetés"
 }

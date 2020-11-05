@@ -116,7 +116,7 @@ class RawMaterialButton extends StatefulWidget {
   /// [State.setState] is not allowed).
   final ValueChanged<bool>? onHighlightChanged;
 
-  /// {@template flutter.material.RawMaterialButton.mouseCursor}
+  /// {@template flutter.material.button.mouseCursor}
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// button.
   ///
@@ -296,7 +296,7 @@ class RawMaterialButton extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none], and must not be null.
   final Clip clipBehavior;

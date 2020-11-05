@@ -187,7 +187,7 @@ class Ink extends StatefulWidget {
 
   /// The [child] contained by the container.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is

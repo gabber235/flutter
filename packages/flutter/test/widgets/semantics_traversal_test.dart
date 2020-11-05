@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'dart:collection';
 import 'dart:math' as math;
 import 'dart:ui';
@@ -291,9 +293,9 @@ class TraversalTester {
   final SemanticsTester semantics;
 
   Future<void> test({
-    required TextDirection textDirection,
-    required Map<String, Rect> children,
-    required String expectedTraversal,
+    TextDirection textDirection,
+    Map<String, Rect> children,
+    String expectedTraversal,
   }) async {
     assert(children is LinkedHashMap);
     await tester.pumpWidget(
@@ -312,8 +314,8 @@ class TraversalTester {
                         explicitChildNodes: true,
                         label: label,
                         child: SizedBox(
-                          width: children[label]!.width,
-                          height: children[label]!.height,
+                          width: children[label].width,
+                          height: children[label].height,
                         ),
                       ),
                     );

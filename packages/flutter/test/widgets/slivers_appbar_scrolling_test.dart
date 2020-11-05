@@ -2,14 +2,16 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void verifyPaintPosition(GlobalKey key, Offset ideal) {
-  final RenderObject target = key.currentContext!.findRenderObject()!;
+  final RenderObject target = key.currentContext.findRenderObject();
   expect(target.parent, isA<RenderViewport>());
-  final SliverPhysicalParentData parentData = target.parentData! as SliverPhysicalParentData;
+  final SliverPhysicalParentData parentData = target.parentData as SliverPhysicalParentData;
   final Offset actual = parentData.paintOffset;
   expect(actual, ideal);
 }
@@ -158,7 +160,7 @@ class TestDelegate extends SliverPersistentHeaderDelegate {
 
 class RenderBigSliver extends RenderSliver {
   static const double height = 550.0;
-  double get paintExtent => (height - constraints.scrollOffset).clamp(0.0, constraints.remainingPaintExtent);
+  double get paintExtent => (height - constraints.scrollOffset).clamp(0.0, constraints.remainingPaintExtent) as double;
 
   @override
   void performLayout() {
@@ -171,7 +173,7 @@ class RenderBigSliver extends RenderSliver {
 }
 
 class BigSliver extends LeafRenderObjectWidget {
-  const BigSliver({ Key? key }) : super(key: key);
+  const BigSliver({ Key key }) : super(key: key);
   @override
   RenderBigSliver createRenderObject(BuildContext context) {
     return RenderBigSliver();

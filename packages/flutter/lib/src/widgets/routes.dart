@@ -62,7 +62,7 @@ abstract class OverlayRoute<T> extends Route<T> {
   bool get finishedWhenPopped => true;
 
   @override
-  bool didPop(T? result) {
+  bool didPop(T result) {
     final bool returnValue = super.didPop(result);
     assert(returnValue);
     if (finishedWhenPopped)
@@ -90,10 +90,10 @@ abstract class TransitionRoute<T> extends OverlayRoute<T> {
   /// This future completes once the animation has been dismissed. That will be
   /// after [popped], because [popped] typically completes before the animation
   /// even starts, as soon as the route is popped.
-  Future<T?> get completed => _transitionCompleter.future;
-  final Completer<T?> _transitionCompleter = Completer<T?>();
+  Future<T> get completed => _transitionCompleter.future;
+  final Completer<T> _transitionCompleter = Completer<T>();
 
-  /// {@template flutter.widgets.TransitionRoute.transitionDuration}
+  /// {@template flutter.widgets.transitionRoute.transitionDuration}
   /// The duration the transition going forwards.
   ///
   /// See also:
@@ -103,7 +103,7 @@ abstract class TransitionRoute<T> extends OverlayRoute<T> {
   /// {@endtemplate}
   Duration get transitionDuration;
 
-  /// {@template flutter.widgets.TransitionRoute.reverseTransitionDuration}
+  /// {@template flutter.widgets.transitionRoute.reverseTransitionDuration}
   /// The duration the transition going in reverse.
   ///
   /// By default, the reverse transition duration is set to the value of
@@ -111,7 +111,7 @@ abstract class TransitionRoute<T> extends OverlayRoute<T> {
   /// {@endtemplate}
   Duration get reverseTransitionDuration => transitionDuration;
 
-  /// {@template flutter.widgets.TransitionRoute.opaque}
+  /// {@template flutter.widgets.transitionRoute.opaque}
   /// Whether the route obscures previous routes when the transition is complete.
   ///
   /// When an opaque route's entrance transition is complete, the routes behind
@@ -189,6 +189,7 @@ abstract class TransitionRoute<T> extends OverlayRoute<T> {
         // removing the route and disposing it.
         if (!isActive) {
           navigator!.finalizeRoute(this);
+          assert(overlayEntries.isEmpty);
         }
         break;
     }
@@ -234,7 +235,7 @@ abstract class TransitionRoute<T> extends OverlayRoute<T> {
   }
 
   @override
-  bool didPop(T? result) {
+  bool didPop(T result) {
     assert(_controller != null, '$runtimeType.didPop called before calling install() or after calling dispose().');
     assert(!_transitionCompleter.isCompleted, 'Cannot reuse a $runtimeType after disposing it.');
     _result = result;
@@ -630,7 +631,7 @@ mixin LocalHistoryRoute<T> on Route<T> {
   }
 
   @override
-  bool didPop(T? result) {
+  bool didPop(T result) {
     if (_localHistory != null && _localHistory!.isNotEmpty) {
       final LocalHistoryEntry entry = _localHistory!.removeLast();
       assert(entry._owner == this);
@@ -1099,7 +1100,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
 
   // The API for subclasses to override - used by this class
 
-  /// {@template flutter.widgets.ModalRoute.barrierDismissible}
+  /// {@template flutter.widgets.modalRoute.barrierDismissible}
   /// Whether you can dismiss this route by tapping the modal barrier.
   ///
   /// The modal barrier is the scrim that is rendered behind each route, which
@@ -1140,7 +1141,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
   /// has no effect.
   bool get semanticsDismissible => true;
 
-  /// {@template flutter.widgets.ModalRoute.barrierColor}
+  /// {@template flutter.widgets.modalRoute.barrierColor}
   /// The color to use for the modal barrier. If this is null, the barrier will
   /// be transparent.
   ///
@@ -1183,7 +1184,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
   ///  * [ModalBarrier], the widget that implements this feature.
   Color? get barrierColor;
 
-  /// {@template flutter.widgets.ModalRoute.barrierLabel}
+  /// {@template flutter.widgets.modalRoute.barrierLabel}
   /// The semantic label used for a dismissible barrier.
   ///
   /// If the barrier is dismissible, this label will be read out if
@@ -1234,7 +1235,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
   ///  * [AnimatedModalBarrier], the widget that implements this feature.
   Curve get barrierCurve => Curves.ease;
 
-  /// {@template flutter.widgets.ModalRoute.maintainState}
+  /// {@template flutter.widgets.modalRoute.maintainState}
   /// Whether the route should remain in memory when it is inactive.
   ///
   /// If this is true, then the route is maintained, so that any futures it is
@@ -1817,7 +1818,7 @@ class _DialogRoute<T> extends PopupRoute<T> {
 ///
 ///  * [showDialog], which displays a Material-style dialog.
 ///  * [showCupertinoDialog], which displays an iOS-style dialog.
-Future<T?> showGeneralDialog<T extends Object?>({
+Future<T> showGeneralDialog<T extends Object?>({
   required BuildContext context,
   required RoutePageBuilder pageBuilder,
   bool barrierDismissible = false,

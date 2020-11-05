@@ -318,7 +318,6 @@ void main() {
             increasedValue: '60%',
             decreasedValue: '40%',
             textDirection: TextDirection.ltr,
-            flags: <SemanticsFlag>[SemanticsFlag.isSlider],
             actions: SemanticsAction.decrease.index | SemanticsAction.increase.index,
           ),
         ],
@@ -342,14 +341,7 @@ void main() {
     );
 
     expect(semantics, hasSemantics(
-      TestSemantics.root(
-        children: <TestSemantics>[
-          TestSemantics(
-            id: 1,
-            flags: <SemanticsFlag>[SemanticsFlag.isSlider],
-          )
-        ],
-      ),
+      TestSemantics.root(),
       ignoreRect: true,
       ignoreTransform: true,
     ));
@@ -373,7 +365,6 @@ void main() {
     );
 
     expect(tester.getSemantics(find.byType(CupertinoSlider)), matchesSemantics(
-      isSlider: true,
       hasIncreaseAction: true,
       hasDecreaseAction: true,
       value: '50%',
@@ -396,7 +387,6 @@ void main() {
     );
 
     expect(tester.getSemantics(find.byType(CupertinoSlider)), matchesSemantics(
-      isSlider: true,
       hasIncreaseAction: true,
       hasDecreaseAction: true,
       value: '60%',

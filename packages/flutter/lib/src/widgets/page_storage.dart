@@ -250,7 +250,7 @@ class PageStorage extends StatelessWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The page storage bucket to use for this subtree.

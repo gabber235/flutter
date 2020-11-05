@@ -171,7 +171,7 @@ class GLFWKeyHelper with KeyHelper {
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether the CAPS LOCK modifier key is on.
   ///
-  /// {@template flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@template flutter.services.glfwKeyHelper.modifiers}
   /// Use this value if you need to decode the [RawKeyEventDataLinux.modifiers]
   /// field yourself, but it's much easier to use [isModifierPressed] if you
   /// just want to know if a modifier is pressed. This is especially true on
@@ -183,32 +183,32 @@ class GLFWKeyHelper with KeyHelper {
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the SHIFT modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@macro flutter.services.glfwKeyHelper.modifiers}
   static const int modifierShift = 0x0001;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the CTRL modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@macro flutter.services.glfwKeyHelper.modifiers}
   static const int modifierControl = 0x0002;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the ALT modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@macro flutter.services.glfwKeyHelper.modifiers}
   static const int modifierAlt = 0x0004;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the Meta(SUPER) modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@macro flutter.services.glfwKeyHelper.modifiers}
   static const int modifierMeta = 0x0008;
 
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether any key in the numeric keypad is pressed.
   ///
-  /// {@macro flutter.services.GLFWKeyHelper.modifierCapsLock}
+  /// {@macro flutter.services.glfwKeyHelper.modifiers}
   static const int modifierNumericPad = 0x0020;
 
   int _mergeModifiers({required int modifiers, required int keyCode, required bool isDown}) {
@@ -308,7 +308,7 @@ class GtkKeyHelper with KeyHelper {
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the SHIFT modifier keys is pressed.
   ///
-  /// {@template flutter.services.GtkKeyHelper.modifierShift}
+  /// {@template flutter.services.gtkKeyHelper.modifiers}
   /// Use this value if you need to decode the [RawKeyEventDataLinux.modifiers] field yourself, but
   /// it's much easier to use [isModifierPressed] if you just want to know if a
   /// modifier is pressed. This is especially true on GTK, since its modifiers
@@ -319,32 +319,32 @@ class GtkKeyHelper with KeyHelper {
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether the CAPS LOCK modifier key is on.
   ///
-  /// {@macro flutter.services.GtkKeyHelper.modifierShift}
+  /// {@macro flutter.services.gtkKeyHelper.modifiers}
   static const int modifierCapsLock = 1 << 1;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the CTRL modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GtkKeyHelper.modifierShift}
+  /// {@macro flutter.services.gtkKeyHelper.modifiers}
   static const int modifierControl = 1 << 2;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether the first modifier key is pressed (usually mapped to alt).
   ///
-  /// {@macro flutter.services.GtkKeyHelper.modifierShift}
+  /// {@macro flutter.services.gtkKeyHelper.modifiers}
   static const int modifierMod1 = 1 << 3;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether the second modifier key is pressed (assumed to be mapped to
   /// num lock).
   ///
-  /// {@macro flutter.services.GtkKeyHelper.modifierShift}
+  /// {@macro flutter.services.gtkKeyHelper.modifiers}
   static const int modifierMod2 = 1 << 4;
 
   /// This mask is used to check the [RawKeyEventDataLinux.modifiers] field to
   /// test whether one of the Meta(SUPER) modifier keys is pressed.
   ///
-  /// {@macro flutter.services.GtkKeyHelper.modifierShift}
+  /// {@macro flutter.services.gtkKeyHelper.modifiers}
   static const int modifierMeta = 1 << 28;
 
   int _mergeModifiers({required int modifiers, required int keyCode, required bool isDown}) {

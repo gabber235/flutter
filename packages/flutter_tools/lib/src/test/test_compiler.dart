@@ -37,18 +37,14 @@ class TestCompiler {
   ///
   /// [flutterProject] is the project for which we are running tests.
   TestCompiler(
-    this.buildInfo,
+    this.buildMode,
+    this.trackWidgetCreation,
     this.flutterProject,
-  ) : testFilePath = globals.fs.path.join(
-        flutterProject.directory.path,
-        getBuildDirectory(),
-        'test_cache',
-        getDefaultCachedKernelPath(
-          trackWidgetCreation: buildInfo.trackWidgetCreation,
-          nullSafetyMode: buildInfo.nullSafetyMode,
-          dartDefines: buildInfo.dartDefines,
-          extraFrontEndOptions: buildInfo.extraFrontEndOptions,
-        )) {
+    this.extraFrontEndOptions,
+  ) : testFilePath = getKernelPathForTransformerOptions(
+        globals.fs.path.join(flutterProject.directory.path, getBuildDirectory(), 'testfile.dill'),
+        trackWidgetCreation: trackWidgetCreation,
+      ) {
     // Compiler maintains and updates single incremental dill file.
     // Incremental compilation requests done for each test copy that file away
     // for independent execution.
@@ -65,8 +61,10 @@ class TestCompiler {
   final StreamController<_CompilationRequest> compilerController = StreamController<_CompilationRequest>();
   final List<_CompilationRequest> compilationQueue = <_CompilationRequest>[];
   final FlutterProject flutterProject;
-  final BuildInfo buildInfo;
+  final BuildMode buildMode;
+  final bool trackWidgetCreation;
   final String testFilePath;
+  final List<String> extraFrontEndOptions;
 
 
   ResidentCompiler compiler;
@@ -103,15 +101,14 @@ class TestCompiler {
       artifacts: globals.artifacts,
       logger: globals.logger,
       processManager: globals.processManager,
-      buildMode: buildInfo.mode,
-      trackWidgetCreation: buildInfo.trackWidgetCreation,
+      buildMode: buildMode,
+      trackWidgetCreation: trackWidgetCreation,
       initializeFromDill: testFilePath,
       unsafePackageSerialization: false,
-      dartDefines: buildInfo.dartDefines,
+      dartDefines: const <String>[],
       packagesPath: globalPackagesPath,
-      extraFrontEndOptions: buildInfo.extraFrontEndOptions,
+      extraFrontEndOptions: extraFrontEndOptions,
       platform: globals.platform,
-      testCompilation: true,
     );
     return residentCompiler;
   }

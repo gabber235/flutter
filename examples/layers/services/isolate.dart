@@ -5,6 +5,7 @@
 import 'dart:convert';
 import 'dart:isolate';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,7 +17,7 @@ typedef OnResultListener = void Function(String result);
 // The choice of JSON parsing here is meant as an example that might surface
 // in real-world applications.
 class Calculator {
-  Calculator({ required this.onProgressListener, required this.onResultListener, String? data })
+  Calculator({ @required this.onProgressListener, @required this.onResultListener, String data })
     : assert(onProgressListener != null),
       assert(onResultListener != null),
       // In order to keep the example files smaller, we "cheat" a little and
@@ -52,7 +53,7 @@ class Calculator {
     }
   }
 
-  static String _replicateJson(String? data, int count) {
+  static String _replicateJson(String data, int count) {
     final StringBuffer buffer = StringBuffer()..write('[');
     for (int i = 0; i < count; i++) {
       buffer.write(data);
@@ -84,7 +85,7 @@ class CalculationMessage {
 // This class manages these ports and maintains state related to the
 // progress of the background computation.
 class CalculationManager {
-  CalculationManager({ required this.onProgressListener, required this.onResultListener })
+  CalculationManager({ @required this.onProgressListener, @required this.onResultListener })
     : assert(onProgressListener != null),
       assert(onResultListener != null),
       _receivePort = ReceivePort() {
@@ -119,7 +120,7 @@ class CalculationManager {
     if (isRunning) {
       _state = CalculationState.idle;
       if (_isolate != null) {
-        _isolate!.kill(priority: Isolate.immediate);
+        _isolate.kill(priority: Isolate.immediate);
         _isolate = null;
         _completed = 0.0;
         _total = 1.0;
@@ -128,7 +129,7 @@ class CalculationManager {
   }
 
   final ReceivePort _receivePort;
-  Isolate? _isolate;
+  Isolate _isolate;
 
   void _runCalculation() {
     // Load the JSON string. This is done in the main isolate because spawned
@@ -208,8 +209,8 @@ class IsolateExampleState extends State<StatefulWidget> with SingleTickerProvide
   String _label = 'Start';
   String _result = ' ';
   double _progress = 0.0;
-  late AnimationController _animation;
-  late CalculationManager _calculationManager;
+  AnimationController _animation;
+  CalculationManager _calculationManager;
 
   @override
   void initState() {

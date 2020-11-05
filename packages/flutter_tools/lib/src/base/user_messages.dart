@@ -34,11 +34,7 @@ class UserMessages {
 
   // Messages used in NoIdeValidator
   String get noIdeStatusInfo => 'No supported IDEs installed';
-  List<String> get noIdeInstallationInfo => <String>[
-    'IntelliJ - https://www.jetbrains.com/idea/',
-    'Android Studio - https://developer.android.com/studio/',
-    'VS Code - https://code.visualstudio.com/',
-  ];
+  String get noIdeInstallationInfo => 'IntelliJ - https://www.jetbrains.com/idea/';
 
   // Messages used in IntellijValidator
   String intellijStatusInfo(String version) => 'version $version';
@@ -169,19 +165,23 @@ class UserMessages {
   String cocoaPodsMissing(String consequence, String installInstructions) =>
       'CocoaPods not installed.\n'
       '$consequence\n'
-      'To install $installInstructions';
+      'To install:\n'
+      '$installInstructions';
   String cocoaPodsUnknownVersion(String consequence, String upgradeInstructions) =>
       'Unknown CocoaPods version installed.\n'
       '$consequence\n'
-      'To upgrade $upgradeInstructions';
+      'To upgrade:\n'
+      '$upgradeInstructions';
   String cocoaPodsOutdated(String currentVersion, String recVersion, String consequence, String upgradeInstructions) =>
       'CocoaPods $currentVersion out of date ($recVersion is recommended).\n'
       '$consequence\n'
-      'To upgrade $upgradeInstructions';
+      'To upgrade:\n'
+      '$upgradeInstructions';
   String cocoaPodsBrokenInstall(String consequence, String reinstallInstructions) =>
       'CocoaPods installed but not working.\n'
       '$consequence\n'
-      'To re-install $reinstallInstructions';
+      'To re-install CocoaPods, run:\n'
+      '$reinstallInstructions';
 
   // Messages used in VsCodeValidator
   String vsCodeVersion(String version) => 'version $version';

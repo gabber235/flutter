@@ -123,7 +123,7 @@ mixin MaterialRouteTransitionMixin<T> on PageRoute<T> {
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-    final PageTransitionsTheme theme = Theme.of(context).pageTransitionsTheme;
+    final PageTransitionsTheme theme = Theme.of(context)!.pageTransitionsTheme;
     return theme.buildTransitions<T>(this, context, animation, secondaryAnimation, child);
   }
 }
@@ -165,10 +165,10 @@ class MaterialPage<T> extends Page<T> {
   /// The content to be shown in the [Route] created by this page.
   final Widget child;
 
-  /// {@macro flutter.widgets.ModalRoute.maintainState}
+  /// {@macro flutter.widgets.modalRoute.maintainState}
   final bool maintainState;
 
-  /// {@macro flutter.widgets.PageRoute.fullscreenDialog}
+  /// {@macro flutter.widgets.pageRoute.fullscreenDialog}
   final bool fullscreenDialog;
 
   @override

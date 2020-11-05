@@ -88,7 +88,7 @@ class Visibility extends StatelessWidget {
 
   /// The widget to show or hide, as controlled by [visible].
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The widget to use when the child is not [visible], assuming that none of

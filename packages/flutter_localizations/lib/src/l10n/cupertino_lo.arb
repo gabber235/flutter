@@ -20,6 +20,5 @@
   "pasteButtonLabel": "ວາງ",
   "selectAllButtonLabel": "ເລືອກທັງໝົດ",
   "tabSemanticsLabel": "ແຖບທີ $tabIndex ຈາກທັງໝົດ $tabCount",
-  "modalBarrierDismissLabel": "ປິດໄວ້",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "ປິດໄວ້"
 }

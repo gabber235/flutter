@@ -8,8 +8,11 @@ import '../asset.dart';
 import '../base/common.dart';
 import '../base/file_system.dart';
 import '../build_info.dart';
+import '../build_system/build_system.dart';
 import '../bundle.dart';
 import '../cache.dart';
+import '../dart/generate_synthetic_packages.dart';
+import '../dart/pub.dart';
 import '../devfs.dart';
 import '../globals.dart' as globals;
 import '../project.dart';
@@ -166,6 +169,32 @@ class TestCommand extends FlutterCommand {
         'directory (or one of its subdirectories).');
     }
     final FlutterProject flutterProject = FlutterProject.current();
+    if (shouldRunPub) {
+      if (flutterProject.manifest.generateSyntheticPackage) {
+        final Environment environment = Environment(
+          artifacts: globals.artifacts,
+          logger: globals.logger,
+          cacheDir: globals.cache.getRoot(),
+          engineVersion: globals.flutterVersion.engineRevision,
+          fileSystem: globals.fs,
+          flutterRootDir: globals.fs.directory(Cache.flutterRoot),
+          outputDir: globals.fs.directory(getBuildDirectory()),
+          processManager: globals.processManager,
+          projectDir: flutterProject.directory,
+        );
+
+        await generateLocalizationsSyntheticPackage(
+          environment: environment,
+          buildSystem: globals.buildSystem,
+        );
+      }
+
+      await pub.get(
+        context: PubContext.getVerifyContext(name),
+        skipPubspecYamlCheck: true,
+        generateSyntheticPackage: flutterProject.manifest.generateSyntheticPackage,
+      );
+    }
     final bool buildTestAssets = boolArg('test-assets');
     final List<String> names = stringsArg('name');
     final List<String> plainNames = stringsArg('plain-name');
@@ -235,8 +264,8 @@ class TestCommand extends FlutterCommand {
       watcher = collector;
     }
 
-    final bool disableServiceAuthCodes = boolArg('disable-service-auth-codes');
-    final BuildInfo buildInfo = getBuildInfo(forcedBuildMode: BuildMode.debug);
+    final bool disableServiceAuthCodes =
+      boolArg('disable-service-auth-codes');
 
     final int result = await testRunner.runTests(
       testWrapper,
@@ -253,13 +282,15 @@ class TestCommand extends FlutterCommand {
       disableDds: disableDds,
       ipv6: boolArg('ipv6'),
       machine: machine,
-      buildInfo: buildInfo,
+      buildMode: BuildMode.debug,
+      trackWidgetCreation: boolArg('track-widget-creation'),
       updateGoldens: boolArg('update-goldens'),
       concurrency: jobs,
       buildTestAssets: buildTestAssets,
       flutterProject: flutterProject,
       web: stringArg('platform') == 'chrome',
       randomSeed: stringArg('test-randomize-ordering-seed'),
+      extraFrontEndOptions: getBuildInfo(forcedBuildMode: BuildMode.debug).extraFrontEndOptions,
       nullAssertions: boolArg(FlutterOptions.kNullAssertions),
     );
 

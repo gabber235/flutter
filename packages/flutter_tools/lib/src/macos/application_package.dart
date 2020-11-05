@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 
 import '../application_package.dart';
 import '../base/file_system.dart';
-import '../base/io.dart';
 import '../base/utils.dart';
 import '../build_info.dart';
 import '../globals.dart' as globals;
@@ -33,21 +32,18 @@ abstract class MacOSApp extends ApplicationPackage {
   /// which is expected to start the application and send the observatory
   /// port over stdout.
   factory MacOSApp.fromPrebuiltApp(FileSystemEntity applicationBinary) {
-    final _BundleInfo bundleInfo = _executableFromBundle(applicationBinary);
-    if (bundleInfo == null) {
-      return null;
-    }
-
+    final _ExecutableAndId executableAndId = _executableFromBundle(applicationBinary);
+    final Directory applicationBundle = globals.fs.directory(applicationBinary);
     return PrebuiltMacOSApp(
-      bundleDir: bundleInfo.bundle,
-      bundleName: bundleInfo.bundle.path,
-      projectBundleId: bundleInfo.id,
-      executable: bundleInfo.executable,
+      bundleDir: applicationBundle,
+      bundleName: applicationBundle.path,
+      projectBundleId: executableAndId.id,
+      executable: executableAndId.executable,
     );
   }
 
   /// Look up the executable name for a macOS application bundle.
-  static _BundleInfo _executableFromBundle(FileSystemEntity applicationBundle) {
+  static _ExecutableAndId _executableFromBundle(FileSystemEntity applicationBundle) {
     final FileSystemEntityType entityType = globals.fs.typeSync(applicationBundle.path);
     if (entityType == FileSystemEntityType.notFound) {
       globals.printError('File "${applicationBundle.path}" does not exist.');
@@ -62,23 +58,8 @@ abstract class MacOSApp extends ApplicationPackage {
       }
       bundleDir = globals.fs.directory(applicationBundle);
     } else {
-      // Try to unpack as a zip.
-      final Directory tempDir = globals.fs.systemTempDirectory.createTempSync('flutter_app.');
-      try {
-        globals.os.unzip(globals.fs.file(applicationBundle), tempDir);
-      } on ProcessException {
-        globals.printError('Invalid prebuilt macOS app. Unable to extract bundle from archive.');
-        return null;
-      }
-      try {
-        bundleDir = tempDir
-            .listSync()
-            .whereType<Directory>()
-            .singleWhere(_isBundleDirectory);
-      } on StateError {
-        globals.printError('Archive "${applicationBundle.path}" does not contain a single app bundle.');
-        return null;
-      }
+      globals.printError('Folder "${applicationBundle.path}" is not an app bundle.');
+      return null;
     }
     final String plistPath = globals.fs.path.join(bundleDir.path, 'Contents', 'Info.plist');
     if (!globals.fs.file(plistPath).existsSync()) {
@@ -92,15 +73,11 @@ abstract class MacOSApp extends ApplicationPackage {
       globals.printError('Invalid prebuilt macOS app. Info.plist does not contain bundle identifier');
       return null;
     }
-    if (executableName == null) {
-      globals.printError('Invalid prebuilt macOS app. Info.plist does not contain bundle executable');
-      return null;
-    }
     final String executable = globals.fs.path.join(bundleDir.path, 'Contents', 'MacOS', executableName);
     if (!globals.fs.file(executable).existsSync()) {
       globals.printError('Could not find macOS binary at $executable');
     }
-    return _BundleInfo(executable, id, bundleDir);
+    return _ExecutableAndId(executable, id);
   }
 
   @override
@@ -165,15 +142,14 @@ class BuildableMacOSApp extends MacOSApp {
     if (directory == null) {
       return null;
     }
-    final _BundleInfo bundleInfo = MacOSApp._executableFromBundle(globals.fs.directory(directory));
-    return bundleInfo?.executable;
+    final _ExecutableAndId executableAndId = MacOSApp._executableFromBundle(globals.fs.directory(directory));
+    return executableAndId?.executable;
   }
 }
 
-class _BundleInfo {
-  _BundleInfo(this.executable, this.id, this.bundle);
+class _ExecutableAndId {
+  _ExecutableAndId(this.executable, this.id);
 
-  final Directory bundle;
   final String executable;
   final String id;
 }

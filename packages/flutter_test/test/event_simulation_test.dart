@@ -36,7 +36,7 @@ void main() {
 
       expect(events.length, 8);
       for (int i = 0; i < events.length; ++i) {
-        final bool isEven = i.isEven;
+        final bool isEven = i % 2 == 0;
         if (isEven) {
           expect(events[i].runtimeType, equals(RawKeyDownEvent));
         } else {

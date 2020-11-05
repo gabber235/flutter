@@ -155,7 +155,7 @@ class Card extends StatelessWidget {
   /// If false, the border will be painted behind the [child].
   final bool borderOnForeground;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// If this property is null then [CardTheme.clipBehavior] of
   /// [ThemeData.cardTheme] is used. If that's null then the behavior will be [Clip.none].
@@ -185,14 +185,14 @@ class Card extends StatelessWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   static const double _defaultElevation = 1.0;
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context)!;
     final CardTheme cardTheme = CardTheme.of(context);
 
     return Semantics(

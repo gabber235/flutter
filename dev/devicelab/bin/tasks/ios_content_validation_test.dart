@@ -119,12 +119,6 @@ Future<void> main() async {
           <String>['embed_and_thin'],
           environment: <String, String>{
             'SOURCE_ROOT': flutterProject.iosPath,
-            'BUILT_PRODUCTS_DIR': path.join(
-              flutterProject.rootPath,
-              'build',
-              'ios',
-              'Release-iphoneos',
-            ),
             'TARGET_BUILD_DIR': buildPath,
             'FRAMEWORKS_FOLDER_PATH': 'Runner.app/Frameworks',
             'VERBOSE_SCRIPT_LOGGING': '1',

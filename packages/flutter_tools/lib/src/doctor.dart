@@ -74,8 +74,7 @@ class _DefaultDoctorValidatorsProvider implements DoctorValidatorsProvider {
     }
 
     final List<DoctorValidator> ideValidators = <DoctorValidator>[
-      if (androidWorkflow.appliesToHostPlatform)
-        ...AndroidStudioValidator.allValidators(globals.config, globals.platform, globals.fs, globals.userMessages),
+      ...AndroidStudioValidator.allValidators(globals.config, globals.platform, globals.fs, globals.userMessages),
       ...IntelliJValidator.installedValidators(
         fileSystem: globals.fs,
         platform: globals.platform,
@@ -769,11 +768,9 @@ class NoIdeValidator extends DoctorValidator {
 
   @override
   Future<ValidationResult> validate() async {
-    return ValidationResult(
-      ValidationType.missing,
-      userMessages.noIdeInstallationInfo.map((String ideInfo) => ValidationMessage(ideInfo)).toList(),
-      statusInfo: userMessages.noIdeStatusInfo,
-    );
+    return ValidationResult(ValidationType.missing, <ValidationMessage>[
+      ValidationMessage(userMessages.noIdeInstallationInfo),
+    ], statusInfo: userMessages.noIdeStatusInfo);
   }
 }
 

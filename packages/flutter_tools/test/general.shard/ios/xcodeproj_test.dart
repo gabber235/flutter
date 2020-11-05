@@ -51,9 +51,7 @@ void main() {
 
     // Work around https://github.com/flutter/flutter/issues/56415.
     testWithoutContext('xcodebuild versionText returns null when xcodebuild is not installed', () {
-      when(processManager.runSync(<String>['sysctl', 'hw.optional.arm64']))
-          .thenReturn(ProcessResult(0, 1, '', ''));
-      when(processManager.runSync(<String>['xcrun', 'xcodebuild', '-version']))
+      when(processManager.runSync(<String>[xcodebuild, '-version']))
         .thenThrow(const ProcessException(xcodebuild, <String>['-version']));
 
       expect(xcodeProjectInterpreter.versionText, isNull);
@@ -67,9 +65,6 @@ void main() {
       );
       platform.environment = const <String, String>{};
 
-      when(processManager.runSync(<String>['sysctl', 'hw.optional.arm64']))
-          .thenReturn(ProcessResult(0, 1, '', ''));
-
       expect(await xcodeProjectInterpreter.getBuildSettings(
         '', scheme: 'Runner', timeout: delay),
         const <String, String>{});
@@ -79,14 +74,6 @@ void main() {
       expect(logger.traceText, contains('timed out'));
     });
   });
-
-  const FakeCommand kARMCheckCommand = FakeCommand(
-    command: <String>[
-      'sysctl',
-      'hw.optional.arm64',
-    ],
-    exitCode: 1,
-  );
 
   FakeProcessManager fakeProcessManager;
   XcodeProjectInterpreter xcodeProjectInterpreter;
@@ -115,55 +102,43 @@ void main() {
   });
 
   testWithoutContext('xcodebuild versionText returns null when xcodebuild is not fully installed', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: "xcode-select: error: tool 'xcodebuild' requires Xcode, "
-            "but active developer directory '/Library/Developer/CommandLineTools' "
-            'is a command line tools instance',
-        exitCode: 1,
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: "xcode-select: error: tool 'xcodebuild' requires Xcode, "
+        "but active developer directory '/Library/Developer/CommandLineTools' "
+        'is a command line tools instance',
+      exitCode: 1,
+    ));
 
     expect(xcodeProjectInterpreter.versionText, isNull);
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild versionText returns formatted version text', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode 8.3.3\nBuild version 8E3004b',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode 8.3.3\nBuild version 8E3004b',
+    ));
 
     expect(xcodeProjectInterpreter.versionText, 'Xcode 8.3.3, Build version 8E3004b');
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild versionText handles Xcode version string with unexpected format', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
+    ));
 
     expect(xcodeProjectInterpreter.versionText, 'Xcode Ultra5000, Build version 8E3004b');
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild version parts can be parsed', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode 11.4.1\nBuild version 11N111s',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode 11.4.1\nBuild version 11N111s',
+    ));
 
     expect(xcodeProjectInterpreter.majorVersion, 11);
     expect(xcodeProjectInterpreter.minorVersion, 4);
@@ -172,13 +147,10 @@ void main() {
   });
 
   testWithoutContext('xcodebuild minor and patch version default to 0', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode 11\nBuild version 11N111s',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode 11\nBuild version 11N111s',
+    ));
 
     expect(xcodeProjectInterpreter.majorVersion, 11);
     expect(xcodeProjectInterpreter.minorVersion, 0);
@@ -187,13 +159,10 @@ void main() {
   });
 
   testWithoutContext('xcodebuild version parts is null when version has unexpected format', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
+    ));
     expect(xcodeProjectInterpreter.majorVersion, isNull);
     expect(xcodeProjectInterpreter.minorVersion, isNull);
     expect(xcodeProjectInterpreter.patchVersion, isNull);
@@ -223,92 +192,53 @@ void main() {
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
-  testWithoutContext(
-      'xcodebuild isInstalled is false when Xcode is not fully installed', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: "xcode-select: error: tool 'xcodebuild' requires Xcode, "
-            "but active developer directory '/Library/Developer/CommandLineTools' "
-            'is a command line tools instance',
-        exitCode: 1,
-      ),
-    ]);
+  testWithoutContext('xcodebuild isInstalled is false when Xcode is not fully installed', () {
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: "xcode-select: error: tool 'xcodebuild' requires Xcode, "
+        "but active developer directory '/Library/Developer/CommandLineTools' "
+        'is a command line tools instance',
+      exitCode: 1,
+    ));
 
     expect(xcodeProjectInterpreter.isInstalled, isFalse);
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild isInstalled is false when version has unexpected format', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode Ultra5000\nBuild version 8E3004b',
+    ));
 
     expect(xcodeProjectInterpreter.isInstalled, isFalse);
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild isInstalled is true when version has expected format', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-version'],
-        stdout: 'Xcode 8.3.3\nBuild version 8E3004b',
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-version'],
+      stdout: 'Xcode 8.3.3\nBuild version 8E3004b',
+    ));
 
     expect(xcodeProjectInterpreter.isInstalled, isTrue);
-    expect(fakeProcessManager.hasRemainingExpectations, isFalse);
-  });
-
-  testWithoutContext('xcrun runs natively on arm64', () {
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      FakeCommand(
-        command: <String>[
-          'sysctl',
-          'hw.optional.arm64',
-        ],
-        stdout: 'hw.optional.arm64: 1',
-      ),
-    ]);
-
-    expect(xcodeProjectInterpreter.xcrunCommand(), <String>[
-      '/usr/bin/arch',
-      '-arm64e',
-      'xcrun',
-    ]);
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
 
   testWithoutContext('xcodebuild build settings is empty when xcodebuild failed to get the build settings', () async {
     platform.environment = const <String, String>{};
 
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      FakeCommand(
-        command: <String>[
-          'sysctl',
-          'hw.optional.arm64',
-        ],
-        exitCode: 1,
-      ),
-      FakeCommand(
-        command: <String>[
-          'xcrun',
-          'xcodebuild',
-          '-project',
-          '/',
-          '-scheme',
-          'Free',
-          '-showBuildSettings'
-        ],
-        exitCode: 1,
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[
+        '/usr/bin/xcodebuild',
+        '-project',
+        '/',
+        '-scheme',
+        'Free',
+        '-showBuildSettings'
+      ],
+      exitCode: 1,
+    ));
 
     expect(await xcodeProjectInterpreter.getBuildSettings('', scheme: 'Free'), const <String, String>{});
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
@@ -317,19 +247,15 @@ void main() {
   testWithoutContext('build settings accepts an empty scheme', () async {
     platform.environment = const <String, String>{};
 
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>[
-          'xcrun',
-          'xcodebuild',
-          '-project',
-          '/',
-          '-showBuildSettings'
-        ],
-        exitCode: 1,
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[
+        '/usr/bin/xcodebuild',
+        '-project',
+        '/',
+        '-showBuildSettings'
+      ],
+      exitCode: 1,
+    ));
 
     expect(await xcodeProjectInterpreter.getBuildSettings(''), const <String, String>{});
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
@@ -340,22 +266,18 @@ void main() {
       'FLUTTER_XCODE_CODE_SIGN_STYLE': 'Manual',
       'FLUTTER_XCODE_ARCHS': 'arm64'
     };
-    fakeProcessManager.addCommands(<FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>[
-          'xcrun',
-          'xcodebuild',
-          '-project',
-          fileSystem.path.separator,
-          '-scheme',
-          'Free',
-          '-showBuildSettings',
-          'CODE_SIGN_STYLE=Manual',
-          'ARCHS=arm64'
-        ],
-      ),
-    ]);
+    fakeProcessManager.addCommand(FakeCommand(
+      command: <String>[
+        xcodebuild,
+        '-project',
+        fileSystem.path.separator,
+        '-scheme',
+        'Free',
+        '-showBuildSettings',
+        'CODE_SIGN_STYLE=Manual',
+        'ARCHS=arm64'
+      ],
+    ));
     expect(await xcodeProjectInterpreter.getBuildSettings('', scheme: 'Free'), const <String, String>{});
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
   });
@@ -366,23 +288,19 @@ void main() {
       'FLUTTER_XCODE_ARCHS': 'arm64'
     };
 
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>[
-          'xcrun',
-          'xcodebuild',
-          '-workspace',
-          'workspace_path',
-          '-scheme',
-          'Free',
-          '-quiet',
-          'clean',
-          'CODE_SIGN_STYLE=Manual',
-          'ARCHS=arm64'
-        ],
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[
+        xcodebuild,
+        '-workspace',
+        'workspace_path',
+        '-scheme',
+        'Free',
+        '-quiet',
+        'clean',
+        'CODE_SIGN_STYLE=Manual',
+        'ARCHS=arm64'
+      ],
+    ));
 
     await xcodeProjectInterpreter.cleanWorkspace('workspace_path', 'Free');
     expect(fakeProcessManager.hasRemainingExpectations, isFalse);
@@ -390,12 +308,9 @@ void main() {
 
   testWithoutContext('xcodebuild -list getInfo returns something when xcodebuild -list succeeds', () async {
     const String workingDirectory = '/';
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-list'],
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-list'],
+    ));
 
     final XcodeProjectInterpreter xcodeProjectInterpreter = XcodeProjectInterpreter(
       logger: logger,
@@ -414,14 +329,11 @@ void main() {
     const String workingDirectory = '/';
     const String stderr = 'Useful Xcode failure message about missing project.';
 
-    fakeProcessManager.addCommands(const <FakeCommand>[
-      kARMCheckCommand,
-      FakeCommand(
-        command: <String>['xcrun', 'xcodebuild', '-list'],
-        exitCode: 66,
-        stderr: stderr,
-      ),
-    ]);
+    fakeProcessManager.addCommand(const FakeCommand(
+      command: <String>[xcodebuild, '-list'],
+      exitCode: 66,
+      stderr: stderr,
+    ));
 
     final XcodeProjectInterpreter xcodeProjectInterpreter = XcodeProjectInterpreter(
       logger: logger,
@@ -653,13 +565,13 @@ Information about project "Runner":
       expect(config.existsSync(), isTrue);
 
       final String contents = config.readAsStringSync();
-      expect(contents.contains(r'OTHER_LDFLAGS=$(inherited) -framework Flutter'), isTrue);
+      expect(contents.contains('OTHER_LDFLAGS=\$(inherited) -framework Flutter'), isTrue);
 
       final File buildPhaseScript = fs.file('path/to/project/ios/Flutter/flutter_export_environment.sh');
       expect(buildPhaseScript.existsSync(), isTrue);
 
       final String buildPhaseScriptContents = buildPhaseScript.readAsStringSync();
-      expect(buildPhaseScriptContents.contains(r'OTHER_LDFLAGS=$(inherited) -framework Flutter'), isTrue);
+      expect(buildPhaseScriptContents.contains('OTHER_LDFLAGS=\$(inherited) -framework Flutter'), isTrue);
     });
 
     testUsingOsxContext('do not set OTHER_LDFLAGS for macOS', () async {

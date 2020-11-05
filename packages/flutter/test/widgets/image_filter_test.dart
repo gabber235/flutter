@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -76,7 +78,8 @@ void main() {
 
     await pumpWithSigma(5.0);
     final RenderObject renderObject = tester.firstRenderObject(find.byType(ImageFiltered));
-    final ImageFilterLayer originalLayer = renderObject.debugLayer! as ImageFilterLayer;
+    final ImageFilterLayer originalLayer = renderObject.debugLayer as ImageFilterLayer;
+    expect(originalLayer, isNotNull);
 
     // Change blur sigma to force a repaint.
     await pumpWithSigma(10.0);

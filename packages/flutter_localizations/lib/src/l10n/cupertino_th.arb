@@ -20,6 +20,5 @@
   "pasteButtonLabel": "วาง",
   "selectAllButtonLabel": "เลือกทั้งหมด",
   "tabSemanticsLabel": "แท็บที่ $tabIndex จาก $tabCount",
-  "modalBarrierDismissLabel": "ปิด",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "ปิด"
 }

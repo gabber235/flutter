@@ -287,13 +287,13 @@ class SingleChildScrollView extends StatelessWidget {
 
   /// The widget that scrolls.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge].
   final Clip clipBehavior;
@@ -413,7 +413,7 @@ class _RenderSingleChildViewport extends RenderBox with RenderObjectWithChildMix
     markNeedsLayout();
   }
 
-  /// {@macro flutter.rendering.RenderViewportBase.cacheExtent}
+  /// {@macro flutter.rendering.viewport.cacheExtent}
   double get cacheExtent => _cacheExtent;
   double _cacheExtent;
   set cacheExtent(double value) {
@@ -424,7 +424,7 @@ class _RenderSingleChildViewport extends RenderBox with RenderObjectWithChildMix
     markNeedsLayout();
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none], and must not be null.
   Clip get clipBehavior => _clipBehavior;

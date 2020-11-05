@@ -290,7 +290,7 @@ class Container extends StatelessWidget {
   /// the parent provides unbounded constraints, in which case the container
   /// will attempt to be as small as possible.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// Align the [child] within the container.
@@ -406,7 +406,7 @@ class Container extends StatelessWidget {
       assert(decoration != null);
       current = ClipPath(
         clipper: _DecorationClipper(
-          textDirection: Directionality.maybeOf(context),
+          textDirection: Directionality.of(context),
           decoration: decoration!,
         ),
         clipBehavior: clipBehavior,

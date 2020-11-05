@@ -53,6 +53,8 @@ FlutterPlatform installHook({
   int port = 0,
   String precompiledDillPath,
   Map<String, String> precompiledDillFiles,
+  @required BuildMode buildMode,
+  bool trackWidgetCreation = false,
   bool updateGoldens = false,
   bool buildTestAssets = false,
   int observatoryPort,
@@ -61,8 +63,10 @@ FlutterPlatform installHook({
   FlutterProject flutterProject,
   String icudtlPath,
   PlatformPluginRegistration platformPluginRegistration,
+  List<String> extraFrontEndOptions,
+  // Deprecated, use extraFrontEndOptions.
+  List<String> dartExperiments,
   bool nullAssertions = false,
-  @required BuildInfo buildInfo,
 }) {
   assert(testWrapper != null);
   assert(enableObservatory || (!startPaused && observatoryPort == null));
@@ -89,13 +93,15 @@ FlutterPlatform installHook({
     port: port,
     precompiledDillPath: precompiledDillPath,
     precompiledDillFiles: precompiledDillFiles,
+    buildMode: buildMode,
+    trackWidgetCreation: trackWidgetCreation,
     updateGoldens: updateGoldens,
     buildTestAssets: buildTestAssets,
     projectRootDirectory: projectRootDirectory,
     flutterProject: flutterProject,
     icudtlPath: icudtlPath,
+    extraFrontEndOptions: extraFrontEndOptions,
     nullAssertions: nullAssertions,
-    buildInfo: buildInfo,
   );
   platformPluginRegistration(platform);
   return platform;
@@ -232,13 +238,15 @@ class FlutterPlatform extends PlatformPlugin {
     this.port,
     this.precompiledDillPath,
     this.precompiledDillFiles,
+    @required this.buildMode,
+    this.trackWidgetCreation,
     this.updateGoldens,
     this.buildTestAssets,
     this.projectRootDirectory,
     this.flutterProject,
     this.icudtlPath,
     this.nullAssertions = false,
-    @required this.buildInfo,
+    @required this.extraFrontEndOptions,
   }) : assert(shellPath != null);
 
   final String shellPath;
@@ -253,13 +261,15 @@ class FlutterPlatform extends PlatformPlugin {
   final int port;
   final String precompiledDillPath;
   final Map<String, String> precompiledDillFiles;
+  final BuildMode buildMode;
+  final bool trackWidgetCreation;
   final bool updateGoldens;
   final bool buildTestAssets;
   final Uri projectRootDirectory;
   final FlutterProject flutterProject;
   final String icudtlPath;
+  final List<String> extraFrontEndOptions;
   final bool nullAssertions;
-  final BuildInfo buildInfo;
 
   Directory fontsDirectory;
 
@@ -434,7 +444,7 @@ class FlutterPlatform extends PlatformPlugin {
 
       if (precompiledDillPath == null && precompiledDillFiles == null) {
         // Lazily instantiate compiler so it is built only if it is actually used.
-        compiler ??= TestCompiler(buildInfo, flutterProject);
+        compiler ??= TestCompiler(buildMode, trackWidgetCreation, flutterProject, extraFrontEndOptions);
         mainDart = await compiler.compile(globals.fs.file(mainDart).uri);
 
         if (mainDart == null) {

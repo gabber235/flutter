@@ -30,6 +30,5 @@
   "pasteButtonLabel": "Vložit",
   "selectAllButtonLabel": "Vybrat vše",
   "tabSemanticsLabel": "Karta $tabIndex z $tabCount",
-  "modalBarrierDismissLabel": "Zavřít",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Zavřít"
 }

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -63,6 +65,18 @@ void main() {
       }
     });
 
+    testWidgets('ListWheelScrollView needs positive item extent', (WidgetTester tester) async {
+      expect(
+        () {
+          ListWheelScrollView(
+            itemExtent: null,
+            children: <Widget>[Container()],
+          );
+        },
+        throwsAssertionError,
+      );
+    });
+
     testWidgets('ListWheelScrollView can have zero child', (WidgetTester tester) async {
       await tester.pumpWidget(
         Directionality(
@@ -92,6 +106,17 @@ void main() {
     });
 
     testWidgets('ListWheelScrollView needs valid overAndUnderCenterOpacity', (WidgetTester tester) async {
+      expect(
+        () {
+          ListWheelScrollView(
+            overAndUnderCenterOpacity: null,
+            itemExtent: 20.0,
+            children: <Widget>[Container()],
+          );
+        },
+        throwsAssertionError,
+      );
+
       expect(
         () {
           ListWheelScrollView(
@@ -401,7 +426,7 @@ void main() {
         ),
       );
 
-      final RenderListWheelViewport viewport = tester.renderObject(find.byType(ListWheelViewport)) as RenderListWheelViewport;
+      final RenderListWheelViewport viewport = tester.firstRenderObject(find.byType(Text)).parent.parent as RenderListWheelViewport;
 
       // Item 0 is in the middle. There are 3 children visible after it, so the
       // value of childCount should be 4.
@@ -438,7 +463,7 @@ void main() {
         ),
       );
 
-      final RenderListWheelViewport viewport = tester.renderObject(find.byType(ListWheelViewport)) as RenderListWheelViewport;
+      final RenderListWheelViewport viewport = tester.firstRenderObject(find.byType(Text)).parent.parent as RenderListWheelViewport;
 
       // The screen is vertically 600px. Since the middle item is centered,
       // half of the first and last items are visible, making 7 children visible.
@@ -629,7 +654,7 @@ void main() {
         ),
       );
 
-      final RenderListWheelViewport viewport = tester.renderObject(find.byType(ListWheelViewport)) as RenderListWheelViewport;
+      final RenderListWheelViewport viewport = tester.firstRenderObject(find.byType(Container)).parent.parent as RenderListWheelViewport;
       expect(viewport, paints..transform(
         matrix4: equals(<dynamic>[
           1.0, 0.0, 0.0, 0.0,
@@ -686,7 +711,7 @@ void main() {
         ),
       );
 
-      final RenderListWheelViewport viewport = tester.renderObject(find.byType(ListWheelViewport)) as RenderListWheelViewport;
+      final RenderListWheelViewport viewport = tester.firstRenderObject(find.byType(Container)).parent.parent as RenderListWheelViewport;
       expect(viewport, paints..transform(
         matrix4: equals(<dynamic>[
           1.0, 0.0, 0.0, 0.0,
@@ -807,7 +832,7 @@ void main() {
         ),
       );
 
-      final RenderListWheelViewport viewport = tester.renderObject(find.byType(ListWheelViewport)) as RenderListWheelViewport;
+      final RenderListWheelViewport viewport = tester.firstRenderObject(find.byType(Container)).parent.parent as RenderListWheelViewport;
       expect(viewport, paints
         ..transform(
           matrix4: equals(<dynamic>[
@@ -1270,7 +1295,7 @@ void main() {
 
   testWidgets('ListWheelScrollView getOffsetToReveal', (WidgetTester tester) async {
     List<Widget> outerChildren;
-    final List<Widget> innerChildren = List<Widget>.generate(10, (int index) => Container());
+    final List<Widget> innerChildren = List<Widget>(10);
 
     await tester.pumpWidget(
       Directionality(
@@ -1340,7 +1365,7 @@ void main() {
 
   testWidgets('ListWheelScrollView showOnScreen', (WidgetTester tester) async {
     List<Widget> outerChildren;
-    final List<Widget> innerChildren = List<Widget>.generate(10, (int index) => Container());
+    final List<Widget> innerChildren = List<Widget>(10);
     ScrollController controller;
 
     await tester.pumpWidget(

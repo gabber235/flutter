@@ -20,6 +20,5 @@
   "pasteButtonLabel": "پیسٹ کریں",
   "selectAllButtonLabel": "سبھی منتخب کریں",
   "tabSemanticsLabel": "$tabCount میں سے $tabIndex ٹیب",
-  "modalBarrierDismissLabel": "برخاست کریں",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "برخاست کریں"
 }

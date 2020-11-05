@@ -54,7 +54,6 @@ void main() {
         testFlow: false,
         gitTagVersion: const GitTagVersion.unknown(),
         flutterVersion: flutterVersion,
-        verifyOnly: false,
       );
       expect(result, throwsToolExit());
       expect(processManager.hasRemainingExpectations, isFalse);
@@ -70,7 +69,6 @@ void main() {
         testFlow: false,
         gitTagVersion: gitTagVersion,
         flutterVersion: flutterVersion,
-        verifyOnly: false,
       );
       expect(result, throwsToolExit());
       expect(processManager.hasRemainingExpectations, isFalse);
@@ -89,32 +87,9 @@ void main() {
         testFlow: false,
         gitTagVersion: gitTagVersion,
         flutterVersion: flutterVersion,
-        verifyOnly: false,
       );
       expect(await result, FlutterCommandResult.success());
       expect(testLogger.statusText, contains('Flutter is already up to date'));
-      expect(processManager.hasRemainingExpectations, isFalse);
-    }, overrides: <Type, Generator>{
-      ProcessManager: () => processManager,
-      Platform: () => fakePlatform,
-    });
-
-    testUsingContext('Correctly provides upgrade version on verify only', () async {
-      const String revision = 'abc123';
-      when(flutterVersion.frameworkRevision).thenReturn(revision);
-      fakeCommandRunner.alreadyUpToDate = false;
-      final Future<FlutterCommandResult> result = fakeCommandRunner.runCommand(
-        force: false,
-        continueFlow: false,
-        testFlow: false,
-        gitTagVersion: gitTagVersion,
-        flutterVersion: flutterVersion,
-        verifyOnly: true,
-      );
-      expect(await result, FlutterCommandResult.success());
-      expect(testLogger.statusText, contains('A new version of Flutter is available'));
-      expect(testLogger.statusText, contains(fakeCommandRunner.remoteRevision));
-      expect(testLogger.statusText, contains(revision));
       expect(processManager.hasRemainingExpectations, isFalse);
     }, overrides: <Type, Generator>{
       ProcessManager: () => processManager,
@@ -188,7 +163,7 @@ void main() {
       await expectLater(
             () async => await realCommandRunner.fetchRemoteRevision(),
         throwsToolExit(
-          message: 'Unable to upgrade Flutter: no origin repository configured.',
+          message: 'Unable to upgrade Flutter: no origin repository configured\.',
         ),
       );
       expect(processManager.hasRemainingExpectations, isFalse);
@@ -280,7 +255,6 @@ void main() {
           testFlow: false,
           gitTagVersion: const GitTagVersion.unknown(),
           flutterVersion: flutterVersion,
-          verifyOnly: false,
         );
         expect(await result, FlutterCommandResult.success());
         expect(processManager.hasRemainingExpectations, isFalse);
@@ -298,7 +272,6 @@ void main() {
           testFlow: false,
           gitTagVersion: gitTagVersion,
           flutterVersion: flutterVersion,
-          verifyOnly: false,
         );
         expect(await result, FlutterCommandResult.success());
         expect(processManager.hasRemainingExpectations, isFalse);
@@ -314,7 +287,6 @@ void main() {
           testFlow: false,
           gitTagVersion: gitTagVersion,
           flutterVersion: flutterVersion,
-          verifyOnly: false,
         );
         expect(await result, FlutterCommandResult.success());
         expect(processManager.hasRemainingExpectations, isFalse);

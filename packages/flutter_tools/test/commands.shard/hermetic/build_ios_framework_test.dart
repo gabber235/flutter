@@ -11,6 +11,7 @@ import 'package:flutter_tools/src/build_info.dart';
 import 'package:flutter_tools/src/build_system/build_system.dart';
 import 'package:flutter_tools/src/cache.dart';
 import 'package:flutter_tools/src/commands/build_ios_framework.dart';
+import 'package:flutter_tools/src/globals.dart' as globals;
 import 'package:flutter_tools/src/version.dart';
 import 'package:mockito/mockito.dart';
 
@@ -42,7 +43,7 @@ void main() {
       );
 
       when(mockFlutterVersion.gitTagVersion).thenReturn(mockGitTagVersion);
-      outputDirectory = memoryFileSystem.systemTempDirectory
+      outputDirectory = globals.fs.systemTempDirectory
           .createTempSync('flutter_build_ios_framework_test_output.')
           .childDirectory('Debug')
         ..createSync();

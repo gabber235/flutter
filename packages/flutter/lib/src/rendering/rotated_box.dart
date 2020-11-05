@@ -42,7 +42,7 @@ class RenderRotatedBox extends RenderBox with RenderObjectWithChildMixin<RenderB
     markNeedsLayout();
   }
 
-  bool get _isVertical => quarterTurns.isOdd;
+  bool get _isVertical => quarterTurns % 2 == 1;
 
   @override
   double computeMinIntrinsicWidth(double height) {

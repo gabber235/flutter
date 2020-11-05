@@ -83,11 +83,12 @@ class _PasswordFieldState extends State<PasswordField> {
 }
 
 class TextFormFieldDemoState extends State<TextFormFieldDemo> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   PersonData person = PersonData();
 
   void showInSnackBar(String value) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text(value),
     ));
   }
@@ -167,6 +168,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawerDragStartBehavior: DragStartBehavior.down,
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Text fields'),
         actions: <Widget>[MaterialDemoDocumentationButton(TextFormFieldDemo.routeName)],

@@ -27,7 +27,7 @@ class WillPopScope extends StatefulWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// Called to veto attempts by the user to dismiss the enclosing [ModalRoute].

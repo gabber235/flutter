@@ -675,7 +675,7 @@ class FlutterErrorDetails with Diagnosticable {
             'provide substantially more information in this error message to help you determine '
             'and fix the underlying cause.\n'
             'In either case, please report this assertion by filing a bug on GitHub:\n'
-            '  https://github.com/flutter/flutter/issues/new?template=2_bug.md'
+            '  https://github.com/flutter/flutter/issues/new?template=BUG.md'
           ));
         }
       }
@@ -808,7 +808,7 @@ class FlutterError extends Error with DiagnosticableTreeMixin implements Asserti
           '\nThis error should still help you solve your problem, '
           'however please also report this malformed error in the '
           'framework by filing a bug on GitHub:\n'
-          '  https://github.com/flutter/flutter/issues/new?template=2_bug.md'
+          '  https://github.com/flutter/flutter/issues/new?template=BUG.md'
         ),
       ],
     ));
@@ -834,7 +834,7 @@ class FlutterError extends Error with DiagnosticableTreeMixin implements Asserti
           '\nThis error should still help you solve your problem, '
           'however please also report this malformed error in the '
           'framework by filing a bug on GitHub:\n'
-          '  https://github.com/flutter/flutter/issues/new?template=2_bug.md'
+          '  https://github.com/flutter/flutter/issues/new?template=BUG.md'
         ));
         throw FlutterError.fromParts(message);
       }
@@ -944,32 +944,22 @@ class FlutterError extends Error with DiagnosticableTreeMixin implements Asserti
   static void dumpErrorToConsole(FlutterErrorDetails details, { bool forceReport = false }) {
     assert(details != null);
     assert(details.exception != null);
-    bool isInDebugMode = false;
+    bool reportError = details.silent != true; // could be null
     assert(() {
       // In checked mode, we ignore the "silent" flag.
-      isInDebugMode = true;
+      reportError = true;
       return true;
     }());
-    final bool reportError = isInDebugMode || details.silent != true; // could be null
     if (!reportError && !forceReport)
       return;
     if (_errorCount == 0 || forceReport) {
-      // Diagnostics is only available in debug mode. In profile and release modes fallback to plain print.
-      if (isInDebugMode) {
-        debugPrint(
-          TextTreeRenderer(
-            wrapWidth: wrapWidth,
-            wrapWidthProperties: wrapWidth,
-            maxDescendentsTruncatableNode: 5,
-          ).render(details.toDiagnosticsNode(style: DiagnosticsTreeStyle.error)).trimRight(),
-        );
-      } else {
-        debugPrintStack(
-          stackTrace: details.stack,
-          label: details.exception.toString(),
-          maxFrames: 100,
-        );
-      }
+      debugPrint(
+        TextTreeRenderer(
+          wrapWidth: wrapWidth,
+          wrapWidthProperties: wrapWidth,
+          maxDescendentsTruncatableNode: 5,
+        ).render(details.toDiagnosticsNode(style: DiagnosticsTreeStyle.error)).trimRight(),
+      );
     } else {
       debugPrint('Another exception was thrown: ${details.summary}');
     }

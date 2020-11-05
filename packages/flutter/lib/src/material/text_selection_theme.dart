@@ -152,12 +152,13 @@ class TextSelectionTheme extends InheritedTheme {
   /// ```
   static TextSelectionThemeData of(BuildContext context) {
     final TextSelectionTheme? selectionTheme = context.dependOnInheritedWidgetOfExactType<TextSelectionTheme>();
-    return selectionTheme?.data ?? Theme.of(context).textSelectionTheme;
+    return selectionTheme?.data ?? Theme.of(context)!.textSelectionTheme;
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return TextSelectionTheme(data: data, child: child);
+    final TextSelectionTheme? ancestorTheme = context.findAncestorWidgetOfExactType<TextSelectionTheme>();
+    return identical(this, ancestorTheme) ? child : TextSelectionTheme(data: data, child: child);
   }
 
   @override

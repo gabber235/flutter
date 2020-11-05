@@ -86,7 +86,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     }, testOn: 'posix');
   });
 
@@ -129,7 +128,6 @@ void main() {
       FileSystemUtils: () => fsUtils,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     }, testOn: 'posix');
 
     testUsingContext('respects IOS_SIMULATOR_LOG_FILE_PATH', () {
@@ -146,7 +144,6 @@ void main() {
       FileSystemUtils: () => fsUtils,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
   });
 
@@ -267,7 +264,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('Apple Watch is unsupported', () {
@@ -281,7 +277,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPad 2 is supported', () {
@@ -295,7 +290,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPad Retina is supported', () {
@@ -309,7 +303,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPhone 5 is supported', () {
@@ -323,7 +316,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPhone 5s is supported', () {
@@ -337,7 +329,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPhone SE is supported', () {
@@ -351,7 +342,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPhone 7 Plus is supported', () {
@@ -365,7 +355,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('iPhone X is supported', () {
@@ -379,7 +368,6 @@ void main() {
       Platform: () => osx,
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
   });
 
@@ -400,11 +388,7 @@ void main() {
         Future<ProcessResult>.value(ProcessResult(2, 0, '', ''))
       );
       // Test a real one. Screenshot doesn't require instance states.
-      final SimControl simControl = SimControl(
-        processManager: mockProcessManager,
-        logger: mockLogger,
-        xcode: mockXcode,
-      );
+      final SimControl simControl = SimControl(processManager: mockProcessManager, logger: mockLogger);
       // Doesn't matter what the device is.
       deviceUnderTest = IOSSimulator(
         'x',
@@ -412,7 +396,6 @@ void main() {
         simControl: simControl,
         xcode: mockXcode,
       );
-      when(mockXcode.xcrunCommand()).thenReturn(<String>['xcrun']);
     });
 
     testWithoutContext(
@@ -434,7 +417,7 @@ void main() {
         await deviceUnderTest.takeScreenshot(screenshot);
         verify(mockProcessManager.run(
           <String>[
-            'xcrun',
+            '/usr/bin/xcrun',
             'simctl',
             'io',
             'x',
@@ -459,7 +442,6 @@ void main() {
         .thenAnswer((Invocation invocation) => Future<Process>.value(MockProcess()));
       mockSimControl = MockSimControl();
       mockXcode = MockXcode();
-      when(mockXcode.xcrunCommand()).thenReturn(<String>['xcrun']);
     });
 
     testUsingContext('syslog uses tail', () async {
@@ -483,8 +465,7 @@ void main() {
       FileSystemUtils: () => FileSystemUtils(
         fileSystem: fileSystem,
         platform: macosPlatform,
-      ),
-      Xcode: () => mockXcode,
+      )
     });
 
     testUsingContext('unified logging with app name', () async {
@@ -506,7 +487,7 @@ void main() {
 
       final List<String> command = verify(mockProcessManager.start(captureAny, environment: null, workingDirectory: null)).captured.single as List<String>;
       expect(command, <String>[
-        'xcrun',
+        '/usr/bin/xcrun',
         'simctl',
         'spawn',
         'x',
@@ -521,7 +502,6 @@ void main() {
       overrides: <Type, Generator>{
       ProcessManager: () => mockProcessManager,
       FileSystem: () => fileSystem,
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('unified logging without app name', () async {
@@ -542,7 +522,7 @@ void main() {
 
       final List<String> command = verify(mockProcessManager.start(captureAny, environment: null, workingDirectory: null)).captured.single as List<String>;
       expect(command, <String>[
-        'xcrun',
+        '/usr/bin/xcrun',
         'simctl',
         'spawn',
         'x',
@@ -557,7 +537,6 @@ void main() {
       overrides: <Type, Generator>{
         ProcessManager: () => mockProcessManager,
         FileSystem: () => fileSystem,
-        Xcode: () => mockXcode,
       });
   });
 
@@ -572,7 +551,6 @@ void main() {
       mockIosProject = MockIosProject();
       mockSimControl = MockSimControl();
       mockXcode = MockXcode();
-      when(mockXcode.xcrunCommand()).thenReturn(<String>['xcrun']);
     });
 
     group('syslog', () {
@@ -612,7 +590,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
         ProcessManager: () => fakeProcessManager,
         FileSystem: () => fileSystem,
         Platform: () => osx,
-        Xcode: () => mockXcode,
       });
 
       testUsingContext('simulator can output `)`', () async {
@@ -649,7 +626,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
         ProcessManager: () => fakeProcessManager,
         FileSystem: () => fileSystem,
         Platform: () => osx,
-        Xcode: () => mockXcode,
       });
 
       testUsingContext('multiline messages', () async {
@@ -702,7 +678,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
         ProcessManager: () => fakeProcessManager,
         FileSystem: () => fileSystem,
         Platform: () => osx,
-        Xcode: () => mockXcode,
       });
     });
 
@@ -715,7 +690,7 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
           'AND NOT(eventMessage CONTAINS " libxpc.dylib ")';
         fakeProcessManager.addCommand(const FakeCommand(
             command:  <String>[
-              'xcrun',
+              '/usr/bin/xcrun',
               'simctl',
               'spawn',
               '123456',
@@ -726,14 +701,14 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
               '--predicate',
               logPredicate,
             ],
-            stdout: r'''
+            stdout: '''
 },{
   "traceID" : 37579774151491588,
   "eventMessage" : "Single line message",
   "eventType" : "logEvent"
 },{
   "traceID" : 37579774151491588,
-  "eventMessage" : "Multi line message\n  continues...\n  continues..."
+  "eventMessage" : "Multi line message\\n  continues...\\n  continues..."
 },{
   "traceID" : 37579774151491588,
   "eventMessage" : "Single line message, not the part of the above",
@@ -761,7 +736,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
       }, overrides: <Type, Generator>{
         ProcessManager: () => fakeProcessManager,
         FileSystem: () => fileSystem,
-        Xcode: () => mockXcode,
       });
     });
   });
@@ -813,13 +787,11 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
         return ProcessResult(mockPid, 0, validSimControlOutput, '');
       });
 
-      mockXcode = MockXcode();
-      when(mockXcode.xcrunCommand()).thenReturn(<String>['xcrun']);
       simControl = SimControl(
         logger: mockLogger,
         processManager: mockProcessManager,
-        xcode: mockXcode,
       );
+      mockXcode = MockXcode();
     });
 
     testWithoutContext('getDevices succeeds', () async {
@@ -872,7 +844,7 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
 
     testWithoutContext('.install() handles exceptions', () async {
       when(mockProcessManager.run(
-        <String>['xcrun', 'simctl', 'install', deviceId, appId],
+        <String>['/usr/bin/xcrun', 'simctl', 'install', deviceId, appId],
         environment: anyNamed('environment'),
         workingDirectory: anyNamed('workingDirectory'),
       )).thenThrow(const ProcessException('xcrun', <String>[]));
@@ -884,7 +856,7 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
 
     testWithoutContext('.uninstall() handles exceptions', () async {
       when(mockProcessManager.run(
-        <String>['xcrun', 'simctl', 'uninstall', deviceId, appId],
+        <String>['/usr/bin/xcrun', 'simctl', 'uninstall', deviceId, appId],
         environment: anyNamed('environment'),
         workingDirectory: anyNamed('workingDirectory'),
       )).thenThrow(const ProcessException('xcrun', <String>[]));
@@ -896,7 +868,7 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
 
     testWithoutContext('.launch() handles exceptions', () async {
       when(mockProcessManager.run(
-        <String>['xcrun', 'simctl', 'launch', deviceId, appId],
+        <String>['/usr/bin/xcrun', 'simctl', 'launch', deviceId, appId],
         environment: anyNamed('environment'),
         workingDirectory: anyNamed('workingDirectory'),
       )).thenThrow(const ProcessException('xcrun', <String>[]));
@@ -914,7 +886,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
     setUp(() {
       simControl = MockSimControl();
       mockXcode = MockXcode();
-      when(mockXcode.xcrunCommand()).thenReturn(<String>['xcrun']);
     });
 
     testUsingContext("startApp uses compiled app's Info.plist to find CFBundleIdentifier", () async {
@@ -939,7 +910,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
       PlistParser: () => MockPlistUtils(),
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('startApp respects the enable software rendering flag', () async {
@@ -963,7 +933,6 @@ Dec 20 17:04:32 md32-11-vm1 Another App[88374]: Ignore this text'''
       PlistParser: () => MockPlistUtils(),
       FileSystem: () => fileSystem,
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
   });
 
@@ -997,7 +966,6 @@ flutter:
     }, overrides: <Type, Generator>{
       FileSystem: () => MemoryFileSystem.test(),
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
 
@@ -1016,7 +984,6 @@ flutter:
     }, overrides: <Type, Generator>{
       FileSystem: () => MemoryFileSystem.test(),
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('is false with no host app and no module', () async {
@@ -1033,7 +1000,6 @@ flutter:
     }, overrides: <Type, Generator>{
       FileSystem: () => MemoryFileSystem.test(),
       ProcessManager: () => FakeProcessManager.any(),
-      Xcode: () => mockXcode,
     });
 
     testUsingContext('createDevFSWriter returns a LocalDevFSWriter', () {

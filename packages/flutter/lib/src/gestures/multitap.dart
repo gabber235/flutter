@@ -114,7 +114,7 @@ class _TapTracker {
 class DoubleTapGestureRecognizer extends GestureRecognizer {
   /// Create a gesture recognizer for double taps.
   ///
-  /// {@macro flutter.gestures.GestureRecognizer.kind}
+  /// {@macro flutter.gestures.gestureRecognizer.kind}
   DoubleTapGestureRecognizer({
     Object? debugOwner,
     PointerDeviceKind? kind,

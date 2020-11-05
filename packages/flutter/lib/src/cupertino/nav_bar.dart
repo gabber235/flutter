@@ -102,6 +102,7 @@ Widget _wrapWithBackground({
         overlayStyle = SystemUiOverlayStyle.light;
         break;
       case Brightness.light:
+      default:
         overlayStyle = SystemUiOverlayStyle.dark;
         break;
     }
@@ -235,7 +236,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
        ),
        super(key: key);
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.leading}
+  /// {@template flutter.cupertino.navBar.leading}
   /// Widget to place at the start of the navigation bar. Normally a back button
   /// for a normal page or a cancel button for full page dialogs.
   ///
@@ -244,7 +245,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// {@endtemplate}
   final Widget? leading;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.automaticallyImplyLeading}
+  /// {@template flutter.cupertino.navBar.automaticallyImplyLeading}
   /// Controls whether we should try to imply the leading widget if null.
   ///
   /// If true and [leading] is null, automatically try to deduce what the [leading]
@@ -272,7 +273,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// This value cannot be null.
   final bool automaticallyImplyMiddle;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.previousPageTitle}
+  /// {@template flutter.cupertino.navBar.previousPageTitle}
   /// Manually specify the previous route's title when automatically implying
   /// the leading back button.
   ///
@@ -293,7 +294,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// has a `title`.
   final Widget? middle;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.trailing}
+  /// {@template flutter.cupertino.navBar.trailing}
   /// Widget to place at the end of the navigation bar. Normally additional actions
   /// taken on the page such as a search or edit function.
   /// {@endtemplate}
@@ -302,7 +303,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   // TODO(xster): https://github.com/flutter/flutter/issues/10469 implement
   // support for double row navigation bars.
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.backgroundColor}
+  /// {@template flutter.cupertino.navBar.backgroundColor}
   /// The background color of the navigation bar. If it contains transparency, the
   /// tab bar will automatically produce a blurring effect to the content
   /// behind it.
@@ -311,7 +312,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// {@endtemplate}
   final Color? backgroundColor;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.brightness}
+  /// {@template flutter.cupertino.navBar.brightness}
   /// The brightness of the specified [backgroundColor].
   ///
   /// Setting this value changes the style of the system status bar. Typically
@@ -323,7 +324,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// {@endtemplate}
   final Brightness? brightness;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.padding}
+  /// {@template flutter.cupertino.navBar.padding}
   /// Padding for the contents of the navigation bar.
   ///
   /// If null, the navigation bar will adopt the following defaults:
@@ -338,14 +339,14 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// {@endtemplate}
   final EdgeInsetsDirectional? padding;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.border}
+  /// {@template flutter.cupertino.navBar.border}
   /// The border of the navigation bar. By default renders a single pixel bottom border side.
   ///
   /// If a border is null, the navigation bar will not display a border.
   /// {@endtemplate}
   final Border? border;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.actionsForegroundColor}
+  /// {@template flutter.cupertino.navBar.actionsForegroundColor}
   /// Default color used for text and icons of the [leading] and [trailing]
   /// widgets in the navigation bar.
   ///
@@ -360,7 +361,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   )
   final Color? actionsForegroundColor;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.transitionBetweenRoutes}
+  /// {@template flutter.cupertino.navBar.transitionBetweenRoutes}
   /// Whether to transition between navigation bars.
   ///
   /// When [transitionBetweenRoutes] is true, this navigation bar will transition
@@ -379,7 +380,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// {@endtemplate}
   final bool transitionBetweenRoutes;
 
-  /// {@template flutter.cupertino.CupertinoNavigationBar.heroTag}
+  /// {@template flutter.cupertino.navBar.heroTag}
   /// Tag for the navigation bar's Hero widget if [transitionBetweenRoutes] is true.
   ///
   /// Defaults to a common tag between all [CupertinoNavigationBar] and
@@ -399,7 +400,7 @@ class CupertinoNavigationBar extends StatefulWidget implements ObstructingPrefer
   /// True if the navigation bar's background color has no transparency.
   @override
   bool shouldFullyObstruct(BuildContext context) {
-    final Color backgroundColor = CupertinoDynamicColor.maybeResolve(this.backgroundColor, context)
+    final Color backgroundColor = CupertinoDynamicColor.resolve(this.backgroundColor, context)
                                ?? CupertinoTheme.of(context).barBackgroundColor;
     return backgroundColor.alpha == 0xFF;
   }
@@ -430,7 +431,7 @@ class _CupertinoNavigationBarState extends State<CupertinoNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor =
-      CupertinoDynamicColor.maybeResolve(widget.backgroundColor, context) ?? CupertinoTheme.of(context).barBackgroundColor;
+      CupertinoDynamicColor.resolve(widget.backgroundColor, context) ?? CupertinoTheme.of(context).barBackgroundColor;
 
     final _NavigationBarStaticComponents components = _NavigationBarStaticComponents(
       keys: keys,
@@ -459,7 +460,7 @@ class _CupertinoNavigationBarState extends State<CupertinoNavigationBar> {
       ),
     );
 
-    final Color? actionsForegroundColor = CupertinoDynamicColor.maybeResolve(
+    final Color? actionsForegroundColor = CupertinoDynamicColor.resolve(
       widget.actionsForegroundColor,
       context,
     );
@@ -608,12 +609,12 @@ class CupertinoSliverNavigationBar extends StatefulWidget {
   /// ([CupertinoPageRoute.title]) and [automaticallyImplyTitle] must be true.
   final Widget? largeTitle;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.leading}
+  /// {@macro flutter.cupertino.navBar.leading}
   ///
   /// This widget is visible in both collapsed and expanded states.
   final Widget? leading;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.automaticallyImplyLeading}
+  /// {@macro flutter.cupertino.navBar.automaticallyImplyLeading}
   final bool automaticallyImplyLeading;
 
   /// Controls whether we should try to imply the [largeTitle] widget if null.
@@ -625,7 +626,7 @@ class CupertinoSliverNavigationBar extends StatefulWidget {
   /// This value cannot be null.
   final bool automaticallyImplyTitle;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.previousPageTitle}
+  /// {@macro flutter.cupertino.navBar.previousPageTitle}
   final String? previousPageTitle;
 
   /// A widget to place in the middle of the static navigation bar instead of
@@ -636,24 +637,24 @@ class CupertinoSliverNavigationBar extends StatefulWidget {
   /// [middle] widget is provided.
   final Widget? middle;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.trailing}
+  /// {@macro flutter.cupertino.navBar.trailing}
   ///
   /// This widget is visible in both collapsed and expanded states.
   final Widget? trailing;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.backgroundColor}
+  /// {@macro flutter.cupertino.navBar.backgroundColor}
   final Color? backgroundColor;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.brightness}
+  /// {@macro flutter.cupertino.navBar.brightness}
   final Brightness? brightness;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.padding}
+  /// {@macro flutter.cupertino.navBar.padding}
   final EdgeInsetsDirectional? padding;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.border}
+  /// {@macro flutter.cupertino.navBar.border}
   final Border? border;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.actionsForegroundColor}
+  /// {@macro flutter.cupertino.navBar.actionsForegroundColor}
   ///
   /// The default color for text in the [largeTitle] slot is always black, as per
   /// iOS standard design.
@@ -663,10 +664,10 @@ class CupertinoSliverNavigationBar extends StatefulWidget {
   )
   final Color? actionsForegroundColor;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.transitionBetweenRoutes}
+  /// {@macro flutter.cupertino.navBar.transitionBetweenRoutes}
   final bool transitionBetweenRoutes;
 
-  /// {@macro flutter.cupertino.CupertinoNavigationBar.heroTag}
+  /// {@macro flutter.cupertino.navBar.heroTag}
   final Object heroTag;
 
   /// True if the navigation bar's background color has no transparency.
@@ -691,7 +692,7 @@ class _CupertinoSliverNavigationBarState extends State<CupertinoSliverNavigation
   @override
   Widget build(BuildContext context) {
     // Lint ignore to maintain backward compatibility.
-    final Color actionsForegroundColor = CupertinoDynamicColor.maybeResolve(widget.actionsForegroundColor, context)
+    final Color actionsForegroundColor = CupertinoDynamicColor.resolve(widget.actionsForegroundColor, context)
                                       ?? CupertinoTheme.of(context).primaryColor;
 
     final _NavigationBarStaticComponents components = _NavigationBarStaticComponents(
@@ -713,21 +714,21 @@ class _CupertinoSliverNavigationBarState extends State<CupertinoSliverNavigation
       actionsForegroundColor,
       context,
       MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+        data: MediaQuery.of(context)!.copyWith(textScaleFactor: 1),
         child: SliverPersistentHeader(
           pinned: true, // iOS navigation bars are always pinned.
           delegate: _LargeTitleNavigationBarSliverDelegate(
             keys: keys,
             components: components,
             userMiddle: widget.middle,
-            backgroundColor: CupertinoDynamicColor.maybeResolve(widget.backgroundColor, context) ?? CupertinoTheme.of(context).barBackgroundColor,
+            backgroundColor: CupertinoDynamicColor.resolve(widget.backgroundColor, context) ?? CupertinoTheme.of(context).barBackgroundColor,
             brightness: widget.brightness,
             border: widget.border,
             padding: widget.padding,
             actionsForegroundColor: actionsForegroundColor,
             transitionBetweenRoutes: widget.transitionBetweenRoutes,
             heroTag: widget.heroTag,
-            persistentHeight: _kNavBarPersistentHeight + MediaQuery.of(context).padding.top,
+            persistentHeight: _kNavBarPersistentHeight + MediaQuery.of(context)!.padding.top,
             alwaysShowMiddle: widget.middle != null,
           ),
         ),
@@ -789,7 +790,7 @@ class _LargeTitleNavigationBarSliverDelegate
 
     final Widget navBar = _wrapWithBackground(
       border: border,
-      backgroundColor: CupertinoDynamicColor.resolve(backgroundColor, context),
+      backgroundColor: CupertinoDynamicColor.resolve(backgroundColor, context)!,
       brightness: brightness,
       child: DefaultTextStyle(
         style: CupertinoTheme.of(context).textTheme.textStyle,
@@ -960,7 +961,7 @@ class _PersistentNavigationBar extends StatelessWidget {
     }
 
     return SizedBox(
-      height: _kNavBarPersistentHeight + MediaQuery.of(context).padding.top,
+      height: _kNavBarPersistentHeight + MediaQuery.of(context)!.padding.top,
       child: SafeArea(
         bottom: false,
         child: paddedToolbar,
@@ -1325,7 +1326,7 @@ class CupertinoNavigationBarBackButton extends StatelessWidget {
 
     TextStyle actionTextStyle = CupertinoTheme.of(context).textTheme.navActionTextStyle;
     if (color != null) {
-      actionTextStyle = actionTextStyle.copyWith(color: CupertinoDynamicColor.maybeResolve(color, context));
+      actionTextStyle = actionTextStyle.copyWith(color: CupertinoDynamicColor.resolve(color, context));
     }
 
     return CupertinoButton(
@@ -1374,23 +1375,20 @@ class _BackChevron extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextDirection textDirection = Directionality.of(context);
+    final TextDirection textDirection = Directionality.of(context)!;
     final TextStyle textStyle = DefaultTextStyle.of(context).style;
 
     // Replicate the Icon logic here to get a tightly sized icon and add
     // custom non-square padding.
-    Widget iconWidget = Padding(
-      padding: const EdgeInsetsDirectional.only(start: 6, end: 2),
-      child: Text.rich(
-        TextSpan(
-          text: String.fromCharCode(CupertinoIcons.back.codePoint),
-          style: TextStyle(
-            inherit: false,
-            color: textStyle.color,
-            fontSize: 30.0,
-            fontFamily: CupertinoIcons.back.fontFamily,
-            package: CupertinoIcons.back.fontPackage,
-          ),
+    Widget iconWidget = Text.rich(
+      TextSpan(
+        text: String.fromCharCode(CupertinoIcons.back.codePoint),
+        style: TextStyle(
+          inherit: false,
+          color: textStyle.color,
+          fontSize: 34.0,
+          fontFamily: CupertinoIcons.back.fontFamily,
+          package: CupertinoIcons.back.fontPackage,
         ),
       ),
     );
@@ -1588,7 +1586,7 @@ class _NavigationBarTransition extends StatelessWidget {
       animation: animation,
       bottomNavBar: bottomNavBar,
       topNavBar: topNavBar,
-      directionality: Directionality.of(context),
+      directionality: Directionality.of(context)!,
     );
 
     final List<Widget> children = <Widget>[
@@ -1631,7 +1629,7 @@ class _NavigationBarTransition extends StatelessWidget {
     // can actually be outside the linearly lerp'ed Rect in the middle of
     // the animation, such as the topLargeTitle.
     return SizedBox(
-      height: math.max(heightTween.begin!, heightTween.end!) + MediaQuery.of(context).padding.top,
+      height: math.max(heightTween.begin!, heightTween.end!) + MediaQuery.of(context)!.padding.top,
       width: double.infinity,
       child: Stack(
         children: children,

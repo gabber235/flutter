@@ -30,6 +30,5 @@
   "pasteButtonLabel": "Prilepiť",
   "selectAllButtonLabel": "Vybrať všetko",
   "tabSemanticsLabel": "Karta $tabIndex z $tabCount",
-  "modalBarrierDismissLabel": "Odmietnuť",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Odmietnuť"
 }

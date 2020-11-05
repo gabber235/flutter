@@ -117,7 +117,7 @@ abstract class BindingBase {
   /// Implementations of this method must call their superclass
   /// implementation.
   ///
-  /// {@macro flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@macro flutter.foundation.bindingBase.registerServiceExtension}
   ///
   /// See also:
   ///
@@ -310,7 +310,7 @@ abstract class BindingBase {
   ///
   /// Calls the `callback` callback when the service extension is called.
   ///
-  /// {@macro flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@macro flutter.foundation.bindingBase.registerServiceExtension}
   @protected
   void registerSignalServiceExtension({
     required String name,
@@ -340,7 +340,7 @@ abstract class BindingBase {
   /// Calls the `setter` callback with the new value when the
   /// service extension method is called with a new value.
   ///
-  /// {@macro flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@macro flutter.foundation.bindingBase.registerServiceExtension}
   @protected
   void registerBoolServiceExtension({
     required String name,
@@ -374,7 +374,7 @@ abstract class BindingBase {
   /// Calls the `setter` callback with the new value when the
   /// service extension method is called with a new value.
   ///
-  /// {@macro flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@macro flutter.foundation.bindingBase.registerServiceExtension}
   @protected
   void registerNumericServiceExtension({
     required String name,
@@ -436,7 +436,7 @@ abstract class BindingBase {
   /// Calls the `setter` callback with the new value when the
   /// service extension method is called with a new value.
   ///
-  /// {@macro flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@macro flutter.foundation.bindingBase.registerServiceExtension}
   @protected
   void registerStringServiceExtension({
     required String name,
@@ -470,7 +470,7 @@ abstract class BindingBase {
   ///
   /// The returned map will be mutated.
   ///
-  /// {@template flutter.foundation.BindingBase.registerServiceExtension}
+  /// {@template flutter.foundation.bindingBase.registerServiceExtension}
   /// A registered service extension can only be activated if the vm-service
   /// is included in the build, which only happens in debug and profile mode.
   /// Although a service extension cannot be used in release mode its code may

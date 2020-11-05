@@ -237,7 +237,7 @@ class _BorderContainerState extends State<_BorderContainer> with TickerProviderS
         border: _border,
         gapAnimation: widget.gapAnimation,
         gap: widget.gap,
-        textDirection: Directionality.of(context),
+        textDirection: Directionality.of(context)!,
         fillColor: widget.fillColor,
         hoverColorTween: _hoverColorTween,
         hoverAnimation: _hoverAnimation,
@@ -976,15 +976,11 @@ class _RenderDecoration extends RenderBox {
       + contentPadding.right));
     // Increase the available width for the label when it is scaled down.
     final double invertedLabelScale = lerpDouble(1.00, 1 / _kFinalLabelScale, decoration.floatingLabelProgress)!;
-    double suffixIconWidth = _boxSize(suffixIcon).width;
-    if (decoration.border!.isOutline) {
-      suffixIconWidth = lerpDouble(suffixIconWidth, 0.0, decoration.floatingLabelProgress)!;
-    }
     final double labelWidth = math.max(0.0, constraints.maxWidth - (
       _boxSize(icon).width
       + contentPadding.left
       + _boxSize(prefixIcon).width
-      + suffixIconWidth
+      + _boxSize(suffixIcon).width
       + contentPadding.right));
     boxToBaseline[label] = _layoutLineBox(
       label,
@@ -1812,7 +1808,7 @@ class InputDecorator extends StatefulWidget {
   /// How the text in the decoration should be aligned horizontally.
   final TextAlign? textAlign;
 
-  /// {@template flutter.material.InputDecorator.textAlignVertical}
+  /// {@template flutter.widgets.inputDecorator.textAlignVertical}
   /// How the text should be aligned vertically.
   ///
   /// Determines the alignment of the baseline within the available space of
@@ -1956,7 +1952,7 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
   InputDecoration? _effectiveDecoration;
   InputDecoration? get decoration {
     _effectiveDecoration ??= widget.decoration.applyDefaults(
-      Theme.of(context).inputDecorationTheme,
+      Theme.of(context)!.inputDecorationTheme,
     );
     return _effectiveDecoration;
   }
@@ -2143,7 +2139,7 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData themeData = Theme.of(context)!;
     final TextStyle inlineStyle = _getInlineStyle(themeData);
     final TextBaseline textBaseline = inlineStyle.textBaseline!;
 
@@ -2311,7 +2307,7 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
 
     // The _Decoration widget and _RenderDecoration assume that contentPadding
     // has been resolved to EdgeInsets.
-    final TextDirection textDirection = Directionality.of(context);
+    final TextDirection textDirection = Directionality.of(context)!;
     final EdgeInsets? decorationContentPadding = decoration!.contentPadding?.resolve(textDirection);
 
     final EdgeInsets contentPadding;

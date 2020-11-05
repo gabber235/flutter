@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 @TestOn('!chrome') // asset bundle behaves differently.
 import 'dart:typed_data';
 import 'dart:ui' as ui show Image;
@@ -41,7 +43,7 @@ class TestAssetBundle extends CachingAssetBundle {
 
   @override
   Future<ByteData> load(String key) {
-    late ByteData data;
+    ByteData data;
     switch (key) {
       case 'assets/image.png':
         data = TestByteData(1.0);
@@ -69,7 +71,7 @@ class TestAssetBundle extends CachingAssetBundle {
   Future<String> loadString(String key, { bool cache = true }) {
     if (key == 'AssetManifest.json')
       return SynchronousFuture<String>(manifest);
-    return SynchronousFuture<String>('');
+    return SynchronousFuture<String>(null);
   }
 
   @override
@@ -89,20 +91,21 @@ class TestAssetImage extends AssetImage {
 
   @override
   ImageStreamCompleter load(AssetBundleImageKey key, DecoderCallback decode) {
-    late ImageInfo imageInfo;
+    ImageInfo imageInfo;
     key.bundle.load(key.name).then<void>((ByteData data) {
       final TestByteData testData = data as TestByteData;
-      final ui.Image image = images[testData.scale]!;
+      final ui.Image image = images[testData.scale];
       assert(image != null, 'Expected ${testData.scale} to have a key in $images');
       imageInfo = ImageInfo(image: image, scale: key.scale);
     });
+    assert(imageInfo != null);
     return FakeImageStreamCompleter(
       SynchronousFuture<ImageInfo>(imageInfo)
     );
   }
 }
 
-Widget buildImageAtRatio(String imageName, Key key, double ratio, bool inferSize, Map<double, ui.Image> images, [ AssetBundle? bundle ]) {
+Widget buildImageAtRatio(String imageName, Key key, double ratio, bool inferSize, Map<double, ui.Image> images, [ AssetBundle bundle ]) {
   const double windowSize = 500.0; // 500 logical pixels
   const double imageSize = 200.0; // 200 logical pixels
 
@@ -310,12 +313,12 @@ void main() {
     await pumpTreeToLayout(tester, buildImageAtRatio(image, key, ratio, false, images, bundle));
     expect(getRenderImage(tester, key).size, const Size(200.0, 200.0));
     // Verify we got the 10x scaled image, since the TestByteData said it should be 10x.
-    expect(getRenderImage(tester, key).image!.height, 480);
+    expect(getRenderImage(tester, key).image.height, 480);
     key = GlobalKey();
     await pumpTreeToLayout(tester, buildImageAtRatio(image, key, ratio, true, images, bundle));
     expect(getRenderImage(tester, key).size, const Size(480.0, 480.0));
     // Verify we got the 10x scaled image, since the TestByteData said it should be 10x.
-    expect(getRenderImage(tester, key).image!.height, 480);
+    expect(getRenderImage(tester, key).image.height, 480);
   });
 
   testWidgets('Image cache resize upscale display 5', (WidgetTester tester) async {

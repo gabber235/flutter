@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'dart:ui' as ui show Image;
 
 import 'package:flutter/foundation.dart';
@@ -29,7 +31,7 @@ class TestImageProvider extends ImageProvider<TestImageProvider> {
 }
 
 void main() {
-  late ui.Image testImage;
+  ui.Image testImage;
   setUpAll(() async {
     testImage = await createTestImage(width: 16, height: 9);
   });

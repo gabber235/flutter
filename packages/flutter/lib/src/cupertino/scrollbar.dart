@@ -241,7 +241,7 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
   late Animation<double> _fadeoutOpacityAnimation;
   late AnimationController _thicknessAnimationController;
   Timer? _fadeoutTimer;
-  double? _dragScrollbarAxisPosition;
+  double? _dragScrollbarPositionY;
   Drag? _drag;
 
   double get _thickness {
@@ -283,9 +283,9 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
       _painter = _buildCupertinoScrollbarPainter(context);
     } else {
       _painter!
-        ..textDirection = Directionality.of(context)
-        ..color = CupertinoDynamicColor.resolve(_kScrollbarColor, context)
-        ..padding = MediaQuery.of(context).padding;
+        ..textDirection = Directionality.of(context)!
+        ..color = CupertinoDynamicColor.resolve(_kScrollbarColor, context)!
+        ..padding = MediaQuery.of(context)!.padding;
     }
     _triggerScrollbar();
   }
@@ -308,14 +308,14 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
   /// Returns a [ScrollbarPainter] visually styled like the iOS scrollbar.
   ScrollbarPainter _buildCupertinoScrollbarPainter(BuildContext context) {
     return ScrollbarPainter(
-      color: CupertinoDynamicColor.resolve(_kScrollbarColor, context),
-      textDirection: Directionality.of(context),
+      color: CupertinoDynamicColor.resolve(_kScrollbarColor, context)!,
+      textDirection: Directionality.of(context)!,
       thickness: _thickness,
       fadeoutOpacityAnimation: _fadeoutOpacityAnimation,
       mainAxisMargin: _kScrollbarMainAxisMargin,
       crossAxisMargin: _kScrollbarCrossAxisMargin,
       radius: _radius,
-      padding: MediaQuery.of(context).padding,
+      padding: MediaQuery.of(context)!.padding,
       minLength: _kScrollbarMinLength,
       minOverscrollLength: _kScrollbarMinOverscrollLength,
     );
@@ -342,25 +342,18 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
     // position, and create/update the drag event with that position.
     final double scrollOffsetLocal = _painter!.getTrackToScroll(primaryDelta);
     final double scrollOffsetGlobal = scrollOffsetLocal + _currentController!.position.pixels;
-    final Axis direction = _currentController!.position.axis;
 
     if (_drag == null) {
       _drag = _currentController!.position.drag(
         DragStartDetails(
-          globalPosition: direction == Axis.vertical
-            ? Offset(0.0, scrollOffsetGlobal)
-            : Offset(scrollOffsetGlobal, 0.0),
+          globalPosition: Offset(0.0, scrollOffsetGlobal),
         ),
         () {},
       );
     } else {
       _drag!.update(DragUpdateDetails(
-        globalPosition: direction == Axis.vertical
-          ? Offset(0.0, scrollOffsetGlobal)
-          : Offset(scrollOffsetGlobal, 0.0),
-        delta: direction == Axis.vertical
-          ? Offset(0.0, -scrollOffsetLocal)
-          : Offset(-scrollOffsetLocal, 0.0),
+        globalPosition: Offset(0.0, scrollOffsetGlobal),
+        delta: Offset(0.0, -scrollOffsetLocal),
         primaryDelta: -scrollOffsetLocal,
       ));
     }
@@ -376,43 +369,33 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
     }
   }
 
-  Axis? _getDirection() {
+  bool _checkVertical() {
     try {
-      return _currentController!.position.axis;
+      return _currentController!.position.axis == Axis.vertical;
     } catch (_) {
       // Ignore the gesture if we cannot determine the direction.
-      return null;
+      return false;
     }
   }
 
-  double _pressStartAxisPosition = 0.0;
+  double _pressStartY = 0.0;
 
   // Long press event callbacks handle the gesture where the user long presses
   // on the scrollbar thumb and then drags the scrollbar without releasing.
   void _handleLongPressStart(LongPressStartDetails details) {
     _currentController = _controller;
-    final Axis? direction = _getDirection();
-    if (direction == null) {
+    if (!_checkVertical()) {
       return;
     }
+    _pressStartY = details.localPosition.dy;
     _fadeoutTimer?.cancel();
     _fadeoutAnimationController.forward();
-    switch (direction) {
-      case Axis.vertical:
-        _pressStartAxisPosition = details.localPosition.dy;
-        _dragScrollbar(details.localPosition.dy);
-        _dragScrollbarAxisPosition = details.localPosition.dy;
-        break;
-      case Axis.horizontal:
-        _pressStartAxisPosition = details.localPosition.dx;
-        _dragScrollbar(details.localPosition.dx);
-        _dragScrollbarAxisPosition = details.localPosition.dx;
-        break;
-    }
+    _dragScrollbar(details.localPosition.dy);
+    _dragScrollbarPositionY = details.localPosition.dy;
   }
 
   void _handleLongPress() {
-    if (_getDirection() == null) {
+    if (!_checkVertical()) {
       return;
     }
     _fadeoutTimer?.cancel();
@@ -422,57 +405,37 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
   }
 
   void _handleLongPressMoveUpdate(LongPressMoveUpdateDetails details) {
-    final Axis? direction = _getDirection();
-    if (direction == null) {
+    if (!_checkVertical()) {
       return;
     }
-    switch(direction) {
-      case Axis.vertical:
-        _dragScrollbar(details.localPosition.dy - _dragScrollbarAxisPosition!);
-        _dragScrollbarAxisPosition = details.localPosition.dy;
-        break;
-      case Axis.horizontal:
-        _dragScrollbar(details.localPosition.dx - _dragScrollbarAxisPosition!);
-        _dragScrollbarAxisPosition = details.localPosition.dx;
-        break;
-    }
+    _dragScrollbar(details.localPosition.dy - _dragScrollbarPositionY!);
+    _dragScrollbarPositionY = details.localPosition.dy;
   }
 
   void _handleLongPressEnd(LongPressEndDetails details) {
-    final Axis? direction = _getDirection();
-    if (direction == null) {
+    if (!_checkVertical()) {
       return;
     }
-    switch(direction) {
-      case Axis.vertical:
-        _handleDragScrollEnd(details.velocity.pixelsPerSecond.dy, direction);
-        if (details.velocity.pixelsPerSecond.dy.abs() < 10 &&
-          (details.localPosition.dy - _pressStartAxisPosition).abs() > 0) {
-          HapticFeedback.mediumImpact();
-        }
-        break;
-      case Axis.horizontal:
-        _handleDragScrollEnd(details.velocity.pixelsPerSecond.dx, direction);
-        if (details.velocity.pixelsPerSecond.dx.abs() < 10 &&
-          (details.localPosition.dx - _pressStartAxisPosition).abs() > 0) {
-          HapticFeedback.mediumImpact();
-        }
-        break;
+    _handleDragScrollEnd(details.velocity.pixelsPerSecond.dy);
+    if (details.velocity.pixelsPerSecond.dy.abs() < 10 &&
+        (details.localPosition.dy - _pressStartY).abs() > 0) {
+      HapticFeedback.mediumImpact();
     }
     _currentController = null;
   }
 
-  void _handleDragScrollEnd(double trackVelocity, Axis direction) {
+  void _handleDragScrollEnd(double trackVelocityY) {
     _startFadeoutTimer();
     _thicknessAnimationController.reverse();
-    _dragScrollbarAxisPosition = null;
-    final double scrollVelocity = _painter!.getTrackToScroll(trackVelocity);
+    _dragScrollbarPositionY = null;
+    final double scrollVelocityY = _painter!.getTrackToScroll(trackVelocityY);
     _drag?.end(DragEndDetails(
-      primaryVelocity: -scrollVelocity,
+      primaryVelocity: -scrollVelocityY,
       velocity: Velocity(
-        pixelsPerSecond: direction == Axis.vertical
-          ? Offset(0.0, -scrollVelocity)
-          : Offset(-scrollVelocity, 0.0),
+        pixelsPerSecond: Offset(
+          0.0,
+          -scrollVelocityY,
+        ),
       ),
     ));
     _drag = null;
@@ -495,7 +458,7 @@ class _CupertinoScrollbarState extends State<CupertinoScrollbar> with TickerProv
       _painter!.update(notification.metrics, notification.metrics.axisDirection);
     } else if (notification is ScrollEndNotification) {
       // On iOS, the scrollbar can only go away once the user lifted the finger.
-      if (_dragScrollbarAxisPosition == null) {
+      if (_dragScrollbarPositionY == null) {
         _startFadeoutTimer();
       }
     }

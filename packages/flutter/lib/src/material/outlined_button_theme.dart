@@ -111,12 +111,13 @@ class OutlinedButtonTheme extends InheritedTheme {
   /// ```
   static OutlinedButtonThemeData of(BuildContext context) {
     final OutlinedButtonTheme? buttonTheme = context.dependOnInheritedWidgetOfExactType<OutlinedButtonTheme>();
-    return buttonTheme?.data ?? Theme.of(context).outlinedButtonTheme;
+    return buttonTheme?.data ?? Theme.of(context)!.outlinedButtonTheme;
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return OutlinedButtonTheme(data: data, child: child);
+    final OutlinedButtonTheme? ancestorTheme = context.findAncestorWidgetOfExactType<OutlinedButtonTheme>();
+    return identical(this, ancestorTheme) ? child : OutlinedButtonTheme(data: data, child: child);
   }
 
   @override

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -331,7 +333,7 @@ void main() {
     final List<int> log = <int>[];
     final PageController controller = PageController(viewportFraction: 0.9);
 
-    Widget build(PageController controller, { Size? size }) {
+    Widget build(PageController controller, { Size size }) {
       final Widget pageView = Directionality(
         textDirection: TextDirection.ltr,
         child: PageView(
@@ -393,7 +395,7 @@ void main() {
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 200.0,
-              color: index.isEven
+              color: index % 2 == 0
                 ? const Color(0xFF0000FF)
                 : const Color(0xFF00FF00),
               child: Text(kStates[index]),
@@ -427,7 +429,7 @@ void main() {
   testWidgets('Page snapping disable and reenable', (WidgetTester tester) async {
     final List<int> log = <int>[];
 
-    Widget build({ required bool pageSnapping }) {
+    Widget build({ bool pageSnapping }) {
       return Directionality(
         textDirection: TextDirection.ltr,
         child: PageView(
@@ -499,7 +501,7 @@ void main() {
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 200.0,
-              color: index.isEven
+              color: index % 2 == 0
                 ? const Color(0xFF0000FF)
                 : const Color(0xFF00FF00),
               child: Text(kStates[index]),
@@ -543,7 +545,7 @@ void main() {
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 200.0,
-              color: index.isEven
+              color: index % 2 == 0
                 ? const Color(0xFF0000FF)
                 : const Color(0xFF00FF00),
               child: Text(kStates[index]),
@@ -576,7 +578,7 @@ void main() {
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 height: 200.0,
-                color: index.isEven
+                color: index % 2 == 0
                   ? const Color(0xFF0000FF)
                   : const Color(0xFF00FF00),
                 child: Text(kStates[index]),
@@ -615,7 +617,7 @@ void main() {
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 height: 200.0,
-                color: index.isEven
+                color: index % 2 == 0
                   ? const Color(0xFF0000FF)
                   : const Color(0xFF00FF00),
                   child: Text(index.toString()),
@@ -641,7 +643,7 @@ void main() {
     (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/23873.
       final PageController controller = PageController(viewportFraction: 1/4, initialPage: 0);
-      late int tappedIndex;
+      int tappedIndex;
 
       Widget build() {
         return Directionality(

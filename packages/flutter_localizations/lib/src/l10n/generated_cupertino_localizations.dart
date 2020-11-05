@@ -73,10 +73,10 @@ class CupertinoLocalizationAf extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour uur';
+  String get datePickerHourSemanticsLabelOne => '\$hour uur';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour uur';
+  String get datePickerHourSemanticsLabelOther => '\$hour uur';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -94,7 +94,7 @@ class CupertinoLocalizationAf extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minute';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minute';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -112,13 +112,10 @@ class CupertinoLocalizationAf extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'nm.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Kies alles';
 
   @override
-  String get tabSemanticsLabelRaw => r'Oortjie $tabIndex van $tabCount';
+  String get tabSemanticsLabelRaw => 'Oortjie \$tabIndex van \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -230,10 +227,10 @@ class CupertinoLocalizationAm extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour ሰዓት';
+  String get datePickerHourSemanticsLabelOne => '\$hour ሰዓት';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour ሰዓት';
+  String get datePickerHourSemanticsLabelOther => '\$hour ሰዓት';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -251,7 +248,7 @@ class CupertinoLocalizationAm extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 ደቂቃ';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute ደቂቃዎች';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute ደቂቃዎች';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -269,13 +266,10 @@ class CupertinoLocalizationAm extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ከሰዓት';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ሁሉንም ምረጥ';
 
   @override
-  String get tabSemanticsLabelRaw => r'ትር $tabIndex ከ$tabCount';
+  String get tabSemanticsLabelRaw => 'ትር \$tabIndex ከ\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -381,40 +375,40 @@ class CupertinoLocalizationAr extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelFew => '\$hour بالضبط';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelMany => '\$hour بالضبط';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelOne => '\$hour بالضبط';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelOther => '\$hour بالضبط';
 
   @override
-  String get datePickerHourSemanticsLabelTwo => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelTwo => '\$hour بالضبط';
 
   @override
-  String get datePickerHourSemanticsLabelZero => r'$hour بالضبط';
+  String get datePickerHourSemanticsLabelZero => '\$hour بالضبط';
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute دقائق';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute دقائق';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute دقيقة​';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute دقيقة​';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => 'دقيقة واحدة';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute دقيقة​';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute دقيقة​';
 
   @override
-  String get datePickerMinuteSemanticsLabelTwo => r'دقيقتان ($minute)';
+  String get datePickerMinuteSemanticsLabelTwo => 'دقيقتان (\$minute)';
 
   @override
-  String get datePickerMinuteSemanticsLabelZero => r'$minute دقيقة​';
+  String get datePickerMinuteSemanticsLabelZero => '\$minute دقيقة​';
 
   @override
   String get modalBarrierDismissLabel => 'رفض';
@@ -426,13 +420,10 @@ class CupertinoLocalizationAr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'م';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'اختيار الكل';
 
   @override
-  String get tabSemanticsLabelRaw => r'علامة التبويب $tabIndex من $tabCount';
+  String get tabSemanticsLabelRaw => 'علامة التبويب \$tabIndex من \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'ساعات';
@@ -544,10 +535,10 @@ class CupertinoLocalizationAs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour বাজিছে';
+  String get datePickerHourSemanticsLabelOne => '\$hour বাজিছে';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour বাজিছে';
+  String get datePickerHourSemanticsLabelOther => '\$hour বাজিছে';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -565,7 +556,7 @@ class CupertinoLocalizationAs extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '১মিনিট';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minuteমিনিট';
+  String get datePickerMinuteSemanticsLabelOther => '\$minuteমিনিট';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -577,19 +568,16 @@ class CupertinoLocalizationAs extends GlobalCupertinoLocalizations {
   String get modalBarrierDismissLabel => 'অগ্ৰাহ্য কৰক';
 
   @override
-  String get pasteButtonLabel => "পে'ষ্ট কৰক";
+  String get pasteButtonLabel => 'পে\'ষ্ট কৰক';
 
   @override
   String get postMeridiemAbbreviation => 'অপৰাহ্ন';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'সকলো বাছনি কৰক';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount টা টেবৰ $tabIndex নম্বৰটো';
+  String get tabSemanticsLabelRaw => '\$tabCount টা টেবৰ \$tabIndex নম্বৰটো';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -701,10 +689,10 @@ class CupertinoLocalizationAz extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Saat $hour';
+  String get datePickerHourSemanticsLabelOne => 'Saat \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Saat $hour';
+  String get datePickerHourSemanticsLabelOther => 'Saat \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -722,7 +710,7 @@ class CupertinoLocalizationAz extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 dəqiqə';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute dəqiqə';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute dəqiqə';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -740,13 +728,10 @@ class CupertinoLocalizationAz extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Hamısını seçin';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -852,16 +837,16 @@ class CupertinoLocalizationBe extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour гадзіны нуль хвілін';
+  String get datePickerHourSemanticsLabelFew => '\$hour гадзіны нуль хвілін';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour гадзін нуль хвілін';
+  String get datePickerHourSemanticsLabelMany => '\$hour гадзін нуль хвілін';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour гадзіна нуль хвілін';
+  String get datePickerHourSemanticsLabelOne => '\$hour гадзіна нуль хвілін';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour гадзіны нуль хвілін';
+  String get datePickerHourSemanticsLabelOther => '\$hour гадзіны нуль хвілін';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -870,16 +855,16 @@ class CupertinoLocalizationBe extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute хвіліны';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute хвіліны';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute хвілін';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute хвілін';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 хвіліна';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute хвіліны';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute хвіліны';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -897,13 +882,10 @@ class CupertinoLocalizationBe extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'вечара';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Выбраць усе';
 
   @override
-  String get tabSemanticsLabelRaw => r'Укладка $tabIndex з $tabCount';
+  String get tabSemanticsLabelRaw => 'Укладка \$tabIndex з \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'гадзіны';
@@ -1015,10 +997,10 @@ class CupertinoLocalizationBg extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour часа';
+  String get datePickerHourSemanticsLabelOne => '\$hour часа';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour часа';
+  String get datePickerHourSemanticsLabelOther => '\$hour часа';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1036,7 +1018,7 @@ class CupertinoLocalizationBg extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 минута';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минути';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минути';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1054,13 +1036,10 @@ class CupertinoLocalizationBg extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Избиране на всички';
 
   @override
-  String get tabSemanticsLabelRaw => r'Раздел $tabIndex от $tabCount';
+  String get tabSemanticsLabelRaw => 'Раздел \$tabIndex от \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -1172,10 +1151,10 @@ class CupertinoLocalizationBn extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hourটা বাজে';
+  String get datePickerHourSemanticsLabelOne => '\$hourটা বাজে';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hourটা বাজে';
+  String get datePickerHourSemanticsLabelOther => '\$hourটা বাজে';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1193,7 +1172,7 @@ class CupertinoLocalizationBn extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '১ মিনিট';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute মিনিট';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute মিনিট';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1211,13 +1190,10 @@ class CupertinoLocalizationBn extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'সব বেছে নিন';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount-এর মধ্যে $tabIndex নম্বর ট্যাব';
+  String get tabSemanticsLabelRaw => '\$tabCount-এর মধ্যে \$tabIndex নম্বর ট্যাব';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -1323,16 +1299,16 @@ class CupertinoLocalizationBs extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour sata';
+  String get datePickerHourSemanticsLabelFew => '\$hour sata';
 
   @override
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour sat';
+  String get datePickerHourSemanticsLabelOne => '\$hour sat';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour sati';
+  String get datePickerHourSemanticsLabelOther => '\$hour sati';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1341,7 +1317,7 @@ class CupertinoLocalizationBs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minute';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minute';
 
   @override
   String get datePickerMinuteSemanticsLabelMany => null;
@@ -1350,7 +1326,7 @@ class CupertinoLocalizationBs extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuta';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuta';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1368,13 +1344,10 @@ class CupertinoLocalizationBs extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'poslijepodne';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Odaberi sve';
 
   @override
-  String get tabSemanticsLabelRaw => r'Kartica $tabIndex od $tabCount';
+  String get tabSemanticsLabelRaw => 'Kartica \$tabIndex od \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'sata';
@@ -1486,10 +1459,10 @@ class CupertinoLocalizationCa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punt';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punt';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punt';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punt';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1507,7 +1480,7 @@ class CupertinoLocalizationCa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuts';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuts';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1525,13 +1498,10 @@ class CupertinoLocalizationCa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Selecciona-ho tot';
 
   @override
-  String get tabSemanticsLabelRaw => r'Pestanya $tabIndex de $tabCount';
+  String get tabSemanticsLabelRaw => 'Pestanya \$tabIndex de \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -1637,16 +1607,16 @@ class CupertinoLocalizationCs extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour hodiny';
+  String get datePickerHourSemanticsLabelFew => '\$hour hodiny';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour hodiny';
+  String get datePickerHourSemanticsLabelMany => '\$hour hodiny';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour hodina';
+  String get datePickerHourSemanticsLabelOne => '\$hour hodina';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour hodin';
+  String get datePickerHourSemanticsLabelOther => '\$hour hodin';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1655,16 +1625,16 @@ class CupertinoLocalizationCs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minuty';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minuty';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute minuty';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute minuty';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 minuta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minut';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minut';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1682,13 +1652,10 @@ class CupertinoLocalizationCs extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Vybrat vše';
 
   @override
-  String get tabSemanticsLabelRaw => r'Karta $tabIndex z $tabCount';
+  String get tabSemanticsLabelRaw => 'Karta \$tabIndex z \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'hodiny';
@@ -1800,10 +1767,10 @@ class CupertinoLocalizationDa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'klokken $hour';
+  String get datePickerHourSemanticsLabelOne => 'klokken \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'klokken $hour';
+  String get datePickerHourSemanticsLabelOther => 'klokken \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1821,7 +1788,7 @@ class CupertinoLocalizationDa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutter';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutter';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1839,13 +1806,10 @@ class CupertinoLocalizationDa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Vælg alle';
 
   @override
-  String get tabSemanticsLabelRaw => r'Fane $tabIndex af $tabCount';
+  String get tabSemanticsLabelRaw => 'Fane \$tabIndex af \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -1957,10 +1921,10 @@ class CupertinoLocalizationDe extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour Uhr';
+  String get datePickerHourSemanticsLabelOne => '\$hour Uhr';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour Uhr';
+  String get datePickerHourSemanticsLabelOther => '\$hour Uhr';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -1978,7 +1942,7 @@ class CupertinoLocalizationDe extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 Minute';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute Minuten';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute Minuten';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -1996,13 +1960,10 @@ class CupertinoLocalizationDe extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Alles auswählen';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex von $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex von \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -2145,10 +2106,10 @@ class CupertinoLocalizationEl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour ακριβώς';
+  String get datePickerHourSemanticsLabelOne => '\$hour ακριβώς';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour ακριβώς';
+  String get datePickerHourSemanticsLabelOther => '\$hour ακριβώς';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -2166,7 +2127,7 @@ class CupertinoLocalizationEl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 λεπτό';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute λεπτά';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute λεπτά';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -2184,13 +2145,10 @@ class CupertinoLocalizationEl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'μ.μ.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Επιλογή όλων';
 
   @override
-  String get tabSemanticsLabelRaw => r'Καρτέλα $tabIndex από $tabCount';
+  String get tabSemanticsLabelRaw => 'Καρτέλα \$tabIndex από \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -2302,10 +2260,10 @@ class CupertinoLocalizationEn extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r"$hour o'clock";
+  String get datePickerHourSemanticsLabelOne => '\$hour o\'clock';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r"$hour o'clock";
+  String get datePickerHourSemanticsLabelOther => '\$hour o\'clock';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -2323,7 +2281,7 @@ class CupertinoLocalizationEn extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minute';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutes';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutes';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -2341,13 +2299,10 @@ class CupertinoLocalizationEn extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Select All';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex of $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex of \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -2731,10 +2686,10 @@ class CupertinoLocalizationEs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -2752,7 +2707,7 @@ class CupertinoLocalizationEs extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutos';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutos';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -2770,13 +2725,10 @@ class CupertinoLocalizationEs extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'p. m.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Seleccionar todos';
 
   @override
-  String get tabSemanticsLabelRaw => r'Pestaña $tabIndex de $tabCount';
+  String get tabSemanticsLabelRaw => 'Pestaña \$tabIndex de \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -2864,10 +2816,10 @@ class CupertinoLocalizationEs419 extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -2907,10 +2859,10 @@ class CupertinoLocalizationEsAr extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -2950,10 +2902,10 @@ class CupertinoLocalizationEsBo extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -2993,10 +2945,10 @@ class CupertinoLocalizationEsCl extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3036,10 +2988,10 @@ class CupertinoLocalizationEsCo extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3079,10 +3031,10 @@ class CupertinoLocalizationEsCr extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3122,10 +3074,10 @@ class CupertinoLocalizationEsDo extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3165,10 +3117,10 @@ class CupertinoLocalizationEsEc extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3208,10 +3160,10 @@ class CupertinoLocalizationEsGt extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3251,10 +3203,10 @@ class CupertinoLocalizationEsHn extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3294,10 +3246,10 @@ class CupertinoLocalizationEsMx extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3337,10 +3289,10 @@ class CupertinoLocalizationEsNi extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3380,10 +3332,10 @@ class CupertinoLocalizationEsPa extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3423,10 +3375,10 @@ class CupertinoLocalizationEsPe extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3466,10 +3418,10 @@ class CupertinoLocalizationEsPr extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3509,10 +3461,10 @@ class CupertinoLocalizationEsPy extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3552,10 +3504,10 @@ class CupertinoLocalizationEsSv extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3595,10 +3547,10 @@ class CupertinoLocalizationEsUs extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3638,10 +3590,10 @@ class CupertinoLocalizationEsUy extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3681,10 +3633,10 @@ class CupertinoLocalizationEsVe extends CupertinoLocalizationEs {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get anteMeridiemAbbreviation => 'a.m.';
@@ -3748,10 +3700,10 @@ class CupertinoLocalizationEt extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Kell $hour';
+  String get datePickerHourSemanticsLabelOne => 'Kell \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Kell $hour';
+  String get datePickerHourSemanticsLabelOther => 'Kell \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -3769,7 +3721,7 @@ class CupertinoLocalizationEt extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutit';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutit';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -3787,13 +3739,10 @@ class CupertinoLocalizationEt extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Vali kõik';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex. vaheleht $tabCount-st';
+  String get tabSemanticsLabelRaw => '\$tabIndex. vaheleht \$tabCount-st';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -3905,10 +3854,10 @@ class CupertinoLocalizationEu extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Ordu$houra da';
+  String get datePickerHourSemanticsLabelOne => 'Ordu\$houra da';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hourak dira';
+  String get datePickerHourSemanticsLabelOther => '\$hourak dira';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -3926,7 +3875,7 @@ class CupertinoLocalizationEu extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'Minutu bat';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutu';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutu';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -3944,13 +3893,10 @@ class CupertinoLocalizationEu extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Hautatu guztiak';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex/$tabCount fitxa';
+  String get tabSemanticsLabelRaw => '\$tabIndex/\$tabCount fitxa';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4062,10 +4008,10 @@ class CupertinoLocalizationFa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'ساعت $hour';
+  String get datePickerHourSemanticsLabelOne => 'ساعت \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'ساعت $hour';
+  String get datePickerHourSemanticsLabelOther => 'ساعت \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4083,7 +4029,7 @@ class CupertinoLocalizationFa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '۱ دقیقه';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute دقیقه';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute دقیقه';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4101,13 +4047,10 @@ class CupertinoLocalizationFa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ب.ظ.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'انتخاب همه';
 
   @override
-  String get tabSemanticsLabelRaw => r'برگه $tabIndex از $tabCount';
+  String get tabSemanticsLabelRaw => 'برگه \$tabIndex از \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4219,10 +4162,10 @@ class CupertinoLocalizationFi extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'klo $hour';
+  String get datePickerHourSemanticsLabelOne => 'klo \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'klo $hour';
+  String get datePickerHourSemanticsLabelOther => 'klo \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4240,7 +4183,7 @@ class CupertinoLocalizationFi extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuutti';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuuttia';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuuttia';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4258,13 +4201,10 @@ class CupertinoLocalizationFi extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ip';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Valitse kaikki';
 
   @override
-  String get tabSemanticsLabelRaw => r'Välilehti $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'Välilehti \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4376,10 +4316,10 @@ class CupertinoLocalizationFil extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Ala $hour';
+  String get datePickerHourSemanticsLabelOne => 'Ala \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Alas $hour';
+  String get datePickerHourSemanticsLabelOther => 'Alas \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4397,7 +4337,7 @@ class CupertinoLocalizationFil extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute na minuto';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute na minuto';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4415,13 +4355,10 @@ class CupertinoLocalizationFil extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Piliin Lahat';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex ng $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex ng \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4533,10 +4470,10 @@ class CupertinoLocalizationFr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour heure';
+  String get datePickerHourSemanticsLabelOne => '\$hour heure';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour heures';
+  String get datePickerHourSemanticsLabelOther => '\$hour heures';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4554,7 +4491,7 @@ class CupertinoLocalizationFr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minute';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutes';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutes';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4572,13 +4509,10 @@ class CupertinoLocalizationFr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Tout sélect.';
 
   @override
-  String get tabSemanticsLabelRaw => r'Onglet $tabIndex sur $tabCount';
+  String get tabSemanticsLabelRaw => 'Onglet \$tabIndex sur \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4635,7 +4569,7 @@ class CupertinoLocalizationFr extends GlobalCupertinoLocalizations {
   String get timerPickerSecondLabelZero => null;
 
   @override
-  String get todayLabel => "aujourd'hui";
+  String get todayLabel => 'aujourd\'hui';
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
@@ -4666,10 +4600,10 @@ class CupertinoLocalizationFrCa extends CupertinoLocalizationFr {
   );
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour heure';
+  String get datePickerHourSemanticsLabelOne => '\$hour heure';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour heures';
+  String get datePickerHourSemanticsLabelOther => '\$hour heures';
 
   @override
   String get anteMeridiemAbbreviation => 'am';
@@ -4678,7 +4612,7 @@ class CupertinoLocalizationFrCa extends CupertinoLocalizationFr {
   String get postMeridiemAbbreviation => 'pm';
 
   @override
-  String get todayLabel => "Aujourd'hui";
+  String get todayLabel => 'Aujourd\'hui';
 
   @override
   String get timerPickerMinuteLabelOne => 'min';
@@ -4742,10 +4676,10 @@ class CupertinoLocalizationGl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour en punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour en punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour en punto';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4763,7 +4697,7 @@ class CupertinoLocalizationGl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutos';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutos';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4781,13 +4715,10 @@ class CupertinoLocalizationGl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'p.m.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Seleccionar todo';
 
   @override
-  String get tabSemanticsLabelRaw => r'Pestana $tabIndex de $tabCount';
+  String get tabSemanticsLabelRaw => 'Pestana \$tabIndex de \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -4899,10 +4830,10 @@ class CupertinoLocalizationGsw extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour Uhr';
+  String get datePickerHourSemanticsLabelOne => '\$hour Uhr';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour Uhr';
+  String get datePickerHourSemanticsLabelOther => '\$hour Uhr';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -4920,7 +4851,7 @@ class CupertinoLocalizationGsw extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 Minute';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute Minuten';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute Minuten';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -4938,13 +4869,10 @@ class CupertinoLocalizationGsw extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Alles auswählen';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex von $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex von \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5056,10 +4984,10 @@ class CupertinoLocalizationGu extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour વાગ્યો છે';
+  String get datePickerHourSemanticsLabelOne => '\$hour વાગ્યો છે';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour વાગ્યા છે';
+  String get datePickerHourSemanticsLabelOther => '\$hour વાગ્યા છે';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -5077,7 +5005,7 @@ class CupertinoLocalizationGu extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 મિનિટ';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute મિનિટ';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute મિનિટ';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -5095,13 +5023,10 @@ class CupertinoLocalizationGu extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'બધા પસંદ કરો';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCountમાંથી $tabIndex ટૅબ';
+  String get tabSemanticsLabelRaw => '\$tabCountમાંથી \$tabIndex ટૅબ';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5210,16 +5135,16 @@ class CupertinoLocalizationHe extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelFew => null;
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour בדיוק';
+  String get datePickerHourSemanticsLabelMany => '\$hour בדיוק';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour בדיוק';
+  String get datePickerHourSemanticsLabelOne => '\$hour בדיוק';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour בדיוק';
+  String get datePickerHourSemanticsLabelOther => '\$hour בדיוק';
 
   @override
-  String get datePickerHourSemanticsLabelTwo => r'$hour בדיוק';
+  String get datePickerHourSemanticsLabelTwo => '\$hour בדיוק';
 
   @override
   String get datePickerHourSemanticsLabelZero => null;
@@ -5228,16 +5153,16 @@ class CupertinoLocalizationHe extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelFew => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute דקות';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute דקות';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => 'דקה אחת';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute דקות';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute דקות';
 
   @override
-  String get datePickerMinuteSemanticsLabelTwo => r'$minute דקות';
+  String get datePickerMinuteSemanticsLabelTwo => '\$minute דקות';
 
   @override
   String get datePickerMinuteSemanticsLabelZero => null;
@@ -5252,13 +5177,10 @@ class CupertinoLocalizationHe extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'בחירת הכול';
 
   @override
-  String get tabSemanticsLabelRaw => r'כרטיסייה $tabIndex מתוך $tabCount';
+  String get tabSemanticsLabelRaw => 'כרטיסייה \$tabIndex מתוך \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5370,10 +5292,10 @@ class CupertinoLocalizationHi extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour बजे';
+  String get datePickerHourSemanticsLabelOne => '\$hour बजे';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour बजे';
+  String get datePickerHourSemanticsLabelOther => '\$hour बजे';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -5391,7 +5313,7 @@ class CupertinoLocalizationHi extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 मिनट';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute मिनट';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute मिनट';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -5409,13 +5331,10 @@ class CupertinoLocalizationHi extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'सभी चुनें';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount का टैब $tabIndex';
+  String get tabSemanticsLabelRaw => '\$tabCount का टैब \$tabIndex';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5521,16 +5440,16 @@ class CupertinoLocalizationHr extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour sata';
+  String get datePickerHourSemanticsLabelFew => '\$hour sata';
 
   @override
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour sat';
+  String get datePickerHourSemanticsLabelOne => '\$hour sat';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour sati';
+  String get datePickerHourSemanticsLabelOther => '\$hour sati';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -5539,7 +5458,7 @@ class CupertinoLocalizationHr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minute';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minute';
 
   @override
   String get datePickerMinuteSemanticsLabelMany => null;
@@ -5548,7 +5467,7 @@ class CupertinoLocalizationHr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'Jedna minuta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuta';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuta';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -5566,13 +5485,10 @@ class CupertinoLocalizationHr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'popodne';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Odaberi sve';
 
   @override
-  String get tabSemanticsLabelRaw => r'Kartica $tabIndex od $tabCount';
+  String get tabSemanticsLabelRaw => 'Kartica \$tabIndex od \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'sata';
@@ -5684,10 +5600,10 @@ class CupertinoLocalizationHu extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour óra';
+  String get datePickerHourSemanticsLabelOne => '\$hour óra';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour óra';
+  String get datePickerHourSemanticsLabelOther => '\$hour óra';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -5705,7 +5621,7 @@ class CupertinoLocalizationHu extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 perc';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute perc';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute perc';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -5723,13 +5639,10 @@ class CupertinoLocalizationHu extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'du.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Összes kijelölése';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount/$tabIndex. lap';
+  String get tabSemanticsLabelRaw => '\$tabCount/\$tabIndex. lap';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5841,10 +5754,10 @@ class CupertinoLocalizationHy extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour:00';
+  String get datePickerHourSemanticsLabelOne => '\$hour:00';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour:00';
+  String get datePickerHourSemanticsLabelOther => '\$hour:00';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -5862,7 +5775,7 @@ class CupertinoLocalizationHy extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 րոպե';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute րոպե';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute րոպե';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -5880,13 +5793,10 @@ class CupertinoLocalizationHy extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Նշել բոլորը';
 
   @override
-  String get tabSemanticsLabelRaw => r'Ներդիր $tabIndex՝ $tabCount-ից';
+  String get tabSemanticsLabelRaw => 'Ներդիր \$tabIndex՝ \$tabCount-ից';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -5998,10 +5908,10 @@ class CupertinoLocalizationId extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour tepat';
+  String get datePickerHourSemanticsLabelOne => '\$hour tepat';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour tepat';
+  String get datePickerHourSemanticsLabelOther => '\$hour tepat';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6019,7 +5929,7 @@ class CupertinoLocalizationId extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 menit';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute menit';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute menit';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6037,13 +5947,10 @@ class CupertinoLocalizationId extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Pilih Semua';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex dari $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex dari \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6155,10 +6062,10 @@ class CupertinoLocalizationIs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'klukkan $hour';
+  String get datePickerHourSemanticsLabelOne => 'klukkan \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'klukkan $hour';
+  String get datePickerHourSemanticsLabelOther => 'klukkan \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6176,7 +6083,7 @@ class CupertinoLocalizationIs extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 mínúta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute mínútur';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute mínútur';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6194,13 +6101,10 @@ class CupertinoLocalizationIs extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'e.h.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Velja allt';
 
   @override
-  String get tabSemanticsLabelRaw => r'Flipi $tabIndex af $tabCount';
+  String get tabSemanticsLabelRaw => 'Flipi \$tabIndex af \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6312,10 +6216,10 @@ class CupertinoLocalizationIt extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour in punto';
+  String get datePickerHourSemanticsLabelOne => '\$hour in punto';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour in punto';
+  String get datePickerHourSemanticsLabelOther => '\$hour in punto';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6333,7 +6237,7 @@ class CupertinoLocalizationIt extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuti';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuti';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6351,13 +6255,10 @@ class CupertinoLocalizationIt extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Seleziona tutto';
 
   @override
-  String get tabSemanticsLabelRaw => r'Scheda $tabIndex di $tabCount';
+  String get tabSemanticsLabelRaw => 'Scheda \$tabIndex di \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6469,10 +6370,10 @@ class CupertinoLocalizationJa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour時';
+  String get datePickerHourSemanticsLabelOne => '\$hour時';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour時';
+  String get datePickerHourSemanticsLabelOther => '\$hour時';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6490,7 +6391,7 @@ class CupertinoLocalizationJa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1分';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute分';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute分';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6508,13 +6409,10 @@ class CupertinoLocalizationJa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'すべて選択';
 
   @override
-  String get tabSemanticsLabelRaw => r'タブ: $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'タブ: \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6626,10 +6524,10 @@ class CupertinoLocalizationKa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour საათი';
+  String get datePickerHourSemanticsLabelOne => '\$hour საათი';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour საათი';
+  String get datePickerHourSemanticsLabelOther => '\$hour საათი';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6647,7 +6545,7 @@ class CupertinoLocalizationKa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 წუთი';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute წუთი';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute წუთი';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6665,13 +6563,10 @@ class CupertinoLocalizationKa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ყველას არჩევა';
 
   @override
-  String get tabSemanticsLabelRaw => r'ჩანართი $tabIndex / $tabCount-დან';
+  String get tabSemanticsLabelRaw => 'ჩანართი \$tabIndex / \$tabCount-დან';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6783,10 +6678,10 @@ class CupertinoLocalizationKk extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Сағат: $hour';
+  String get datePickerHourSemanticsLabelOne => 'Сағат: \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Сағат: $hour';
+  String get datePickerHourSemanticsLabelOther => 'Сағат: \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6804,7 +6699,7 @@ class CupertinoLocalizationKk extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 минут';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минут';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минут';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6822,13 +6717,10 @@ class CupertinoLocalizationKk extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'түстен кейін';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Барлығын таңдау';
 
   @override
-  String get tabSemanticsLabelRaw => r'Қойынды: $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'Қойынды: \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -6940,10 +6832,10 @@ class CupertinoLocalizationKm extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'ម៉ោង $hour';
+  String get datePickerHourSemanticsLabelOne => 'ម៉ោង \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'ម៉ោង $hour';
+  String get datePickerHourSemanticsLabelOther => 'ម៉ោង \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -6961,7 +6853,7 @@ class CupertinoLocalizationKm extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 នាទី';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute នាទី';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute នាទី';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -6979,13 +6871,10 @@ class CupertinoLocalizationKm extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ជ្រើសរើស​ទាំងអស់';
 
   @override
-  String get tabSemanticsLabelRaw => r'ផ្ទាំងទី $tabIndex នៃ $tabCount';
+  String get tabSemanticsLabelRaw => 'ផ្ទាំងទី \$tabIndex នៃ \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -7136,9 +7025,6 @@ class CupertinoLocalizationKn extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => '\u{cb8}\u{c82}\u{c9c}\u{cc6}';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => '\u{c8e}\u{cb2}\u{ccd}\u{cb2}\u{cb5}\u{ca8}\u{ccd}\u{ca8}\u{cc2}\u{20}\u{c86}\u{caf}\u{ccd}\u{c95}\u{cc6}\u{cae}\u{cbe}\u{ca1}\u{cbf}';
 
   @override
@@ -7254,10 +7140,10 @@ class CupertinoLocalizationKo extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour시 정각';
+  String get datePickerHourSemanticsLabelOne => '\$hour시 정각';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour시 정각';
+  String get datePickerHourSemanticsLabelOther => '\$hour시 정각';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -7275,7 +7161,7 @@ class CupertinoLocalizationKo extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1분';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute분';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute분';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -7293,13 +7179,10 @@ class CupertinoLocalizationKo extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => '오후';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => '전체 선택';
 
   @override
-  String get tabSemanticsLabelRaw => r'탭 $tabCount개 중 $tabIndex번째';
+  String get tabSemanticsLabelRaw => '탭 \$tabCount개 중 \$tabIndex번째';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -7411,10 +7294,10 @@ class CupertinoLocalizationKy extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Саат $hour';
+  String get datePickerHourSemanticsLabelOne => 'Саат \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Саат $hour';
+  String get datePickerHourSemanticsLabelOther => 'Саат \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -7432,7 +7315,7 @@ class CupertinoLocalizationKy extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 мүнөт';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute мүнөт';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute мүнөт';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -7450,13 +7333,10 @@ class CupertinoLocalizationKy extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'түштөн кийин';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Баарын тандоо';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount ичинен $tabIndex-өтмөк';
+  String get tabSemanticsLabelRaw => '\$tabCount ичинен \$tabIndex-өтмөк';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -7568,10 +7448,10 @@ class CupertinoLocalizationLo extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour ໂມງກົງ';
+  String get datePickerHourSemanticsLabelOne => '\$hour ໂມງກົງ';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour ໂມງກົງ';
+  String get datePickerHourSemanticsLabelOther => '\$hour ໂມງກົງ';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -7589,7 +7469,7 @@ class CupertinoLocalizationLo extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 ນາທີ';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute ນາທີ';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute ນາທີ';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -7607,13 +7487,10 @@ class CupertinoLocalizationLo extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ຫຼັງທ່ຽງ';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ເລືອກທັງໝົດ';
 
   @override
-  String get tabSemanticsLabelRaw => r'ແຖບທີ $tabIndex ຈາກທັງໝົດ $tabCount';
+  String get tabSemanticsLabelRaw => 'ແຖບທີ \$tabIndex ຈາກທັງໝົດ \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -7719,16 +7596,16 @@ class CupertinoLocalizationLt extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour val.';
+  String get datePickerHourSemanticsLabelFew => '\$hour val.';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour val.';
+  String get datePickerHourSemanticsLabelMany => '\$hour val.';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour val.';
+  String get datePickerHourSemanticsLabelOne => '\$hour val.';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour val.';
+  String get datePickerHourSemanticsLabelOther => '\$hour val.';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -7737,16 +7614,16 @@ class CupertinoLocalizationLt extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute min.';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute min.';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute min.';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute min.';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 min.';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute min.';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute min.';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -7764,13 +7641,10 @@ class CupertinoLocalizationLt extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'popiet';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Pasirinkti viską';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex skirtukas iš $tabCount';
+  String get tabSemanticsLabelRaw => '\$tabIndex skirtukas iš \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'val.';
@@ -7882,16 +7756,16 @@ class CupertinoLocalizationLv extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'plkst. $hour';
+  String get datePickerHourSemanticsLabelOne => 'plkst. \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'plkst. $hour';
+  String get datePickerHourSemanticsLabelOther => 'plkst. \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
 
   @override
-  String get datePickerHourSemanticsLabelZero => r'plkst. $hour';
+  String get datePickerHourSemanticsLabelZero => 'plkst. \$hour';
 
   @override
   String get datePickerMinuteSemanticsLabelFew => null;
@@ -7903,13 +7777,13 @@ class CupertinoLocalizationLv extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minūte';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minūtes';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minūtes';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelZero => r'$minute minūtes';
+  String get datePickerMinuteSemanticsLabelZero => '\$minute minūtes';
 
   @override
   String get modalBarrierDismissLabel => 'Nerādīt';
@@ -7921,13 +7795,10 @@ class CupertinoLocalizationLv extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'pēcpusdienā';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Atlasīt visu';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex. cilne no $tabCount';
+  String get tabSemanticsLabelRaw => '\$tabIndex. cilne no \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8039,10 +7910,10 @@ class CupertinoLocalizationMk extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour часот';
+  String get datePickerHourSemanticsLabelOne => '\$hour часот';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour часот';
+  String get datePickerHourSemanticsLabelOther => '\$hour часот';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8060,7 +7931,7 @@ class CupertinoLocalizationMk extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 минута';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минути';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минути';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8078,13 +7949,10 @@ class CupertinoLocalizationMk extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ПОПЛАДНЕ';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Избери ги сите';
 
   @override
-  String get tabSemanticsLabelRaw => r'Картичка $tabIndex од $tabCount';
+  String get tabSemanticsLabelRaw => 'Картичка \$tabIndex од \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8196,10 +8064,10 @@ class CupertinoLocalizationMl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour മണി';
+  String get datePickerHourSemanticsLabelOne => '\$hour മണി';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour മണി';
+  String get datePickerHourSemanticsLabelOther => '\$hour മണി';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8217,7 +8085,7 @@ class CupertinoLocalizationMl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'ഒരു മിനിറ്റ്';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute മിനിറ്റ്';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute മിനിറ്റ്';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8235,13 +8103,10 @@ class CupertinoLocalizationMl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'എല്ലാം തിരഞ്ഞെടുക്കുക';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount ടാബിൽ $tabIndex-ാമത്തേത്';
+  String get tabSemanticsLabelRaw => '\$tabCount ടാബിൽ \$tabIndex-ാമത്തേത്';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8353,10 +8218,10 @@ class CupertinoLocalizationMn extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour цаг';
+  String get datePickerHourSemanticsLabelOne => '\$hour цаг';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour цаг';
+  String get datePickerHourSemanticsLabelOther => '\$hour цаг';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8374,7 +8239,7 @@ class CupertinoLocalizationMn extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 минут';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минут';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минут';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8392,13 +8257,10 @@ class CupertinoLocalizationMn extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ОРОЙ';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Бүгдийг сонгох';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount-н $tabIndex-р таб';
+  String get tabSemanticsLabelRaw => '\$tabCount-н \$tabIndex-р таб';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8510,10 +8372,10 @@ class CupertinoLocalizationMr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour वाजता';
+  String get datePickerHourSemanticsLabelOne => '\$hour वाजता';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour वाजता';
+  String get datePickerHourSemanticsLabelOther => '\$hour वाजता';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8531,7 +8393,7 @@ class CupertinoLocalizationMr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'एक मिनिट';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute मिनिटे';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute मिनिटे';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8549,13 +8411,10 @@ class CupertinoLocalizationMr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'सर्व निवडा';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount पैकी $tabIndex टॅब';
+  String get tabSemanticsLabelRaw => '\$tabCount पैकी \$tabIndex टॅब';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8667,10 +8526,10 @@ class CupertinoLocalizationMs extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Pukul $hour';
+  String get datePickerHourSemanticsLabelOne => 'Pukul \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Pukul $hour';
+  String get datePickerHourSemanticsLabelOther => 'Pukul \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8688,7 +8547,7 @@ class CupertinoLocalizationMs extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minit';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minit';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minit';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8706,13 +8565,10 @@ class CupertinoLocalizationMs extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PTG';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Pilih Semua';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex daripada $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex daripada \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8824,10 +8680,10 @@ class CupertinoLocalizationMy extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour နာရီ';
+  String get datePickerHourSemanticsLabelOne => '\$hour နာရီ';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour နာရီ';
+  String get datePickerHourSemanticsLabelOther => '\$hour နာရီ';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -8845,7 +8701,7 @@ class CupertinoLocalizationMy extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '၁ မိနစ်';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute မိနစ်';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute မိနစ်';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -8863,13 +8719,10 @@ class CupertinoLocalizationMy extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'အားလုံး ရွေးရန်';
 
   @override
-  String get tabSemanticsLabelRaw => r'တဘ် $tabCount ခုအနက် $tabIndex ခု';
+  String get tabSemanticsLabelRaw => 'တဘ် \$tabCount ခုအနက် \$tabIndex ခု';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -8981,10 +8834,10 @@ class CupertinoLocalizationNb extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour null-null';
+  String get datePickerHourSemanticsLabelOne => '\$hour null-null';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour null-null';
+  String get datePickerHourSemanticsLabelOther => '\$hour null-null';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9002,7 +8855,7 @@ class CupertinoLocalizationNb extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minutt';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutter';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutter';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9020,13 +8873,10 @@ class CupertinoLocalizationNb extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Velg alle';
 
   @override
-  String get tabSemanticsLabelRaw => r'Fane $tabIndex av $tabCount';
+  String get tabSemanticsLabelRaw => 'Fane \$tabIndex av \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9138,10 +8988,10 @@ class CupertinoLocalizationNe extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour बजे';
+  String get datePickerHourSemanticsLabelOne => '\$hour बजे';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour बजे';
+  String get datePickerHourSemanticsLabelOther => '\$hour बजे';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9159,7 +9009,7 @@ class CupertinoLocalizationNe extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '१ मिनेट';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute मिनेट';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute मिनेट';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9177,13 +9027,10 @@ class CupertinoLocalizationNe extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'अपराह्न';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'सबै चयन गर्नुहोस्';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount मध्ये $tabIndex ट्याब';
+  String get tabSemanticsLabelRaw => '\$tabCount मध्ये \$tabIndex ट्याब';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9295,10 +9142,10 @@ class CupertinoLocalizationNl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour uur';
+  String get datePickerHourSemanticsLabelOne => '\$hour uur';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour uur';
+  String get datePickerHourSemanticsLabelOther => '\$hour uur';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9316,7 +9163,7 @@ class CupertinoLocalizationNl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuten';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuten';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9334,13 +9181,10 @@ class CupertinoLocalizationNl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'pm';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Alles selecteren';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tabblad $tabIndex van $tabCount';
+  String get tabSemanticsLabelRaw => 'Tabblad \$tabIndex van \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9452,10 +9296,10 @@ class CupertinoLocalizationNo extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour null-null';
+  String get datePickerHourSemanticsLabelOne => '\$hour null-null';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour null-null';
+  String get datePickerHourSemanticsLabelOther => '\$hour null-null';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9473,7 +9317,7 @@ class CupertinoLocalizationNo extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minutt';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutter';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutter';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9491,13 +9335,10 @@ class CupertinoLocalizationNo extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Velg alle';
 
   @override
-  String get tabSemanticsLabelRaw => r'Fane $tabIndex av $tabCount';
+  String get tabSemanticsLabelRaw => 'Fane \$tabIndex av \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9609,10 +9450,10 @@ class CupertinoLocalizationOr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hourଟା';
+  String get datePickerHourSemanticsLabelOne => '\$hourଟା';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hourଟା';
+  String get datePickerHourSemanticsLabelOther => '\$hourଟା';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9630,7 +9471,7 @@ class CupertinoLocalizationOr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 ମିନିଟ୍';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute ମିନିଟ୍';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute ମିନିଟ୍';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9648,13 +9489,10 @@ class CupertinoLocalizationOr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ସମସ୍ତ ଚୟନ କରନ୍ତୁ';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCountର $tabIndex ଟାବ୍';
+  String get tabSemanticsLabelRaw => '\$tabCountର \$tabIndex ଟାବ୍';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9766,10 +9604,10 @@ class CupertinoLocalizationPa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour ਵਜੇ';
+  String get datePickerHourSemanticsLabelOne => '\$hour ਵਜੇ';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour ਵਜੇ';
+  String get datePickerHourSemanticsLabelOther => '\$hour ਵਜੇ';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9787,7 +9625,7 @@ class CupertinoLocalizationPa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 ਮਿੰਟ';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute ਮਿੰਟ';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute ਮਿੰਟ';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9805,13 +9643,10 @@ class CupertinoLocalizationPa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'ਸਭ ਚੁਣੋ';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount ਵਿੱਚੋਂ $tabIndex ਟੈਬ';
+  String get tabSemanticsLabelRaw => '\$tabCount ਵਿੱਚੋਂ \$tabIndex ਟੈਬ';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -9917,16 +9752,16 @@ class CupertinoLocalizationPl extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour';
+  String get datePickerHourSemanticsLabelFew => '\$hour';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour';
+  String get datePickerHourSemanticsLabelMany => '\$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour';
+  String get datePickerHourSemanticsLabelOne => '\$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour';
+  String get datePickerHourSemanticsLabelOther => '\$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -9935,16 +9770,16 @@ class CupertinoLocalizationPl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minuty';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minuty';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute minut';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute minut';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 minuta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuty';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuty';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -9962,13 +9797,10 @@ class CupertinoLocalizationPl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Wybierz wszystkie';
 
   @override
-  String get tabSemanticsLabelRaw => r'Karta $tabIndex z $tabCount';
+  String get tabSemanticsLabelRaw => 'Karta \$tabIndex z \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'godziny';
@@ -10080,10 +9912,10 @@ class CupertinoLocalizationPt extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour hora';
+  String get datePickerHourSemanticsLabelOne => '\$hour hora';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour horas';
+  String get datePickerHourSemanticsLabelOther => '\$hour horas';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -10101,7 +9933,7 @@ class CupertinoLocalizationPt extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minutos';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minutos';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -10119,13 +9951,10 @@ class CupertinoLocalizationPt extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Selecionar Tudo';
 
   @override
-  String get tabSemanticsLabelRaw => r'Guia $tabIndex de $tabCount';
+  String get tabSemanticsLabelRaw => 'Guia \$tabIndex de \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -10213,10 +10042,10 @@ class CupertinoLocalizationPtPt extends CupertinoLocalizationPt {
   );
 
   @override
-  String get tabSemanticsLabelRaw => r'Separador $tabIndex de $tabCount';
+  String get tabSemanticsLabelRaw => 'Separador \$tabIndex de \$tabCount';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour hora';
+  String get datePickerHourSemanticsLabelOther => '\$hour hora';
 
   @override
   String get timerPickerSecondLabelOne => 'seg';
@@ -10277,16 +10106,16 @@ class CupertinoLocalizationRo extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'Ora $hour';
+  String get datePickerHourSemanticsLabelFew => 'Ora \$hour';
 
   @override
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Ora $hour';
+  String get datePickerHourSemanticsLabelOne => 'Ora \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Ora $hour';
+  String get datePickerHourSemanticsLabelOther => 'Ora \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -10295,7 +10124,7 @@ class CupertinoLocalizationRo extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minute';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minute';
 
   @override
   String get datePickerMinuteSemanticsLabelMany => null;
@@ -10304,7 +10133,7 @@ class CupertinoLocalizationRo extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute de minute';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute de minute';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -10322,13 +10151,10 @@ class CupertinoLocalizationRo extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'p.m.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Selectați-le pe toate';
 
   @override
-  String get tabSemanticsLabelRaw => r'Fila $tabIndex din $tabCount';
+  String get tabSemanticsLabelRaw => 'Fila \$tabIndex din \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'ore';
@@ -10434,16 +10260,16 @@ class CupertinoLocalizationRu extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour часа';
+  String get datePickerHourSemanticsLabelFew => '\$hour часа';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour часов';
+  String get datePickerHourSemanticsLabelMany => '\$hour часов';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour час';
+  String get datePickerHourSemanticsLabelOne => '\$hour час';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour часа';
+  String get datePickerHourSemanticsLabelOther => '\$hour часа';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -10452,16 +10278,16 @@ class CupertinoLocalizationRu extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute минуты';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute минуты';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute минут';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute минут';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 минута';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минуты';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минуты';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -10479,13 +10305,10 @@ class CupertinoLocalizationRu extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Выбрать все';
 
   @override
-  String get tabSemanticsLabelRaw => r'Вкладка $tabIndex из $tabCount';
+  String get tabSemanticsLabelRaw => 'Вкладка \$tabIndex из \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'часа';
@@ -10597,10 +10420,10 @@ class CupertinoLocalizationSi extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hourයි';
+  String get datePickerHourSemanticsLabelOne => '\$hourයි';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hourයි';
+  String get datePickerHourSemanticsLabelOther => '\$hourයි';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -10618,7 +10441,7 @@ class CupertinoLocalizationSi extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'මිනිත්තු 1';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'මිනිත්තු $minute';
+  String get datePickerMinuteSemanticsLabelOther => 'මිනිත්තු \$minute';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -10636,13 +10459,10 @@ class CupertinoLocalizationSi extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ප.ව.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'සියල්ල තෝරන්න';
 
   @override
-  String get tabSemanticsLabelRaw => r'ටැබ $tabCount න් $tabIndex';
+  String get tabSemanticsLabelRaw => 'ටැබ \$tabCount න් \$tabIndex';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -10748,16 +10568,16 @@ class CupertinoLocalizationSk extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour hodiny';
+  String get datePickerHourSemanticsLabelFew => '\$hour hodiny';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour hodiny';
+  String get datePickerHourSemanticsLabelMany => '\$hour hodiny';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour hodina';
+  String get datePickerHourSemanticsLabelOne => '\$hour hodina';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour hodín';
+  String get datePickerHourSemanticsLabelOther => '\$hour hodín';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -10766,16 +10586,16 @@ class CupertinoLocalizationSk extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minúty';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minúty';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute minúty';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute minúty';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 minúta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minút';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minút';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -10793,13 +10613,10 @@ class CupertinoLocalizationSk extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Vybrať všetko';
 
   @override
-  String get tabSemanticsLabelRaw => r'Karta $tabIndex z $tabCount';
+  String get tabSemanticsLabelRaw => 'Karta \$tabIndex z \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'hodiny';
@@ -10905,25 +10722,25 @@ class CupertinoLocalizationSl extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour';
+  String get datePickerHourSemanticsLabelFew => '\$hour';
 
   @override
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour';
+  String get datePickerHourSemanticsLabelOne => '\$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour';
+  String get datePickerHourSemanticsLabelOther => '\$hour';
 
   @override
-  String get datePickerHourSemanticsLabelTwo => r'$hour';
+  String get datePickerHourSemanticsLabelTwo => '\$hour';
 
   @override
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minute';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minute';
 
   @override
   String get datePickerMinuteSemanticsLabelMany => null;
@@ -10932,10 +10749,10 @@ class CupertinoLocalizationSl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuta';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minut';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelTwo => r'$minute minuti';
+  String get datePickerMinuteSemanticsLabelTwo => '\$minute minuti';
 
   @override
   String get datePickerMinuteSemanticsLabelZero => null;
@@ -10950,13 +10767,10 @@ class CupertinoLocalizationSl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'POP.';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Izberi vse';
 
   @override
-  String get tabSemanticsLabelRaw => r'Zavihek $tabIndex od $tabCount';
+  String get tabSemanticsLabelRaw => 'Zavihek \$tabIndex od \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'ure';
@@ -11068,10 +10882,10 @@ class CupertinoLocalizationSq extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour fiks';
+  String get datePickerHourSemanticsLabelOne => '\$hour fiks';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour fiks';
+  String get datePickerHourSemanticsLabelOther => '\$hour fiks';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -11089,7 +10903,7 @@ class CupertinoLocalizationSq extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minutë';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuta';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuta';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -11107,13 +10921,10 @@ class CupertinoLocalizationSq extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'pasdite';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Zgjidhi të gjitha';
 
   @override
-  String get tabSemanticsLabelRaw => r'Skeda $tabIndex nga $tabCount';
+  String get tabSemanticsLabelRaw => 'Skeda \$tabIndex nga \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -11219,16 +11030,16 @@ class CupertinoLocalizationSr extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour сата';
+  String get datePickerHourSemanticsLabelFew => '\$hour сата';
 
   @override
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour сат';
+  String get datePickerHourSemanticsLabelOne => '\$hour сат';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour сати';
+  String get datePickerHourSemanticsLabelOther => '\$hour сати';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -11237,7 +11048,7 @@ class CupertinoLocalizationSr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute минута';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute минута';
 
   @override
   String get datePickerMinuteSemanticsLabelMany => null;
@@ -11246,7 +11057,7 @@ class CupertinoLocalizationSr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 минут';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute минута';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute минута';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -11264,13 +11075,10 @@ class CupertinoLocalizationSr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'по подне';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Изабери све';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex. картица од $tabCount';
+  String get tabSemanticsLabelRaw => '\$tabIndex. картица од \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'сата';
@@ -11398,22 +11206,22 @@ class CupertinoLocalizationSrLatn extends CupertinoLocalizationSr {
   String get cutButtonLabel => 'Iseci';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour sata';
+  String get datePickerHourSemanticsLabelFew => '\$hour sata';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour sat';
+  String get datePickerHourSemanticsLabelOne => '\$hour sat';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour sati';
+  String get datePickerHourSemanticsLabelOther => '\$hour sati';
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute minuta';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute minuta';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuta';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuta';
 
   @override
   String get modalBarrierDismissLabel => 'Odbaci';
@@ -11428,7 +11236,7 @@ class CupertinoLocalizationSrLatn extends CupertinoLocalizationSr {
   String get selectAllButtonLabel => 'Izaberi sve';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabIndex. kartica od $tabCount';
+  String get tabSemanticsLabelRaw => '\$tabIndex. kartica od \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'sata';
@@ -11513,10 +11321,10 @@ class CupertinoLocalizationSv extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Klockan $hour';
+  String get datePickerHourSemanticsLabelOne => 'Klockan \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Klockan $hour';
+  String get datePickerHourSemanticsLabelOther => 'Klockan \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -11534,7 +11342,7 @@ class CupertinoLocalizationSv extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minut';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute minuter';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute minuter';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -11552,13 +11360,10 @@ class CupertinoLocalizationSv extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'EM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Markera alla';
 
   @override
-  String get tabSemanticsLabelRaw => r'Flik $tabIndex av $tabCount';
+  String get tabSemanticsLabelRaw => 'Flik \$tabIndex av \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -11670,10 +11475,10 @@ class CupertinoLocalizationSw extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Saa $hour kamili';
+  String get datePickerHourSemanticsLabelOne => 'Saa \$hour kamili';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Saa $hour kamili';
+  String get datePickerHourSemanticsLabelOther => 'Saa \$hour kamili';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -11691,7 +11496,7 @@ class CupertinoLocalizationSw extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => 'Dakika 1';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'Dakika $minute';
+  String get datePickerMinuteSemanticsLabelOther => 'Dakika \$minute';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -11709,13 +11514,10 @@ class CupertinoLocalizationSw extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Teua Zote';
 
   @override
-  String get tabSemanticsLabelRaw => r'Kichupo cha $tabIndex kati ya $tabCount';
+  String get tabSemanticsLabelRaw => 'Kichupo cha \$tabIndex kati ya \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -11827,10 +11629,10 @@ class CupertinoLocalizationTa extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour மணி';
+  String get datePickerHourSemanticsLabelOne => '\$hour மணி';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour மணி';
+  String get datePickerHourSemanticsLabelOther => '\$hour மணி';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -11848,7 +11650,7 @@ class CupertinoLocalizationTa extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 நிமிடம்';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute நிமிடங்கள்';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute நிமிடங்கள்';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -11866,13 +11668,10 @@ class CupertinoLocalizationTa extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'எல்லாம் தேர்ந்தெடு';
 
   @override
-  String get tabSemanticsLabelRaw => r'தாவல் $tabIndex / $tabCount';
+  String get tabSemanticsLabelRaw => 'தாவல் \$tabIndex / \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -11984,10 +11783,10 @@ class CupertinoLocalizationTe extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour అవుతుంది';
+  String get datePickerHourSemanticsLabelOne => '\$hour అవుతుంది';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour అవుతుంది';
+  String get datePickerHourSemanticsLabelOther => '\$hour అవుతుంది';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12005,7 +11804,7 @@ class CupertinoLocalizationTe extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 నిమిషం';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute నిమిషాలు';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute నిమిషాలు';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12023,13 +11822,10 @@ class CupertinoLocalizationTe extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'అన్నింటినీ ఎంచుకోండి';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCountలో $tabIndexవ ట్యాబ్';
+  String get tabSemanticsLabelRaw => '\$tabCountలో \$tabIndexవ ట్యాబ్';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -12141,10 +11937,10 @@ class CupertinoLocalizationTh extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour นาฬิกา';
+  String get datePickerHourSemanticsLabelOne => '\$hour นาฬิกา';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour นาฬิกา';
+  String get datePickerHourSemanticsLabelOther => '\$hour นาฬิกา';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12162,7 +11958,7 @@ class CupertinoLocalizationTh extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 นาที';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute นาที';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute นาที';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12180,13 +11976,10 @@ class CupertinoLocalizationTh extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'เลือกทั้งหมด';
 
   @override
-  String get tabSemanticsLabelRaw => r'แท็บที่ $tabIndex จาก $tabCount';
+  String get tabSemanticsLabelRaw => 'แท็บที่ \$tabIndex จาก \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -12298,10 +12091,10 @@ class CupertinoLocalizationTl extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Ala $hour';
+  String get datePickerHourSemanticsLabelOne => 'Ala \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Alas $hour';
+  String get datePickerHourSemanticsLabelOther => 'Alas \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12319,7 +12112,7 @@ class CupertinoLocalizationTl extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 minuto';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute na minuto';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute na minuto';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12337,13 +12130,10 @@ class CupertinoLocalizationTl extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Piliin Lahat';
 
   @override
-  String get tabSemanticsLabelRaw => r'Tab $tabIndex ng $tabCount';
+  String get tabSemanticsLabelRaw => 'Tab \$tabIndex ng \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -12455,10 +12245,10 @@ class CupertinoLocalizationTr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'Saat $hour';
+  String get datePickerHourSemanticsLabelOne => 'Saat \$hour';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'Saat $hour';
+  String get datePickerHourSemanticsLabelOther => 'Saat \$hour';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12476,7 +12266,7 @@ class CupertinoLocalizationTr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 dakika';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute dakika';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute dakika';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12494,13 +12284,10 @@ class CupertinoLocalizationTr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'ÖS';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Tümünü Seç';
 
   @override
-  String get tabSemanticsLabelRaw => r'Sekme $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'Sekme \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -12606,16 +12393,16 @@ class CupertinoLocalizationUk extends GlobalCupertinoLocalizations {
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
 
   @override
-  String get datePickerHourSemanticsLabelFew => r'$hour години';
+  String get datePickerHourSemanticsLabelFew => '\$hour години';
 
   @override
-  String get datePickerHourSemanticsLabelMany => r'$hour годин';
+  String get datePickerHourSemanticsLabelMany => '\$hour годин';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour година';
+  String get datePickerHourSemanticsLabelOne => '\$hour година';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour години';
+  String get datePickerHourSemanticsLabelOther => '\$hour години';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12624,16 +12411,16 @@ class CupertinoLocalizationUk extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelZero => null;
 
   @override
-  String get datePickerMinuteSemanticsLabelFew => r'$minute хвилини';
+  String get datePickerMinuteSemanticsLabelFew => '\$minute хвилини';
 
   @override
-  String get datePickerMinuteSemanticsLabelMany => r'$minute хвилин';
+  String get datePickerMinuteSemanticsLabelMany => '\$minute хвилин';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 хвилина';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute хвилини';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute хвилини';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12651,13 +12438,10 @@ class CupertinoLocalizationUk extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'пп';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Вибрати все';
 
   @override
-  String get tabSemanticsLabelRaw => r'Вкладка $tabIndex з $tabCount';
+  String get tabSemanticsLabelRaw => 'Вкладка \$tabIndex з \$tabCount';
 
   @override
   String get timerPickerHourLabelFew => 'години';
@@ -12769,10 +12553,10 @@ class CupertinoLocalizationUr extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour بجے';
+  String get datePickerHourSemanticsLabelOne => '\$hour بجے';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour بجے';
+  String get datePickerHourSemanticsLabelOther => '\$hour بجے';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12790,7 +12574,7 @@ class CupertinoLocalizationUr extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 منٹ';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute منٹس';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute منٹس';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12808,13 +12592,10 @@ class CupertinoLocalizationUr extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'سبھی منتخب کریں';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount میں سے $tabIndex ٹیب';
+  String get tabSemanticsLabelRaw => '\$tabCount میں سے \$tabIndex ٹیب';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -12926,10 +12707,10 @@ class CupertinoLocalizationUz extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour soat';
+  String get datePickerHourSemanticsLabelOne => '\$hour soat';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour soat';
+  String get datePickerHourSemanticsLabelOther => '\$hour soat';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -12947,7 +12728,7 @@ class CupertinoLocalizationUz extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 daqiqa';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute daqiqa';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute daqiqa';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -12965,13 +12746,10 @@ class CupertinoLocalizationUz extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Barchasini tanlash';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount varaqdan $tabIndex';
+  String get tabSemanticsLabelRaw => '\$tabCount varaqdan \$tabIndex';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -13083,10 +12861,10 @@ class CupertinoLocalizationVi extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour giờ';
+  String get datePickerHourSemanticsLabelOne => '\$hour giờ';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour giờ';
+  String get datePickerHourSemanticsLabelOther => '\$hour giờ';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -13104,7 +12882,7 @@ class CupertinoLocalizationVi extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 phút';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute phút';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute phút';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -13122,13 +12900,10 @@ class CupertinoLocalizationVi extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'CHIỀU';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Chọn tất cả';
 
   @override
-  String get tabSemanticsLabelRaw => r'Thẻ $tabIndex/$tabCount';
+  String get tabSemanticsLabelRaw => 'Thẻ \$tabIndex/\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -13240,10 +13015,10 @@ class CupertinoLocalizationZh extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour 点';
+  String get datePickerHourSemanticsLabelOne => '\$hour 点';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour 点';
+  String get datePickerHourSemanticsLabelOther => '\$hour 点';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -13261,7 +13036,7 @@ class CupertinoLocalizationZh extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 分钟';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute 分钟';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute 分钟';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -13279,13 +13054,10 @@ class CupertinoLocalizationZh extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => '下午';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => '全选';
 
   @override
-  String get tabSemanticsLabelRaw => r'第 $tabIndex 个标签，共 $tabCount 个';
+  String get tabSemanticsLabelRaw => '第 \$tabIndex 个标签，共 \$tabCount 个';
 
   @override
   String get timerPickerHourLabelFew => null;
@@ -13413,16 +13185,16 @@ class CupertinoLocalizationZhHant extends CupertinoLocalizationZh {
   String get datePickerDateTimeOrderString => 'date_dayPeriod_time';
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour 點';
+  String get datePickerHourSemanticsLabelOne => '\$hour 點';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour 點';
+  String get datePickerHourSemanticsLabelOther => '\$hour 點';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 分鐘';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute 分鐘';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute 分鐘';
 
   @override
   String get modalBarrierDismissLabel => '拒絕';
@@ -13434,7 +13206,7 @@ class CupertinoLocalizationZhHant extends CupertinoLocalizationZh {
   String get selectAllButtonLabel => '全選';
 
   @override
-  String get tabSemanticsLabelRaw => r'$tabCount 個分頁中嘅第 $tabIndex 個';
+  String get tabSemanticsLabelRaw => '\$tabCount 個分頁中嘅第 \$tabIndex 個';
 
   @override
   String get timerPickerHourLabelOne => '小時';
@@ -13505,13 +13277,13 @@ class CupertinoLocalizationZhHantTw extends CupertinoLocalizationZhHant {
   );
 
   @override
-  String get tabSemanticsLabelRaw => r'第 $tabIndex 個分頁標籤，共 $tabCount 個';
+  String get tabSemanticsLabelRaw => '第 \$tabIndex 個分頁標籤，共 \$tabCount 個';
 
   @override
   String get datePickerMinuteSemanticsLabelOne => '1 分';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute 分';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute 分';
 
   @override
   String get datePickerDateTimeOrderString => 'date_time_dayPeriod';
@@ -13581,10 +13353,10 @@ class CupertinoLocalizationZu extends GlobalCupertinoLocalizations {
   String get datePickerHourSemanticsLabelMany => null;
 
   @override
-  String get datePickerHourSemanticsLabelOne => r'$hour ezimpondweni';
+  String get datePickerHourSemanticsLabelOne => '\$hour ezimpondweni';
 
   @override
-  String get datePickerHourSemanticsLabelOther => r'$hour ezimpondweni';
+  String get datePickerHourSemanticsLabelOther => '\$hour ezimpondweni';
 
   @override
   String get datePickerHourSemanticsLabelTwo => null;
@@ -13602,7 +13374,7 @@ class CupertinoLocalizationZu extends GlobalCupertinoLocalizations {
   String get datePickerMinuteSemanticsLabelOne => '1 iminithi';
 
   @override
-  String get datePickerMinuteSemanticsLabelOther => r'$minute amaminithi';
+  String get datePickerMinuteSemanticsLabelOther => '\$minute amaminithi';
 
   @override
   String get datePickerMinuteSemanticsLabelTwo => null;
@@ -13620,13 +13392,10 @@ class CupertinoLocalizationZu extends GlobalCupertinoLocalizations {
   String get postMeridiemAbbreviation => 'PM';
 
   @override
-  String get searchTextFieldPlaceholerLabel => 'Search';
-
-  @override
   String get selectAllButtonLabel => 'Khetha konke';
 
   @override
-  String get tabSemanticsLabelRaw => r'Ithebhu $tabIndex kwangu-$tabCount';
+  String get tabSemanticsLabelRaw => 'Ithebhu \$tabIndex kwangu-\$tabCount';
 
   @override
   String get timerPickerHourLabelFew => null;

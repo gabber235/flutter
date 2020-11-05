@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Pegar",
   "selectAllButtonLabel": "Seleccionar todo",
   "tabSemanticsLabel": "Pestana $tabIndex de $tabCount",
-  "modalBarrierDismissLabel": "Ignorar",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Ignorar"
 }

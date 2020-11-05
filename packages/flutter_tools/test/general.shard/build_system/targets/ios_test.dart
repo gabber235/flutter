@@ -71,6 +71,7 @@ void main() {
   testUsingContext('DebugUniveralFramework creates expected binary with arm64 only arch', () async {
     environment.defines[kIosArchs] = 'arm64';
     processManager.addCommands(<FakeCommand>[
+      // Create iphone stub.
       const FakeCommand(command: <String>['xcrun', '--sdk', 'iphoneos', '--show-sdk-path']),
       FakeCommand(command: <String>[
         'xcrun',

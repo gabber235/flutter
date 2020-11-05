@@ -2,18 +2,20 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// @dart = 2.9
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:integration_test/integration_test.dart';
+import 'package:e2e/e2e.dart';
 
 import 'package:flutter_gallery/gallery/app.dart' show GalleryApp;
 import 'package:flutter_gallery/gallery/demos.dart';
 import 'package:flutter_gallery/demo_lists.dart';
 
+import 'e2e_utils.dart';
 import 'run_demos.dart';
+
+const List<String> kSkippedDemos = <String>[];
 
 // All of the gallery demos, identified as "title@category".
 //
@@ -25,8 +27,8 @@ List<String> _allDemos = kAllGalleryDemos.map(
 
 void main([List<String> args = const <String>[]]) {
   final bool withSemantics = args.contains('--with_semantics');
-  final IntegrationTestWidgetsFlutterBinding binding =
-      IntegrationTestWidgetsFlutterBinding.ensureInitialized() as IntegrationTestWidgetsFlutterBinding;
+  final E2EWidgetsFlutterBinding binding =
+      E2EWidgetsFlutterBinding.ensureInitialized() as E2EWidgetsFlutterBinding;
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
   group('flutter gallery transitions on e2e', () {
     testWidgets('find.bySemanticsLabel', (WidgetTester tester) async {
@@ -42,7 +44,7 @@ void main([List<String> args = const <String>[]]) {
         runApp(const GalleryApp(testMode: true));
         await tester.pumpAndSettle();
         // Collect timeline data for just a limited set of demos to avoid OOMs.
-        await binding.watchPerformance(() async {
+        await watchPerformance(binding, () async {
           await runDemos(kProfiledDemos, tester);
         });
 

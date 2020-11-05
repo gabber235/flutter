@@ -14,7 +14,6 @@ import 'build_system/targets/ios.dart';
 import 'cache.dart';
 import 'globals.dart' as globals;
 import 'ios/bitcode.dart';
-import 'macos/xcode.dart';
 import 'project.dart';
 
 /// Builds AOT snapshots given a platform, build mode and a path to a Dart
@@ -27,13 +26,12 @@ class AotBuilder {
     @required String mainDartFile,
     bool bitcode = kBitcodeEnabledDefault,
     bool quiet = true,
-    Iterable<DarwinArch> iosBuildArchs,
+    Iterable<DarwinArch> iosBuildArchs = defaultIOSArchs,
     bool reportTimings = false,
   }) async {
     if (platform == null) {
       throwToolExit('No AOT build platform specified');
     }
-    iosBuildArchs ??= defaultIOSArchsForSdk(SdkType.iPhone);
     Target target;
     bool expectSo = false;
     switch (platform) {

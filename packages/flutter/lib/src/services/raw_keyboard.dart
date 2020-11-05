@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'keyboard_key.dart';
 import 'raw_keyboard_android.dart';
 import 'raw_keyboard_fuchsia.dart';
-import 'raw_keyboard_ios.dart';
 import 'raw_keyboard_linux.dart';
 import 'raw_keyboard_macos.dart';
 import 'raw_keyboard_web.dart';
@@ -307,13 +306,6 @@ abstract class RawKeyEvent with Diagnosticable {
             modifiers: message['modifiers'] as int? ?? 0);
         character = message['characters'] as String?;
         break;
-      case 'ios':
-        data = RawKeyEventDataIos(
-            characters: message['characters'] as String? ?? '',
-            charactersIgnoringModifiers: message['charactersIgnoringModifiers'] as String? ?? '',
-            keyCode: message['keyCode'] as int? ?? 0,
-            modifiers: message['modifiers'] as int? ?? 0);
-        break;
       case 'linux':
         final int unicodeScalarValues = message['unicodeScalarValues'] as int? ?? 0;
         data = RawKeyEventDataLinux(
@@ -348,10 +340,9 @@ abstract class RawKeyEvent with Diagnosticable {
         }
         break;
       default:
-        /// This exception would only be hit on platforms that haven't yet
-        /// implemented raw key events, but will only be triggered if the
-        /// engine for those platforms sends raw key event messages in the
-        /// first place.
+        // Raw key events are not yet implemented  on iOS or other platforms,
+        // but this exception isn't hit, because the engine never sends these
+        // messages.
         throw FlutterError('Unknown keymap for key events: $keymap');
     }
 

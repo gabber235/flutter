@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
 
-import 'package:flutter_devicelab/framework/adb.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
 import 'package:process/process.dart';
@@ -281,11 +280,11 @@ Future<Process> startProcess(
   final String finalWorkingDirectory = workingDirectory ?? cwd;
   print('\nExecuting: $command in $finalWorkingDirectory'
       + (environment != null ? ' with environment $environment' : ''));
-  final Map<String, String> newEnvironment = Map<String, String>.from(environment ?? <String, String>{});
-  newEnvironment['BOT'] = isBot ? 'true' : 'false';
+  environment ??= <String, String>{};
+  environment['BOT'] = isBot ? 'true' : 'false';
   final Process process = await _processManager.start(
     <String>[executable, ...arguments],
-    environment: newEnvironment,
+    environment: environment,
     workingDirectory: finalWorkingDirectory,
   );
   final ProcessInfo processInfo = ProcessInfo(command, process);
@@ -433,23 +432,8 @@ Future<String> eval(
 }
 
 List<String> flutterCommandArgs(String command, List<String> options) {
-  // Commands support the --device-timeout flag.
-  final Set<String> supportedDeviceTimeoutCommands = <String>{
-    'attach',
-    'devices',
-    'drive',
-    'install',
-    'logs',
-    'run',
-    'screenshot',
-  };
   return <String>[
     command,
-    if (deviceOperatingSystem == DeviceOperatingSystem.ios && supportedDeviceTimeoutCommands.contains(command))
-      ...<String>[
-        '--device-timeout',
-        '5',
-      ],
     if (localEngine != null) ...<String>['--local-engine', localEngine],
     if (localEngineSrcPath != null) ...<String>['--local-engine-src-path', localEngineSrcPath],
     ...options,
@@ -459,11 +443,11 @@ List<String> flutterCommandArgs(String command, List<String> options) {
 Future<int> flutter(String command, {
   List<String> options = const <String>[],
   bool canFail = false, // as in, whether failures are ok. False means that they are fatal.
-  Map<String, String> environment = const <String, String>{},
+  Map<String, String> environment,
 }) {
   final List<String> args = flutterCommandArgs(command, options);
   return exec(path.join(flutterDirectory.path, 'bin', 'flutter'), args,
-    canFail: canFail, environment: environment);
+      canFail: canFail, environment: environment);
 }
 
 /// Runs a `flutter` command and returns the standard output as a string.
@@ -476,16 +460,6 @@ Future<String> evalFlutter(String command, {
   final List<String> args = flutterCommandArgs(command, options);
   return eval(path.join(flutterDirectory.path, 'bin', 'flutter'), args,
       canFail: canFail, environment: environment, stderr: stderr);
-}
-
-Future<ProcessResult> executeFlutter(String command, {
-  List<String> options = const <String>[],
-}) async {
-  final List<String> args = flutterCommandArgs(command, options);
-  return _processManager.run(
-    <String>[path.join(flutterDirectory.path, 'bin', 'flutter'), ...args],
-    workingDirectory: cwd,
-  );
 }
 
 String get dartBin =>
@@ -750,35 +724,4 @@ Future<int> gitClone({String path, String repo}) async {
     path,
         () => exec('git', <String>['clone', repo]),
   );
-}
-
-/// Call [fn] retrying so long as [retryIf] return `true` for the exception
-/// thrown and [maxAttempts] has not been reached.
-///
-/// If no [retryIf] function is given this will retry any for any [Exception]
-/// thrown. To retry on an [Error], the error must be caught and _rethrown_
-/// as an [Exception].
-///
-/// Waits a constant duration of [delayDuration] between every retry attempt.
-Future<T> retry<T>(
-  FutureOr<T> Function() fn, {
-  FutureOr<bool> Function(Exception) retryIf,
-  int maxAttempts = 5,
-  Duration delayDuration = const Duration(seconds: 3),
-}) async {
-  int attempt = 0;
-  while (true) {
-    attempt++; // first invocation is the first attempt
-    try {
-      return await fn();
-    } on Exception catch (e) {
-      if (attempt >= maxAttempts ||
-          (retryIf != null && !(await retryIf(e)))) {
-        rethrow;
-      }
-    }
-
-    // Sleep for a delay
-    await Future<void>.delayed(delayDuration);
-  }
 }

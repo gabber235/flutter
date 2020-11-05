@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -623,11 +625,11 @@ void main() {
 
     testWidgets('Scale with mouse returns onInteraction properties', (WidgetTester tester) async{
       final TransformationController transformationController = TransformationController();
-      late Offset focalPoint;
-      late Offset localFocalPoint;
-      late double scaleChange;
-      late Velocity currentVelocity;
-      late bool calledStart;
+      Offset focalPoint;
+      Offset localFocalPoint;
+      double scaleChange;
+      Velocity currentVelocity;
+      bool calledStart;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -675,11 +677,11 @@ void main() {
 
     testWidgets('onInteraction can be used to get scene point', (WidgetTester tester) async{
       final TransformationController transformationController = TransformationController();
-      late Offset focalPoint;
-      late Offset localFocalPoint;
-      late double scaleChange;
-      late Velocity currentVelocity;
-      late bool calledStart;
+      Offset focalPoint;
+      Offset localFocalPoint;
+      double scaleChange;
+      Velocity currentVelocity;
+      bool calledStart;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

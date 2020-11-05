@@ -63,7 +63,7 @@ abstract class DragGestureRecognizer extends OneSequenceGestureRecognizer {
   ///
   /// [dragStartBehavior] must not be null.
   ///
-  /// {@macro flutter.gestures.GestureRecognizer.kind}
+  /// {@macro flutter.gestures.gestureRecognizer.kind}
   DragGestureRecognizer({
     Object? debugOwner,
     PointerDeviceKind? kind,
@@ -336,7 +336,7 @@ abstract class DragGestureRecognizer extends OneSequenceGestureRecognizer {
       _pendingDragOffset = OffsetPair.zero;
       _lastPendingEventTimestamp = null;
       _lastTransform = null;
-      _checkStart(timestamp, pointer);
+      _checkStart(timestamp);
       if (localUpdateDelta != Offset.zero && onUpdate != null) {
         final Matrix4? localToGlobal = transform != null ? Matrix4.tryInvert(transform) : null;
         final Offset correctedLocalPosition = _initialPosition.local + localUpdateDelta;
@@ -404,13 +404,12 @@ abstract class DragGestureRecognizer extends OneSequenceGestureRecognizer {
       invokeCallback<void>('onDown', () => onDown!(details));
   }
 
-  void _checkStart(Duration timestamp, int pointer) {
+  void _checkStart(Duration timestamp) {
     assert(_initialButtons == kPrimaryButton);
     final DragStartDetails details = DragStartDetails(
       sourceTimeStamp: timestamp,
       globalPosition: _initialPosition.global,
       localPosition: _initialPosition.local,
-      kind: getKindForPointer(pointer),
     );
     if (onStart != null)
       invokeCallback<void>('onStart', () => onStart!(details));
@@ -502,7 +501,7 @@ abstract class DragGestureRecognizer extends OneSequenceGestureRecognizer {
 class VerticalDragGestureRecognizer extends DragGestureRecognizer {
   /// Create a gesture recognizer for interactions in the vertical axis.
   ///
-  /// {@macro flutter.gestures.GestureRecognizer.kind}
+  /// {@macro flutter.gestures.gestureRecognizer.kind}
   VerticalDragGestureRecognizer({
     Object? debugOwner,
     PointerDeviceKind? kind,
@@ -543,7 +542,7 @@ class VerticalDragGestureRecognizer extends DragGestureRecognizer {
 class HorizontalDragGestureRecognizer extends DragGestureRecognizer {
   /// Create a gesture recognizer for interactions in the horizontal axis.
   ///
-  /// {@macro flutter.gestures.GestureRecognizer.kind}
+  /// {@macro flutter.gestures.gestureRecognizer.kind}
   HorizontalDragGestureRecognizer({
     Object? debugOwner,
     PointerDeviceKind? kind,

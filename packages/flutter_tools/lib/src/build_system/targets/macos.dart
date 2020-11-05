@@ -227,6 +227,7 @@ class CompileMacOSFramework extends Target {
       outputPath: environment.buildDir.path,
       platform: TargetPlatform.darwin_x64,
       darwinArch: DarwinArch.x86_64,
+      packagesPath: environment.projectDir.childFile('.packages').path,
       splitDebugInfo: splitDebugInfo,
       dartObfuscation: dartObfuscation,
       extraGenSnapshotOptions: extraGenSnapshotOptions,

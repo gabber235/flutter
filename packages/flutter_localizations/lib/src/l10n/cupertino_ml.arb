@@ -20,6 +20,5 @@
   "pasteButtonLabel": "ഒട്ടിക്കുക",
   "selectAllButtonLabel": "എല്ലാം തിരഞ്ഞെടുക്കുക",
   "tabSemanticsLabel": "$tabCount ടാബിൽ $tabIndex-ാമത്തേത്",
-  "modalBarrierDismissLabel": "നിരസിക്കുക",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "നിരസിക്കുക"
 }

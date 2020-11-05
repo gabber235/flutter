@@ -235,7 +235,7 @@ class RenderListWheelViewport
     markNeedsLayout();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.diameterRatio}
+  /// {@template flutter.rendering.wheelList.diameterRatio}
   /// A ratio between the diameter of the cylinder and the viewport's size
   /// in the main axis.
   ///
@@ -278,7 +278,7 @@ class RenderListWheelViewport
     markNeedsSemanticsUpdate();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.perspective}
+  /// {@template flutter.rendering.wheelList.perspective}
   /// Perspective of the cylindrical projection.
   ///
   /// A number between 0 and 0.01 where 0 means looking at the cylinder from
@@ -308,7 +308,7 @@ class RenderListWheelViewport
     markNeedsSemanticsUpdate();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.offAxisFraction}
+  /// {@template flutter.rendering.wheelList.offAxisFraction}
   /// How much the wheel is horizontally off-center, as a fraction of its width.
 
   /// This property creates the visual effect of looking at a vertical wheel from
@@ -343,7 +343,7 @@ class RenderListWheelViewport
     markNeedsPaint();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.useMagnifier}
+  /// {@template flutter.rendering.wheelList.useMagnifier}
   /// Whether to use the magnifier for the center item of the wheel.
   /// {@endtemplate}
   bool get useMagnifier => _useMagnifier;
@@ -355,7 +355,7 @@ class RenderListWheelViewport
     _useMagnifier = value;
     markNeedsPaint();
   }
-  /// {@template flutter.rendering.RenderListWheelViewport.magnification}
+  /// {@template flutter.rendering.wheelList.magnification}
   /// The zoomed-in rate of the magnifier, if it is used.
   ///
   /// The default value is 1.0, which will not change anything.
@@ -376,7 +376,7 @@ class RenderListWheelViewport
     markNeedsPaint();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.overAndUnderCenterOpacity}
+  /// {@template flutter.rendering.wheelList.overAndUnderCenterOpacity}
   /// The opacity value that will be applied to the wheel that appears below and
   /// above the magnifier.
   ///
@@ -395,7 +395,7 @@ class RenderListWheelViewport
     markNeedsPaint();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.itemExtent}
+  /// {@template flutter.rendering.wheelList.itemExtent}
   /// The size of the children along the main axis. Children [RenderBox]es will
   /// be given the [BoxConstraints] of this exact size.
   ///
@@ -413,7 +413,7 @@ class RenderListWheelViewport
   }
 
 
-  /// {@template flutter.rendering.RenderListWheelViewport.squeeze}
+  /// {@template flutter.rendering.wheelList.squeeze}
   /// The angular compactness of the children on the wheel.
   ///
   /// This denotes a ratio of the number of children on the wheel vs the number
@@ -445,7 +445,7 @@ class RenderListWheelViewport
     markNeedsSemanticsUpdate();
   }
 
-  /// {@template flutter.rendering.RenderListWheelViewport.renderChildrenOutsideViewport}
+  /// {@template flutter.rendering.wheelList.renderChildrenOutsideViewport}
   /// Whether to paint children inside the viewport only.
   ///
   /// If false, every child will be painted. However the [Scrollable] is still
@@ -470,7 +470,7 @@ class RenderListWheelViewport
     markNeedsSemanticsUpdate();
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
   Clip get clipBehavior => _clipBehavior;

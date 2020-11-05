@@ -30,6 +30,5 @@
   "pasteButtonLabel": "Prilepi",
   "selectAllButtonLabel": "Izberi vse",
   "tabSemanticsLabel": "Zavihek $tabIndex od $tabCount",
-  "modalBarrierDismissLabel": "Opusti",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Opusti"
 }

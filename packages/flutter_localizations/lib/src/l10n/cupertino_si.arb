@@ -20,6 +20,5 @@
   "pasteButtonLabel": "අලවන්න",
   "selectAllButtonLabel": "සියල්ල තෝරන්න",
   "tabSemanticsLabel": "ටැබ $tabCount න් $tabIndex",
-  "modalBarrierDismissLabel": "ඉවත ලන්න",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "ඉවත ලන්න"
 }

@@ -92,48 +92,19 @@ TaskFunction createAndroidSplashScreenKitchenSinkTest() {
   );
 }
 
-TaskFunction createIOSPlatformViewTests() {
+/// Executes a driver test that takes a screenshot and compares it against a golden image.
+/// The golden image is served by Flutter Gold (https://flutter-gold.skia.org/).
+TaskFunction createFlutterDriverScreenshotTest() {
   return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ios_platform_view_tests',
+    '${flutterDirectory.path}/dev/integration_tests/flutter_driver_screenshot_test',
     'lib/main.dart',
   );
 }
 
-TaskFunction createEndToEndKeyboardTest() {
+TaskFunction createIOSPlatformViewTests() {
   return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ui',
-    'lib/keyboard_resize.dart',
-  );
-}
-
-TaskFunction createEndToEndDriverTest() {
-  return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ui',
-    'lib/driver.dart',
-  );
-}
-
-TaskFunction createEndToEndScreenshotTest() {
-  return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ui',
-    'lib/screenshot.dart',
-  );
-}
-
-TaskFunction createEndToEndKeyboardTextfieldTest() {
-  return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ui',
-    'lib/keyboard_textfield.dart',
-  );
-}
-
-TaskFunction dartDefinesTask() {
-  return DriverTest(
-    '${flutterDirectory.path}/dev/integration_tests/ui',
-    'lib/defines.dart', extraOptions: <String>[
-    '--dart-define=test.valueA=Example',
-    '--dart-define=test.valueB=Value',
-    ],
+    '${flutterDirectory.path}/dev/integration_tests/ios_platform_view_tests',
+    'lib/main.dart',
   );
 }
 
@@ -159,7 +130,6 @@ class DriverTest {
       await flutter('packages', options: <String>['get']);
 
       final List<String> options = <String>[
-        '--no-android-gradle-daemon',
         '-v',
         '-t',
         testTarget,

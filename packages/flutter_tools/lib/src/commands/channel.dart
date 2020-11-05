@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import '../base/common.dart';
+import '../base/process.dart';
 import '../cache.dart';
 import '../globals.dart' as globals;
 import '../runner/flutter_command.dart';
@@ -58,7 +59,7 @@ class ChannelCommand extends FlutterCommand {
     showAll = showAll || currentChannel != currentBranch;
 
     globals.printStatus('Flutter channels:');
-    final int result = await globals.processUtils.stream(
+    final int result = await processUtils.stream(
       <String>['git', 'branch', '-r'],
       workingDirectory: Cache.flutterRoot,
       mapFunction: (String line) {
@@ -137,28 +138,28 @@ class ChannelCommand extends FlutterCommand {
 
   static Future<void> _checkout(String branchName) async {
     // Get latest refs from upstream.
-    int result = await globals.processUtils.stream(
+    int result = await processUtils.stream(
       <String>['git', 'fetch'],
       workingDirectory: Cache.flutterRoot,
       prefix: 'git: ',
     );
 
     if (result == 0) {
-      result = await globals.processUtils.stream(
+      result = await processUtils.stream(
         <String>['git', 'show-ref', '--verify', '--quiet', 'refs/heads/$branchName'],
         workingDirectory: Cache.flutterRoot,
         prefix: 'git: ',
       );
       if (result == 0) {
         // branch already exists, try just switching to it
-        result = await globals.processUtils.stream(
+        result = await processUtils.stream(
           <String>['git', 'checkout', branchName, '--'],
           workingDirectory: Cache.flutterRoot,
           prefix: 'git: ',
         );
       } else {
         // branch does not exist, we have to create it
-        result = await globals.processUtils.stream(
+        result = await processUtils.stream(
           <String>['git', 'checkout', '--track', '-b', branchName, 'origin/$branchName'],
           workingDirectory: Cache.flutterRoot,
           prefix: 'git: ',

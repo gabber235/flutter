@@ -73,6 +73,7 @@ class RecipeGridPage extends StatefulWidget {
 }
 
 class _RecipeGridPageState extends State<RecipeGridPage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +81,11 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
     return Theme(
       data: _kTheme.copyWith(platform: Theme.of(context).platform),
       child: Scaffold(
+        key: scaffoldKey,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.edit),
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            scaffoldKey.currentState.showSnackBar(const SnackBar(
               content: Text('Not supported.'),
             ));
           },
@@ -108,7 +110,7 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
           icon: const Icon(Icons.search),
           tooltip: 'Search',
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            scaffoldKey.currentState.showSnackBar(const SnackBar(
               content: Text('Not supported.'),
             ));
           },
@@ -320,6 +322,7 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextStyle menuItemStyle = const PestoStyle(fontSize: 15.0, color: Colors.black54, height: 24.0/15.0);
 
   double _getAppBarHeight(BuildContext context) => MediaQuery.of(context).size.height * 0.3;
@@ -334,6 +337,7 @@ class _RecipePageState extends State<RecipePage> {
     final bool fullWidth = screenSize.width < _kRecipePageMaxWidth;
     final bool isFavorite = _favoriteRecipes.contains(widget.recipe);
     return Scaffold(
+      key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
           Positioned(

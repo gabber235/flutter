@@ -99,7 +99,7 @@ class CupertinoPicker extends StatefulWidget {
   ///
   /// The [itemBuilder] argument must not be null. The [childCount] argument
   /// reflects the number of children that will be provided by the [itemBuilder].
-  /// {@macro flutter.widgets.ListWheelChildBuilderDelegate.childCount}
+  /// {@macro flutter.widgets.wheelList.childCount}
   ///
   /// The [itemExtent] argument must be non-null and positive.
   ///
@@ -150,13 +150,13 @@ class CupertinoPicker extends StatefulWidget {
   /// wheel list edge fade gradient from rendering of the widget.
   final Color? backgroundColor;
 
-  /// {@macro flutter.rendering.RenderListWheelViewport.offAxisFraction}
+  /// {@macro flutter.rendering.wheelList.offAxisFraction}
   final double offAxisFraction;
 
-  /// {@macro flutter.rendering.RenderListWheelViewport.useMagnifier}
+  /// {@macro flutter.rendering.wheelList.useMagnifier}
   final bool useMagnifier;
 
-  /// {@macro flutter.rendering.RenderListWheelViewport.magnification}
+  /// {@macro flutter.rendering.wheelList.magnification}
   final double magnification;
 
   /// A [FixedExtentScrollController] to read and control the current item, and
@@ -171,7 +171,7 @@ class CupertinoPicker extends StatefulWidget {
   /// height. Must not be null and must be positive.
   final double itemExtent;
 
-  /// {@macro flutter.rendering.RenderListWheelViewport.squeeze}
+  /// {@macro flutter.rendering.wheelList.squeeze}
   ///
   /// Defaults to `1.45` to visually mimic iOS.
   final double squeeze;
@@ -278,7 +278,7 @@ class _CupertinoPickerState extends State<CupertinoPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final Color? resolvedBackgroundColor = CupertinoDynamicColor.maybeResolve(widget.backgroundColor, context);
+    final Color? resolvedBackgroundColor = CupertinoDynamicColor.resolve(widget.backgroundColor, context);
 
     final Widget result = DefaultTextStyle(
       style: CupertinoTheme.of(context).textTheme.pickerTextStyle,
@@ -413,14 +413,14 @@ class _CupertinoPickerSemantics extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) {
     assert(debugCheckHasDirectionality(context));
-    return _RenderCupertinoPickerSemantics(scrollController, Directionality.of(context));
+    return _RenderCupertinoPickerSemantics(scrollController, Directionality.of(context)!);
   }
 
   @override
   void updateRenderObject(BuildContext context, covariant _RenderCupertinoPickerSemantics renderObject) {
     assert(debugCheckHasDirectionality(context));
     renderObject
-      ..textDirection = Directionality.of(context)
+      ..textDirection = Directionality.of(context)!
       ..controller = scrollController;
   }
 }

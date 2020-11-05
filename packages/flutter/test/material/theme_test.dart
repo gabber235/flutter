@@ -44,7 +44,7 @@ void main() {
     await tester.tap(find.byKey(popupMenuButtonKey));
     await tester.pump(const Duration(seconds: 1));
 
-    expect(Theme.of(tester.element(find.text('menuItem'))).brightness, equals(Brightness.dark));
+    expect(Theme.of(tester.element(find.text('menuItem')))!.brightness, equals(Brightness.dark));
   });
 
   testWidgets('Fallback theme', (WidgetTester tester) async {
@@ -59,6 +59,7 @@ void main() {
     );
 
     expect(Theme.of(capturedContext), equals(ThemeData.localize(ThemeData.fallback(), defaultGeometryTheme)));
+    expect(Theme.of(capturedContext, shadowThemeOnly: true), isNull);
   });
 
   testWidgets('ThemeData.localize memoizes the result', (WidgetTester tester) async {
@@ -113,7 +114,7 @@ void main() {
     await tester.tap(find.byKey(popupMenuButtonKey));
     await tester.pump(const Duration(seconds: 1));
 
-    expect(Theme.of(tester.element(find.text('menuItem'))).brightness, equals(Brightness.light));
+    expect(Theme.of(tester.element(find.text('menuItem')))!.brightness, equals(Brightness.light));
   });
 
   testWidgets('DropdownMenu inherits shadowed app theme', (WidgetTester tester) async {
@@ -148,7 +149,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
 
     for (final Element item in tester.elementList(find.text('menuItem')))
-      expect(Theme.of(item).brightness, equals(Brightness.light));
+      expect(Theme.of(item)!.brightness, equals(Brightness.light));
   });
 
   testWidgets('ModalBottomSheet inherits shadowed app theme', (WidgetTester tester) async {
@@ -180,7 +181,7 @@ void main() {
 
     await tester.tap(find.text('SHOW'));
     await tester.pump(const Duration(seconds: 1));
-    expect(Theme.of(tester.element(find.text('bottomSheet'))).brightness, equals(Brightness.light));
+    expect(Theme.of(tester.element(find.text('bottomSheet')))!.brightness, equals(Brightness.light));
 
     await tester.tap(find.text('bottomSheet')); // dismiss the bottom sheet
     await tester.pump(const Duration(seconds: 1));
@@ -217,7 +218,7 @@ void main() {
 
     await tester.tap(find.text('SHOW'));
     await tester.pump(const Duration(seconds: 1));
-    expect(Theme.of(tester.element(find.text('dialog'))).brightness, equals(Brightness.light));
+    expect(Theme.of(tester.element(find.text('dialog')))!.brightness, equals(Brightness.light));
   });
 
   testWidgets("Scaffold inherits theme's scaffoldBackgroundColor", (WidgetTester tester) async {
@@ -348,7 +349,7 @@ void main() {
       child: Theme(
         data: customTheme,
         child: Builder(builder: (BuildContext context) {
-          final ThemeData theme = Theme.of(context);
+          final ThemeData theme = Theme.of(context)!;
           actualFontSize = theme.primaryTextTheme.bodyText2!.fontSize!;
           return Text(
             'A',
@@ -367,7 +368,7 @@ void main() {
       textDirection: TextDirection.ltr,
       child: Builder(
         builder: (BuildContext context) {
-          theme = Theme.of(context);
+          theme = Theme.of(context)!;
           return const Text('A');
         },
       ),
@@ -685,7 +686,7 @@ class _TestState extends State<Test> {
     testBuildCalled += 1;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context)!.primaryColor,
       ),
     );
   }

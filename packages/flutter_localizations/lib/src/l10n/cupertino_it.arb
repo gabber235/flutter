@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Incolla",
   "selectAllButtonLabel": "Seleziona tutto",
   "tabSemanticsLabel": "Scheda $tabIndex di $tabCount",
-  "modalBarrierDismissLabel": "Ignora",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Ignora"
 }

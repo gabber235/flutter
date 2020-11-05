@@ -68,7 +68,7 @@ class CupertinoTheme extends StatelessWidget {
   /// given [BuildContext] on a best-effort basis.
   static CupertinoThemeData of(BuildContext context) {
     final _InheritedCupertinoTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedCupertinoTheme>();
-    return (inheritedTheme?.theme.data ?? const CupertinoThemeData()).resolveFrom(context);
+    return (inheritedTheme?.theme.data ?? const CupertinoThemeData()).resolveFrom(context, nullOk: true);
   }
 
   /// Retrieves the [Brightness] to use for descendant Cupertino widgets, based
@@ -78,42 +78,20 @@ class CupertinoTheme extends StatelessWidget {
   /// is null, it will fall back to [MediaQueryData.platformBrightness].
   ///
   /// Throws an exception if no valid [CupertinoTheme] or [MediaQuery] widgets
-  /// exist in the ancestry tree.
-  ///
-  /// See also:
-  ///
-  /// * [maybeBrightnessOf], which returns null if no valid [CupertinoTheme] or
-  ///   [MediaQuery] exists, instead of throwing.
-  /// * [CupertinoThemeData.brightness], the property takes precedence over
-  ///   [MediaQueryData.platformBrightness] for descendant Cupertino widgets.
-  static Brightness brightnessOf(BuildContext context) {
-    final _InheritedCupertinoTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedCupertinoTheme>();
-    return inheritedTheme?.theme.data.brightness ?? MediaQuery.of(context).platformBrightness;
-  }
-
-  /// Retrieves the [Brightness] to use for descendant Cupertino widgets, based
-  /// on the value of [CupertinoThemeData.brightness] in the given [context].
-  ///
-  /// If no [CupertinoTheme] can be found in the given [context], it will fall
-  /// back to [MediaQueryData.platformBrightness].
-  ///
-  /// Returns null if no valid [CupertinoTheme] or [MediaQuery] widgets exist in
-  /// the ancestry tree.
+  /// exist in the ancestry tree, unless [nullOk] is set to true.
   ///
   /// See also:
   ///
   /// * [CupertinoThemeData.brightness], the property takes precedence over
   ///   [MediaQueryData.platformBrightness] for descendant Cupertino widgets.
-  /// * [brightnessOf], which throws if no valid [CupertinoTheme] or
-  ///   [MediaQuery] exists, instead of returning null.
-  static Brightness? maybeBrightnessOf(BuildContext context) {
+  static Brightness? brightnessOf(BuildContext context, { bool nullOk = false }) {
     final _InheritedCupertinoTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedCupertinoTheme>();
-    return inheritedTheme?.theme.data.brightness ?? MediaQuery.maybeOf(context)?.platformBrightness;
+    return inheritedTheme?.theme.data.brightness ?? MediaQuery.of(context, nullOk: nullOk)?.platformBrightness;
   }
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   @override
@@ -256,17 +234,17 @@ class CupertinoThemeData extends NoDefaultCupertinoThemeData with Diagnosticable
   }
 
   @override
-  CupertinoThemeData resolveFrom(BuildContext context) {
-    Color? convertColor(Color? color) => CupertinoDynamicColor.maybeResolve(color, context);
+  CupertinoThemeData resolveFrom(BuildContext context, { bool nullOk = false }) {
+    Color? convertColor(Color? color) => CupertinoDynamicColor.resolve(color, context, nullOk: nullOk);
 
     return CupertinoThemeData._rawWithDefaults(
       brightness,
       convertColor(super.primaryColor),
       convertColor(super.primaryContrastingColor),
-      super.textTheme?.resolveFrom(context),
+      super.textTheme?.resolveFrom(context, nullOk: nullOk),
       convertColor(super.barBackgroundColor),
       convertColor(super.scaffoldBackgroundColor),
-      _defaults.resolveFrom(context, super.textTheme == null),
+      _defaults.resolveFrom(context, super.textTheme == null, nullOk: nullOk),
     );
   }
 
@@ -406,14 +384,14 @@ class NoDefaultCupertinoThemeData {
   /// Called by [CupertinoTheme.of] to resolve colors defined in the retrieved
   /// [CupertinoThemeData].
   @protected
-  NoDefaultCupertinoThemeData resolveFrom(BuildContext context) {
-    Color? convertColor(Color? color) => CupertinoDynamicColor.maybeResolve(color, context);
+  NoDefaultCupertinoThemeData resolveFrom(BuildContext context, { bool nullOk = false }) {
+    Color? convertColor(Color? color) => CupertinoDynamicColor.resolve(color, context, nullOk: nullOk);
 
     return NoDefaultCupertinoThemeData(
       brightness: brightness,
       primaryColor: convertColor(primaryColor),
       primaryContrastingColor: convertColor(primaryContrastingColor),
-      textTheme: textTheme?.resolveFrom(context),
+      textTheme: textTheme?.resolveFrom(context, nullOk: nullOk),
       barBackgroundColor: convertColor(barBackgroundColor),
       scaffoldBackgroundColor: convertColor(scaffoldBackgroundColor),
     );
@@ -462,8 +440,9 @@ class _CupertinoThemeDefaults {
   final Color scaffoldBackgroundColor;
   final _CupertinoTextThemeDefaults textThemeDefaults;
 
-  _CupertinoThemeDefaults resolveFrom(BuildContext context, bool resolveTextTheme) {
-    Color convertColor(Color color) => CupertinoDynamicColor.resolve(color, context);
+  _CupertinoThemeDefaults resolveFrom(BuildContext context, bool resolveTextTheme, { required bool nullOk }) {
+    assert(nullOk != null);
+    Color convertColor(Color color) => CupertinoDynamicColor.resolve(color, context, nullOk: nullOk)!;
 
     return _CupertinoThemeDefaults(
       brightness,
@@ -471,7 +450,7 @@ class _CupertinoThemeDefaults {
       convertColor(primaryContrastingColor),
       convertColor(barBackgroundColor),
       convertColor(scaffoldBackgroundColor),
-      resolveTextTheme ? textThemeDefaults.resolveFrom(context) : textThemeDefaults,
+      resolveTextTheme ? textThemeDefaults.resolveFrom(context, nullOk: nullOk) : textThemeDefaults,
     );
   }
 }
@@ -486,10 +465,10 @@ class _CupertinoTextThemeDefaults {
   final Color labelColor;
   final Color inactiveGray;
 
-  _CupertinoTextThemeDefaults resolveFrom(BuildContext context) {
+  _CupertinoTextThemeDefaults resolveFrom(BuildContext context, { required bool nullOk }) {
     return _CupertinoTextThemeDefaults(
-      CupertinoDynamicColor.resolve(labelColor, context),
-      CupertinoDynamicColor.resolve(inactiveGray, context),
+      CupertinoDynamicColor.resolve(labelColor, context, nullOk: nullOk)!,
+      CupertinoDynamicColor.resolve(inactiveGray, context, nullOk: nullOk)!,
     );
   }
 

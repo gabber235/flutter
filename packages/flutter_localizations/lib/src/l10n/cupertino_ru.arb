@@ -30,6 +30,5 @@
   "pasteButtonLabel": "Вставить",
   "selectAllButtonLabel": "Выбрать все",
   "tabSemanticsLabel": "Вкладка $tabIndex из $tabCount",
-  "modalBarrierDismissLabel": "Закрыть",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Закрыть"
 }

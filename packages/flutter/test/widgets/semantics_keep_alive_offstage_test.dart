@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -81,11 +83,7 @@ void main() {
 
 final Key paddingWidget = GlobalKey();
 
-Widget _buildTestWidget({
-  required bool extraPadding,
-  required String text,
-  required ScrollController controller,
-}) {
+Widget _buildTestWidget({ bool extraPadding, String text, ScrollController controller }) {
   return MaterialApp(
     home: Scaffold(
       body: Column(
@@ -99,7 +97,7 @@ Widget _buildTestWidget({
               controller: controller,
               children: List<Widget>.generate(10, (int i) {
                 return Container(
-                  color: i.isEven ? Colors.red : Colors.blue,
+                  color: i % 2 == 0 ? Colors.red : Colors.blue,
                   height: 250.0,
                   child: Text('Item $i'),
                 );
@@ -119,11 +117,7 @@ Widget _buildTestWidget({
 }
 
 class ProblemWidget extends StatefulWidget {
-  const ProblemWidget({
-    Key? key,
-    required this.extraPadding,
-    required this.text,
-  }) : super(key: key);
+  const ProblemWidget({Key key, this.extraPadding, this.text}) : super(key: key);
 
   final bool extraPadding;
   final String text;

@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Տեղադրել",
   "selectAllButtonLabel": "Նշել բոլորը",
   "tabSemanticsLabel": "Ներդիր $tabIndex՝ $tabCount-ից",
-  "modalBarrierDismissLabel": "Փակել",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Փակել"
 }

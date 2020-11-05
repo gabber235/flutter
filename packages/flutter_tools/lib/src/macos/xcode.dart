@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 import 'package:process/process.dart';
+import 'package:vm_service/vm_service_io.dart' as vm_service_io;
 
 import '../artifacts.dart';
 import '../base/common.dart';
@@ -62,11 +63,10 @@ class Xcode {
     @required Logger logger,
     @required FileSystem fileSystem,
     @required XcodeProjectInterpreter xcodeProjectInterpreter,
-  })  : _platform = platform,
-        _fileSystem = fileSystem,
-        _xcodeProjectInterpreter = xcodeProjectInterpreter,
-        _processUtils =
-            ProcessUtils(logger: logger, processManager: processManager);
+  }) : _platform = platform,
+       _fileSystem = fileSystem,
+       _xcodeProjectInterpreter = xcodeProjectInterpreter,
+       _processUtils = ProcessUtils(logger: logger, processManager: processManager);
 
   final Platform _platform;
   final ProcessUtils _processUtils;
@@ -110,7 +110,7 @@ class Xcode {
     if (_eulaSigned == null) {
       try {
         final RunResult result = _processUtils.runSync(
-          <String>[...xcrunCommand(), 'clang'],
+          <String>['/usr/bin/xcrun', 'clang'],
         );
         if (result.stdout != null && result.stdout.contains('license')) {
           _eulaSigned = false;
@@ -135,7 +135,7 @@ class Xcode {
         // This command will error if additional components need to be installed in
         // xcode 9.2 and above.
         final RunResult result = _processUtils.runSync(
-          <String>[...xcrunCommand(), 'simctl', 'list'],
+          <String>['/usr/bin/xcrun', 'simctl', 'list'],
         );
         _isSimctlInstalled = result.stderr == null || result.stderr == '';
       } on ProcessException {
@@ -161,19 +161,16 @@ class Xcode {
     return false;
   }
 
-  /// See [XcodeProjectInterpreter.xcrunCommand].
-  List<String> xcrunCommand() => _xcodeProjectInterpreter.xcrunCommand();
-
   Future<RunResult> cc(List<String> args) {
     return _processUtils.run(
-      <String>[...xcrunCommand(), 'cc', ...args],
+      <String>['xcrun', 'cc', ...args],
       throwOnError: true,
     );
   }
 
   Future<RunResult> clang(List<String> args) {
     return _processUtils.run(
-      <String>[...xcrunCommand(), 'clang', ...args],
+      <String>['xcrun', 'clang', ...args],
       throwOnError: true,
     );
   }
@@ -181,7 +178,7 @@ class Xcode {
   Future<String> sdkLocation(SdkType sdk) async {
     assert(sdk != null);
     final RunResult runResult = await _processUtils.run(
-      <String>[...xcrunCommand(), '--sdk', getNameForSdk(sdk), '--show-sdk-path'],
+      <String>['xcrun', '--sdk', getNameForSdk(sdk), '--show-sdk-path'],
     );
     if (runResult.exitCode != 0) {
       throwToolExit('Could not find SDK location: ${runResult.stderr}');
@@ -263,7 +260,28 @@ class XCDevice {
     );
   }
 
-  bool get isInstalled => _xcode.isInstalledAndMeetsVersionCheck;
+  bool get isInstalled => _xcode.isInstalledAndMeetsVersionCheck && xcdevicePath != null;
+
+  String _xcdevicePath;
+  String get xcdevicePath {
+    if (_xcdevicePath == null) {
+      try {
+        _xcdevicePath = _processUtils.runSync(
+          <String>[
+            'xcrun',
+            '--find',
+            'xcdevice'
+          ],
+          throwOnError: true,
+        ).stdout.trim();
+      } on ProcessException catch (exception) {
+        _logger.printTrace('Process exception finding xcdevice:\n$exception');
+      } on ArgumentError catch (exception) {
+        _logger.printTrace('Argument exception finding xcdevice:\n$exception');
+      }
+    }
+    return _xcdevicePath;
+  }
 
   Future<List<dynamic>> _getAllDevices({
     bool useCache = false,
@@ -280,7 +298,7 @@ class XCDevice {
       // USB-tethered devices should be found quickly. 1 second timeout is faster than the default.
       final RunResult result = await _processUtils.run(
         <String>[
-          ..._xcode.xcrunCommand(),
+          'xcrun',
           'xcdevice',
           'list',
           '--timeout',
@@ -334,7 +352,7 @@ class XCDevice {
           '-t',
           '0',
           '/dev/null',
-          ..._xcode.xcrunCommand(),
+          'xcrun',
           'xcdevice',
           'observe',
           '--both',
@@ -494,6 +512,7 @@ class XCDevice {
         iosDeploy: _iosDeploy,
         iMobileDevice: _iMobileDevice,
         platform: globals.platform,
+        vmServiceConnectUri: vm_service_io.vmServiceConnectUri,
       ));
     }
     return devices;
@@ -562,7 +581,7 @@ class XCDevice {
         if (architecture.startsWith('armv7')) {
           cpuArchitecture = DarwinArch.armv7;
         } else {
-          cpuArchitecture = DarwinArch.arm64;
+          cpuArchitecture = defaultIOSArchs.first;
         }
         _logger.printError(
           'Unknown architecture $architecture, defaulting to '

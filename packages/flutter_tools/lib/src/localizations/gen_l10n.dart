@@ -13,15 +13,12 @@ import 'gen_l10n_templates.dart';
 import 'gen_l10n_types.dart';
 import 'localizations_utils.dart';
 
-/// The path for the synthetic package.
-final String defaultSyntheticPackagePath = globals.fs.path.join('.dart_tool', 'flutter_gen');
-
-/// The default path used when the `_useSyntheticPackage` setting is set to true
+/// The default path used when the `useSyntheticPackage` setting is set to true
 /// in [LocalizationsGenerator].
 ///
 /// See [LocalizationsGenerator.initialize] for where and how it is used by the
 /// localizations tool.
-final String syntheticL10nPackagePath = globals.fs.path.join(defaultSyntheticPackagePath, 'gen_l10n');
+final String defaultSyntheticPackagePath = globals.fs.path.join('.dart_tool', 'flutter_gen', 'gen_l10n');
 
 List<String> generateMethodParameters(Message message) {
   assert(message.placeholders.isNotEmpty);
@@ -205,22 +202,16 @@ String generateMethod(Message message, AppResourceBundle bundle) {
     .replaceAll('@(message)', generateMessage());
 }
 
-String generateBaseClassMethod(Message message, LocaleInfo templateArbLocale) {
-  final String comment = message.description ?? 'No description provided for @${message.resourceId}.';
-  final String templateLocaleTranslationComment = '''
-  /// In $templateArbLocale, this message translates to:
-  /// **${generateString(message.value)}**''';
-
+String generateBaseClassMethod(Message message) {
+  final String comment = message.description ?? 'No description provided in @${message.resourceId}';
   if (message.placeholders.isNotEmpty) {
     return baseClassMethodTemplate
       .replaceAll('@(comment)', comment)
-      .replaceAll('@(templateLocaleTranslationComment)', templateLocaleTranslationComment)
       .replaceAll('@(name)', message.resourceId)
       .replaceAll('@(parameters)', generateMethodParameters(message).join(', '));
   }
   return baseClassGetterTemplate
     .replaceAll('@(comment)', comment)
-    .replaceAll('@(templateLocaleTranslationComment)', templateLocaleTranslationComment)
     .replaceAll('@(name)', message.resourceId);
 }
 
@@ -414,7 +405,6 @@ class LocalizationsGenerator {
   Iterable<Message> _allMessages;
   AppResourceBundleCollection _allBundles;
   LocaleInfo _templateArbLocale;
-  bool _useSyntheticPackage = true;
 
   /// The directory that contains the project's arb files, as well as the
   /// header file, if specified.
@@ -526,12 +516,6 @@ class LocalizationsGenerator {
   List<String> _inputFileList;
   List<String> _outputFileList;
 
-  /// Whether or not resource attributes are required for each corresponding
-  /// resource id.
-  ///
-  /// Resource attributes provide metadata about the message.
-  bool _areResourceAttributesRequired;
-
   /// Initializes [inputDirectory], [outputDirectory], [templateArbFile],
   /// [outputFile] and [className].
   ///
@@ -553,12 +537,13 @@ class LocalizationsGenerator {
     String inputsAndOutputsListPath,
     bool useSyntheticPackage = true,
     String projectPathString,
-    bool areResourceAttributesRequired = false,
   }) {
-    _useSyntheticPackage = useSyntheticPackage;
     setProjectDir(projectPathString);
     setInputDirectory(inputPathString);
-    setOutputDirectory(outputPathString ?? inputPathString);
+    setOutputDirectory(
+      outputPathString: outputPathString ?? inputPathString,
+      useSyntheticPackage: useSyntheticPackage,
+    );
     setTemplateArbFile(templateArbFileName);
     setBaseOutputFile(outputFileString);
     setPreferredSupportedLocales(preferredSupportedLocale);
@@ -566,7 +551,6 @@ class LocalizationsGenerator {
     _setUseDeferredLoading(useDeferredLoading);
     className = classNameString;
     _setInputsAndOutputsListFile(inputsAndOutputsListPath);
-    _areResourceAttributesRequired = areResourceAttributesRequired;
   }
 
   static bool _isNotReadable(FileStat fileStat) {
@@ -630,14 +614,15 @@ class LocalizationsGenerator {
 
   /// Sets the reference [Directory] for [outputDirectory].
   @visibleForTesting
-  void setOutputDirectory(
+  void setOutputDirectory({
     String outputPathString,
-  ) {
-    if (_useSyntheticPackage) {
+    bool useSyntheticPackage = true,
+  }) {
+    if (useSyntheticPackage) {
       outputDirectory = _fs.directory(
         projectDirectory != null
-          ? _getAbsoluteProjectPath(syntheticL10nPackagePath)
-          : syntheticL10nPackagePath
+          ? _getAbsoluteProjectPath(defaultSyntheticPackagePath)
+          : defaultSyntheticPackagePath
       );
     } else {
       if (outputPathString == null) {
@@ -801,9 +786,7 @@ class LocalizationsGenerator {
   void loadResources() {
     final AppResourceBundle templateBundle = AppResourceBundle(templateArbFile);
     _templateArbLocale = templateBundle.locale;
-    _allMessages = templateBundle.resourceIds.map((String id) => Message(
-      templateBundle.resources, id, _areResourceAttributesRequired,
-    ));
+    _allMessages = templateBundle.resourceIds.map((String id) => Message(templateBundle.resources, id));
     for (final String resourceId in templateBundle.resourceIds) {
       if (!_isValidGetterAndMethodName(resourceId)) {
         throw L10nException(
@@ -1009,7 +992,7 @@ class LocalizationsGenerator {
     _generatedLocalizationsFile = fileTemplate
       .replaceAll('@(header)', header)
       .replaceAll('@(class)', className)
-      .replaceAll('@(methods)', _allMessages.map((Message message) => generateBaseClassMethod(message, _templateArbLocale)).join('\n'))
+      .replaceAll('@(methods)', _allMessages.map(generateBaseClassMethod).join('\n'))
       .replaceAll('@(importFile)', '$directory/$outputFileName')
       .replaceAll('@(supportedLocales)', supportedLocalesCode.join(',\n    '))
       .replaceAll('@(supportedLanguageCodes)', supportedLanguageCodes.join(', '))
@@ -1021,20 +1004,11 @@ class LocalizationsGenerator {
     // First, generate the string contents of all necessary files.
     _generateCode();
 
-    // A pubspec.yaml file is required when using a synthetic package. If it does not
-    // exist, create a blank one.
-    if (_useSyntheticPackage) {
-      final Directory syntheticPackageDirectory = _fs.directory(defaultSyntheticPackagePath);
-      syntheticPackageDirectory.createSync(recursive: true);
-      final File flutterGenPubspec = syntheticPackageDirectory.childFile('pubspec.yaml');
-      if (!flutterGenPubspec.existsSync()) {
-        flutterGenPubspec.writeAsStringSync(emptyPubspecTemplate);
-      }
-    }
-
     // Since all validity checks have passed up to this point,
     // write the contents into the directory.
-    outputDirectory.createSync(recursive: true);
+    if (!outputDirectory.existsSync()) {
+      outputDirectory.createSync(recursive: true);
+    }
 
     // Ensure that the created directory has read/write permissions.
     final FileStat fileStat = outputDirectory.statSync();

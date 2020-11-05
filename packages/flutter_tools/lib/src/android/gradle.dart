@@ -138,7 +138,7 @@ Future<void> checkGradleDependencies() async {
     'Ensuring gradle dependencies are up to date...',
   );
   final FlutterProject flutterProject = FlutterProject.current();
-  await globals.processUtils.run(<String>[
+  await processUtils.run(<String>[
       gradleUtils.getExecutable(flutterProject),
       'dependencies',
     ],
@@ -279,9 +279,6 @@ Future<void> buildGradleApp({
   } else {
     command.add('-q');
   }
-  if (!buildInfo.androidGradleDaemon) {
-    command.add('--no-daemon');
-  }
   if (globals.artifacts is LocalEngineArtifacts) {
     final LocalEngineArtifacts localEngineArtifacts = globals.artifacts as LocalEngineArtifacts;
     final Directory localEngineRepo = _getLocalEngineRepo(
@@ -388,7 +385,7 @@ Future<void> buildGradleApp({
   final Stopwatch sw = Stopwatch()..start();
   int exitCode = 1;
   try {
-    exitCode = await globals.processUtils.stream(
+    exitCode = await processUtils.stream(
       command,
       workingDirectory: project.android.hostAppGradleRoot.path,
       allowReentrantFlutter: true,
@@ -595,9 +592,6 @@ Future<void> buildGradleAar({
   } else {
     command.add('-q');
   }
-  if (!buildInfo.androidGradleDaemon) {
-    command.add('--no-daemon');
-  }
 
   if (target != null && target.isNotEmpty) {
     command.add('-Ptarget=$target');
@@ -655,7 +649,7 @@ Future<void> buildGradleAar({
   final Stopwatch sw = Stopwatch()..start();
   RunResult result;
   try {
-    result = await globals.processUtils.run(
+    result = await processUtils.run(
       command,
       workingDirectory: project.android.hostAppGradleRoot.path,
       allowReentrantFlutter: true,

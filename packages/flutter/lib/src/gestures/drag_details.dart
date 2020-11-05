@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 
-import 'dart:ui' show Offset, PointerDeviceKind;
+import 'dart:ui' show Offset;
 
 import 'package:flutter/foundation.dart';
 
@@ -71,7 +71,6 @@ class DragStartDetails {
     this.sourceTimeStamp,
     this.globalPosition = Offset.zero,
     Offset? localPosition,
-    this.kind,
   }) : assert(globalPosition != null),
        localPosition = localPosition ?? globalPosition;
 
@@ -96,9 +95,6 @@ class DragStartDetails {
   ///
   /// Defaults to [globalPosition] if not specified in the constructor.
   final Offset localPosition;
-
-  /// The kind of the device that initiated the event.
-  final PointerDeviceKind? kind;
 
   // TODO(ianh): Expose the current position, so that you can have a no-jump
   // drag even when disambiguating (though of course it would lag the finger

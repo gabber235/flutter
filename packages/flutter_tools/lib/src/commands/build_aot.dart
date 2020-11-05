@@ -10,7 +10,7 @@ import '../resident_runner.dart';
 import '../runner/flutter_command.dart';
 import 'build.dart';
 
-/// Builds AOT executables into platform specific library containers.
+/// Builds AOT snapshots into platform specific library containers.
 class BuildAotCommand extends BuildSubCommand with TargetPlatformBasedDevelopmentArtifacts {
   BuildAotCommand({this.aotBuilder}) {
     addTreeShakeIconsFlag();
@@ -18,7 +18,7 @@ class BuildAotCommand extends BuildSubCommand with TargetPlatformBasedDevelopmen
     addBuildModeFlags();
     usesPubOption();
     usesDartDefineOption();
-    usesExtraDartFlagOptions();
+    usesExtraFrontendOptions();
     argParser
       ..addOption('output-dir', defaultsTo: getAotBuildDirectory())
       ..addOption('target-platform',
@@ -28,9 +28,13 @@ class BuildAotCommand extends BuildSubCommand with TargetPlatformBasedDevelopmen
       ..addFlag('quiet', defaultsTo: false)
       ..addMultiOption('ios-arch',
         splitCommas: true,
-        defaultsTo: <String>[getNameForDarwinArch(DarwinArch.arm64)],
+        defaultsTo: defaultIOSArchs.map<String>(getNameForDarwinArch),
         allowed: DarwinArch.values.map<String>(getNameForDarwinArch),
         help: 'iOS architectures to build.',
+      )
+      ..addMultiOption(FlutterOptions.kExtraGenSnapshotOptions,
+        splitCommas: true,
+        hide: true,
       )
       ..addFlag('bitcode',
         defaultsTo: kBitcodeEnabledDefault,

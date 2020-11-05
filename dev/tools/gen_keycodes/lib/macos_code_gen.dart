@@ -47,10 +47,7 @@ class MacOsCodeGenerator extends PlatformCodeGenerator {
   }
 
   @override
-  String get templatePath => path.join(flutterRoot.path, 'dev', 'tools', 'gen_keycodes', 'data', 'keyboard_map_macos_cc.tmpl');
-
-  @override
-  String outputPath(String platform) => path.joinAll(<String>[flutterRoot.path, '..', 'engine', 'src', 'flutter', 'shell', 'platform', 'darwin', platform, 'keycodes', 'keyboard_map_$platform.h']);
+  String get templatePath => path.join(flutterRoot.path, 'dev', 'tools', 'gen_keycodes', 'data', 'keyboard_map_darwin_cc.tmpl');
 
   @override
   Map<String, String> mappings() {

@@ -9,7 +9,6 @@ import 'package:args/args.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:flutter_devicelab/framework/ab.dart';
-import 'package:flutter_devicelab/framework/cocoon.dart';
 import 'package:flutter_devicelab/framework/manifest.dart';
 import 'package:flutter_devicelab/framework/runner.dart';
 import 'package:flutter_devicelab/framework/task_result.dart';
@@ -19,8 +18,8 @@ ArgResults args;
 
 List<String> _taskNames = <String>[];
 
-/// The device-id to run test on.
-String deviceId;
+/// Suppresses standard output, prints only standard error output.
+bool silent;
 
 /// The build of the local engine to use.
 ///
@@ -33,13 +32,8 @@ String localEngineSrcPath;
 /// Whether to exit on first test failure.
 bool exitOnFirstTestFailure;
 
-/// File containing a service account token.
-///
-/// If passed, the test run results will be uploaded to Flutter infrastructure.
-String serviceAccountTokenFile;
-
-/// Suppresses standard output, prints only standard error output.
-bool silent;
+/// The device-id to run test on.
+String deviceId;
 
 /// Runs tasks.
 ///
@@ -80,12 +74,11 @@ Future<void> main(List<String> rawArgs) async {
     return;
   }
 
-  deviceId = args['device-id'] as String;
+  silent = args['silent'] as bool;
   localEngine = args['local-engine'] as String;
   localEngineSrcPath = args['local-engine-src-path'] as String;
   exitOnFirstTestFailure = args['exit'] as bool;
-  serviceAccountTokenFile = args['service-account-token-file'] as String;
-  silent = args['silent'] as bool;
+  deviceId = args['device-id'] as String;
 
   if (args.wasParsed('ab')) {
     await _runABTest();
@@ -108,11 +101,6 @@ Future<void> _runTasks() async {
     print('Task result:');
     print(const JsonEncoder.withIndent('  ').convert(result));
     section('Finished task "$taskName"');
-
-    if (serviceAccountTokenFile != null) {
-      final Cocoon cocoon = Cocoon(serviceAccountTokenPath: serviceAccountTokenFile);
-      await cocoon.sendTaskResult(taskName: taskName, result: result);
-    }
 
     if (!result.succeeded) {
       exitCode = 1;
@@ -345,10 +333,6 @@ final ArgParser _argParser = ArgParser()
           'test with a `required_agent_capabilities` value of "mac/android"\n'
           'on a windows host). Each test publishes its '
           '`required_agent_capabilities`\nin the `manifest.yaml` file.',
-  )
-  ..addOption(
-    'service-account-token-file',
-    help: '[Flutter infrastructure] Authentication for uploading results.',
   )
   ..addOption(
     'stage',

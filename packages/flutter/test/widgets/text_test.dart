@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'dart:ui' as ui;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -125,7 +127,7 @@ void main() {
 
     final RichText text = tester.firstWidget(find.byType(RichText));
     expect(text, isNotNull);
-    expect(text.text.style!.fontSize, 20.0);
+    expect(text.text.style.fontSize, 20.0);
   });
 
   testWidgets('inline widgets works with ellipsis', (WidgetTester tester) async {
@@ -158,42 +160,6 @@ void main() {
         overflow: TextOverflow.ellipsis,
       ),
     );
-    expect(tester.takeException(), null);
-  }, skip: isBrowser); // https://github.com/flutter/flutter/issues/42086
-
-  testWidgets('inline widgets hitTest works with ellipsis', (WidgetTester tester) async {
-    // Regression test for https://github.com/flutter/flutter/issues/68559
-    const TextStyle textStyle = TextStyle(fontFamily: 'Ahem');
-    await tester.pumpWidget(
-      Text.rich(
-        TextSpan(
-          children: <InlineSpan>[
-            const TextSpan(
-              text: 'a very very very very very very very very very very long line',
-            ),
-            WidgetSpan(
-              child: SizedBox(
-                width: 20,
-                height: 40,
-                child: Card(
-                  child: RichText(
-                    text: const TextSpan(text: 'widget should be truncated'),
-                    textDirection: TextDirection.rtl,
-                  ),
-                ),
-              ),
-            ),
-          ],
-          style: textStyle,
-        ),
-        textDirection: TextDirection.ltr,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    await tester.tap(find.byType(Text));
-
     expect(tester.takeException(), null);
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/42086
 
@@ -1041,11 +1007,7 @@ void main() {
   }, semanticsEnabled: true, skip: isBrowser); // Browser semantics have different sizes.
 }
 
-Future<void> _pumpTextWidget({
-  required WidgetTester tester,
-  required String text,
-  required TextOverflow overflow,
-}) {
+Future<void> _pumpTextWidget({ WidgetTester tester, String text, TextOverflow overflow }) {
   return tester.pumpWidget(
     Directionality(
       textDirection: TextDirection.ltr,

@@ -20,6 +20,5 @@
   "pasteButtonLabel": "ကူးထည့်ရန်",
   "selectAllButtonLabel": "အားလုံး ရွေးရန်",
   "tabSemanticsLabel": "တဘ် $tabCount ခုအနက် $tabIndex ခု",
-  "modalBarrierDismissLabel": "ပယ်ရန်",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "ပယ်ရန်"
 }

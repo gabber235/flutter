@@ -62,7 +62,7 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
   @override
   void onSingleLongTapMoveUpdate(LongPressMoveUpdateDetails details) {
     if (delegate.selectionEnabled) {
-      switch (Theme.of(_state.context).platform) {
+      switch (Theme.of(_state.context)!.platform) {
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
           renderEditable.selectPositionAt(
@@ -88,7 +88,7 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
   void onSingleTapUp(TapUpDetails details) {
     editableText.hideToolbar();
     if (delegate.selectionEnabled) {
-      switch (Theme.of(_state.context).platform) {
+      switch (Theme.of(_state.context)!.platform) {
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
           switch (details.kind) {
@@ -122,7 +122,7 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
   @override
   void onSingleLongTapStart(LongPressStartDetails details) {
     if (delegate.selectionEnabled) {
-      switch (Theme.of(_state.context).platform) {
+      switch (Theme.of(_state.context)!.platform) {
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
           renderEditable.selectPositionAt(
@@ -258,7 +258,7 @@ class _TextFieldSelectionGestureDetectorBuilder extends TextSelectionGestureDete
 /// [TextEditingController] using [TextEditingController.text].
 ///
   /// ## Handling emojis and other complex characters
-/// {@macro flutter.widgets.EditableText.onChanged}
+/// {@macro flutter.widgets.editableText.complexCharacters}
 ///
 /// In the live Dartpad example above, try typing the emoji 👨‍👩‍👦
 /// into the field and submitting. Because the example code measures the length
@@ -372,7 +372,6 @@ class TextField extends StatefulWidget {
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.dragStartBehavior = DragStartBehavior.start,
     this.enableInteractiveSelection = true,
-    this.selectionControls,
     this.onTap,
     this.mouseCursor,
     this.buildCounter,
@@ -506,7 +505,7 @@ class TextField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.textAlign}
   final TextAlign textAlign;
 
-  /// {@macro flutter.material.InputDecorator.textAlignVertical}
+  /// {@macro flutter.widgets.inputDecorator.textAlignVertical}
   final TextAlignVertical? textAlignVertical;
 
   /// {@macro flutter.widgets.editableText.textDirection}
@@ -524,13 +523,13 @@ class TextField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.autocorrect}
   final bool autocorrect;
 
-  /// {@macro flutter.services.TextInputConfiguration.smartDashesType}
+  /// {@macro flutter.services.textInput.smartDashesType}
   final SmartDashesType smartDashesType;
 
-  /// {@macro flutter.services.TextInputConfiguration.smartQuotesType}
+  /// {@macro flutter.services.textInput.smartQuotesType}
   final SmartQuotesType smartQuotesType;
 
-  /// {@macro flutter.services.TextInputConfiguration.enableSuggestions}
+  /// {@macro flutter.services.textInput.enableSuggestions}
   final bool enableSuggestions;
 
   /// {@macro flutter.widgets.editableText.maxLines}
@@ -675,9 +674,6 @@ class TextField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.enableInteractiveSelection}
   final bool enableInteractiveSelection;
 
-  /// {@macro flutter.widgets.editableText.selectionControls}
-  final TextSelectionControls? selectionControls;
-
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
@@ -764,7 +760,7 @@ class TextField extends StatefulWidget {
   final ScrollController? scrollController;
 
   /// {@macro flutter.widgets.editableText.autofillHints}
-  /// {@macro flutter.services.AutofillConfiguration.autofillHints}
+  /// {@macro flutter.services.autofill.autofillHints}
   final Iterable<String>? autofillHints;
 
   /// {@template flutter.material.textfield.restorationId}
@@ -822,7 +818,6 @@ class TextField extends StatefulWidget {
     properties.add(DiagnosticsProperty<Brightness>('keyboardAppearance', keyboardAppearance, defaultValue: null));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('scrollPadding', scrollPadding, defaultValue: const EdgeInsets.all(20.0)));
     properties.add(FlagProperty('selectionEnabled', value: selectionEnabled, defaultValue: true, ifFalse: 'selection disabled'));
-    properties.add(DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null));
     properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController, defaultValue: null));
     properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics, defaultValue: null));
   }
@@ -865,8 +860,8 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
   bool get _hasError => widget.decoration?.errorText != null || _hasIntrinsicError;
 
   InputDecoration _getEffectiveDecoration() {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final ThemeData themeData = Theme.of(context);
+    final MaterialLocalizations localizations = MaterialLocalizations.of(context)!;
+    final ThemeData themeData = Theme.of(context)!;
     final InputDecoration effectiveDecoration = (widget.decoration ?? const InputDecoration())
       .applyDefaults(themeData.inputDecorationTheme)
       .copyWith(
@@ -943,7 +938,7 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
   }
 
   bool get _canRequestFocus {
-    final NavigationMode mode = MediaQuery.maybeOf(context)?.navigationMode ?? NavigationMode.traditional;
+    final NavigationMode mode = MediaQuery.of(context, nullOk: true)?.navigationMode ?? NavigationMode.traditional;
     switch (mode) {
       case NavigationMode.traditional:
         return _isEnabled;
@@ -1046,7 +1041,7 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
       });
     }
 
-    switch (Theme.of(context).platform) {
+    switch (Theme.of(context)!.platform) {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
         if (cause == SelectionChangedCause.longPress) {
@@ -1087,18 +1082,17 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
       'inherit false style must supply fontSize and textBaseline',
     );
 
-    final ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context)!;
     final TextSelectionThemeData selectionTheme = TextSelectionTheme.of(context);
     final TextStyle style = theme.textTheme.subtitle1!.merge(widget.style);
     final Brightness keyboardAppearance = widget.keyboardAppearance ?? theme.primaryColorBrightness;
     final TextEditingController controller = _effectiveController;
     final FocusNode focusNode = _effectiveFocusNode;
-    final List<TextInputFormatter> formatters = <TextInputFormatter>[
-      ...?widget.inputFormatters,
-      if (widget.maxLength != null && widget.maxLengthEnforced) LengthLimitingTextInputFormatter(widget.maxLength)
-    ];
+    final List<TextInputFormatter> formatters = widget.inputFormatters ?? <TextInputFormatter>[];
+    if (widget.maxLength != null && widget.maxLengthEnforced)
+      formatters.add(LengthLimitingTextInputFormatter(widget.maxLength));
 
-    TextSelectionControls? textSelectionControls = widget.selectionControls;
+    final TextSelectionControls textSelectionControls;
     final bool paintCursorAboveText;
     final bool cursorOpacityAnimates;
     Offset? cursorOffset;
@@ -1112,13 +1106,13 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
       case TargetPlatform.macOS:
         final CupertinoThemeData cupertinoTheme = CupertinoTheme.of(context);
         forcePressEnabled = true;
-        textSelectionControls ??= cupertinoTextSelectionControls;
+        textSelectionControls = cupertinoTextSelectionControls;
         paintCursorAboveText = true;
         cursorOpacityAnimates = true;
         cursorColor ??= selectionTheme.cursorColor ?? cupertinoTheme.primaryColor;
         selectionColor = selectionTheme.selectionColor ?? cupertinoTheme.primaryColor.withOpacity(0.40);
         cursorRadius ??= const Radius.circular(2.0);
-        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
+        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context)!.devicePixelRatio, 0);
         autocorrectionTextRectColor = selectionColor;
         break;
 
@@ -1127,7 +1121,7 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
       case TargetPlatform.linux:
       case TargetPlatform.windows:
         forcePressEnabled = false;
-        textSelectionControls ??= materialTextSelectionControls;
+        textSelectionControls = materialTextSelectionControls;
         paintCursorAboveText = false;
         cursorOpacityAnimates = false;
         cursorColor ??= selectionTheme.cursorColor ?? theme.colorScheme.primary;

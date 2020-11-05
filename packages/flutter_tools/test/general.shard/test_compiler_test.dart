@@ -39,7 +39,8 @@ void main() {
 
   testUsingContext('TestCompiler reports a dill file when compile is successful', () async {
     final FakeTestCompiler testCompiler = FakeTestCompiler(
-      BuildInfo.debug,
+      BuildMode.debug,
+      false,
       FlutterProject.current(),
       residentCompiler,
     );
@@ -64,7 +65,8 @@ void main() {
 
   testUsingContext('TestCompiler reports null when a compile fails', () async {
     final FakeTestCompiler testCompiler = FakeTestCompiler(
-      BuildInfo.debug,
+      BuildMode.debug,
+      false,
       FlutterProject.current(),
       residentCompiler,
     );
@@ -90,7 +92,8 @@ void main() {
 
   testUsingContext('TestCompiler disposing test compiler shuts down backing compiler', () async {
     final FakeTestCompiler testCompiler = FakeTestCompiler(
-      BuildInfo.debug,
+      BuildMode.debug,
+      false,
       FlutterProject.current(),
       residentCompiler,
     );
@@ -111,7 +114,8 @@ void main() {
 
   testUsingContext('TestCompiler reports an error when there is no dependency on flutter_test', () async {
     final FakeTestCompiler testCompiler = FakeTestCompiler(
-      BuildInfo.debug,
+      BuildMode.debug,
+      false,
       FlutterProject.current(),
       residentCompiler,
     );
@@ -136,10 +140,11 @@ void main() {
 /// Override the creation of the Resident Compiler to simplify testing.
 class FakeTestCompiler extends TestCompiler {
   FakeTestCompiler(
-    BuildInfo buildInfo,
+    BuildMode buildMode,
+    bool trackWidgetCreation,
     FlutterProject flutterProject,
     this.residentCompiler,
-  ) : super(buildInfo, flutterProject);
+  ) : super(buildMode, trackWidgetCreation, flutterProject, <String>[]);
 
   final MockResidentCompiler residentCompiler;
 

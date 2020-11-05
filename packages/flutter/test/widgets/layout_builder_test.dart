@@ -2,13 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
   testWidgets('LayoutBuilder parent size', (WidgetTester tester) async {
-    late Size layoutBuilderSize;
+    Size layoutBuilderSize;
     final Key childKey = UniqueKey();
     final Key parentKey = UniqueKey();
 
@@ -39,8 +41,8 @@ void main() {
   });
 
   testWidgets('SliverLayoutBuilder parent geometry', (WidgetTester tester) async {
-    late SliverConstraints parentConstraints1;
-    late SliverConstraints parentConstraints2;
+    SliverConstraints parentConstraints1;
+    SliverConstraints parentConstraints2;
     final Key childKey1 = UniqueKey();
     final Key parentKey1 = UniqueKey();
     final Key childKey2 = UniqueKey();
@@ -79,8 +81,8 @@ void main() {
     final RenderSliver parentSliver2 = tester.renderObject(find.byKey(parentKey2));
 
     // scrollExtent == top + bottom.
-    expect(parentSliver1.geometry!.scrollExtent, 2 + 4);
-    expect(parentSliver2.geometry!.scrollExtent, 7 + 13);
+    expect(parentSliver1.geometry.scrollExtent, 2 + 4);
+    expect(parentSliver2.geometry.scrollExtent, 7 + 13);
 
     final RenderSliver childSliver1 = tester.renderObject(find.byKey(childKey1));
     final RenderSliver childSliver2 = tester.renderObject(find.byKey(childKey2));
@@ -89,8 +91,8 @@ void main() {
   });
 
   testWidgets('LayoutBuilder stateful child', (WidgetTester tester) async {
-    late Size layoutBuilderSize;
-    late StateSetter setState;
+    Size layoutBuilderSize;
+    StateSetter setState;
     final Key childKey = UniqueKey();
     final Key parentKey = UniqueKey();
     double childWidth = 10.0;
@@ -135,7 +137,7 @@ void main() {
   });
 
   testWidgets('SliverLayoutBuilder stateful descendants', (WidgetTester tester) async {
-    late StateSetter setState;
+    StateSetter setState;
     double childWidth = 10.0;
     double childHeight = 20.0;
     final Key parentKey = UniqueKey();
@@ -172,8 +174,8 @@ void main() {
     RenderSliver parentSliver = tester.renderObject(find.byKey(parentKey));
     expect(childBox.size.width, 800);
     expect(childBox.size.height, childHeight);
-    expect(parentSliver.geometry!.scrollExtent, childHeight);
-    expect(parentSliver.geometry!.paintExtent, childHeight);
+    expect(parentSliver.geometry.scrollExtent, childHeight);
+    expect(parentSliver.geometry.paintExtent, childHeight);
 
     setState(() {
       childWidth = 100.0;
@@ -185,8 +187,8 @@ void main() {
     parentSliver = tester.renderObject(find.byKey(parentKey));
     expect(childBox.size.width, 800);
     expect(childBox.size.height, childHeight);
-    expect(parentSliver.geometry!.scrollExtent, childHeight);
-    expect(parentSliver.geometry!.paintExtent, childHeight);
+    expect(parentSliver.geometry.scrollExtent, childHeight);
+    expect(parentSliver.geometry.paintExtent, childHeight);
 
     // Make child wider and higher than the viewport.
     setState(() {
@@ -199,13 +201,13 @@ void main() {
     parentSliver = tester.renderObject(find.byKey(parentKey));
     expect(childBox.size.width, 800);
     expect(childBox.size.height, childHeight);
-    expect(parentSliver.geometry!.scrollExtent, childHeight);
-    expect(parentSliver.geometry!.paintExtent, 600);
+    expect(parentSliver.geometry.scrollExtent, childHeight);
+    expect(parentSliver.geometry.paintExtent, 600);
   });
 
   testWidgets('LayoutBuilder stateful parent', (WidgetTester tester) async {
-    late Size layoutBuilderSize;
-    late StateSetter setState;
+    Size layoutBuilderSize;
+    StateSetter setState;
     final Key childKey = UniqueKey();
     double childWidth = 10.0;
     double childHeight = 20.0;
@@ -360,8 +362,8 @@ void main() {
   });
 
   testWidgets('nested SliverLayoutBuilder', (WidgetTester tester) async {
-    late SliverConstraints parentConstraints1;
-    late SliverConstraints parentConstraints2;
+    SliverConstraints parentConstraints1;
+    SliverConstraints parentConstraints2;
     final Key childKey = UniqueKey();
     final Key parentKey1 = UniqueKey();
     final Key parentKey2 = UniqueKey();
@@ -397,7 +399,7 @@ void main() {
     final RenderSliver parentSliver1 = tester.renderObject(find.byKey(parentKey1));
     final RenderSliver parentSliver2 = tester.renderObject(find.byKey(parentKey2));
     // scrollExtent == top + bottom.
-    expect(parentSliver1.geometry!.scrollExtent, 2 + 4);
+    expect(parentSliver1.geometry.scrollExtent, 2 + 4);
 
     final RenderSliver childSliver = tester.renderObject(find.byKey(childKey));
     expect(childSliver.geometry, parentSliver1.geometry);

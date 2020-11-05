@@ -62,7 +62,7 @@ class Theme extends StatelessWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   static final ThemeData _kFallbackTheme = ThemeData.fallback();
@@ -76,6 +76,14 @@ class Theme extends StatelessWidget {
   ///
   /// Defaults to [new ThemeData.fallback] if there is no [Theme] in the given
   /// build context.
+  ///
+  /// If [shadowThemeOnly] is true and the closest [Theme] ancestor was
+  /// installed by the [MaterialApp] — in other words if the closest [Theme]
+  /// ancestor does not shadow the application's theme — then this returns null.
+  /// This argument should be used in situations where its useful to wrap a
+  /// route's widgets with a [Theme], but only when the application's overall
+  /// theme is being shadowed by a [Theme] widget that is deeper in the tree.
+  /// See [isMaterialAppTheme].
   ///
   /// Typical usage is as follows:
   ///
@@ -116,9 +124,15 @@ class Theme extends StatelessWidget {
   ///   );
   /// }
   /// ```
-  static ThemeData of(BuildContext context) {
+  static ThemeData? of(BuildContext context, { bool shadowThemeOnly = false }) {
     final _InheritedTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    final MaterialLocalizations? localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    if (shadowThemeOnly) {
+      if (inheritedTheme == null || inheritedTheme.theme.isMaterialAppTheme)
+        return null;
+      return inheritedTheme.theme.data;
+    }
+
+    final MaterialLocalizations? localizations = MaterialLocalizations.of(context);
     final ScriptCategory category = localizations?.scriptCategory ?? ScriptCategory.englishLike;
     final ThemeData theme = inheritedTheme?.theme.data ?? _kFallbackTheme;
     return ThemeData.localize(theme, theme.typography.geometryThemeFor(category));
@@ -162,7 +176,8 @@ class _InheritedTheme extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return Theme(data: theme.data, child: child);
+    final _InheritedTheme? ancestorTheme = context.findAncestorWidgetOfExactType<_InheritedTheme>();
+    return identical(this, ancestorTheme) ? child : Theme(data: theme.data, child: child);
   }
 
   @override
@@ -226,7 +241,7 @@ class AnimatedTheme extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   @override

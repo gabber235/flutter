@@ -317,7 +317,7 @@ typedef TweenConstructor<T extends Object> = Tween<T> Function(T targetValue);
 
 /// Signature for callbacks passed to [ImplicitlyAnimatedWidgetState.forEachTween].
 ///
-/// {@template flutter.widgets.TweenVisitor.arguments}
+/// {@template flutter.widgets.implicit_animations.tweenVisitorArguments}
 /// The `tween` argument should contain the current tween value. This will
 /// initially be null when the state is first initialized.
 ///
@@ -448,7 +448,7 @@ abstract class ImplicitlyAnimatedWidgetState<T extends ImplicitlyAnimatedWidget>
   /// result back into the member variable. The arguments to `visitor` are as
   /// follows:
   ///
-  /// {@macro flutter.widgets.TweenVisitor.arguments}
+  /// {@macro flutter.widgets.implicit_animations.tweenVisitorArguments}
   ///
   /// ### When this method will be called
   ///
@@ -664,7 +664,7 @@ class AnimatedContainer extends ImplicitlyAnimatedWidget {
   /// the parent provides unbounded constraints, in which case the container
   /// will attempt to be as small as possible.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// Align the [child] within the container.
@@ -840,7 +840,7 @@ class AnimatedPadding extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   @override
@@ -974,7 +974,7 @@ class AnimatedAlign extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// If non-null, sets its height to the child's height multiplied by this factor.
@@ -1058,47 +1058,6 @@ class _AnimatedAlignState extends AnimatedWidgetBaseState<AnimatedAlign> {
 /// it also requires more development overhead as you have to manually manage
 /// the lifecycle of the underlying [AnimationController].
 ///
-/// {@tool dartpad --template=stateful_widget_scaffold_center}
-///
-/// The following example transitions an AnimatedPositioned
-/// between two states. It adjusts the `height`, `width`, and
-/// [Positioned] properties when tapped.
-///
-/// ```dart
-/// bool selected = false;
-///
-/// @override
-/// Widget build(BuildContext context) {
-///   return Container(
-///     width: 200,
-///     height: 350,
-///     child: Stack(
-///       children: [
-///         AnimatedPositioned(
-///           width: selected ? 200.0 : 50.0,
-///           height: selected ? 50.0 : 200.0,
-///           top: selected ? 50.0 : 150.0,
-///           duration: Duration(seconds: 2),
-///           curve: Curves.fastOutSlowIn,
-///           child: GestureDetector(
-///             onTap: () {
-///               setState(() {
-///                 selected = !selected;
-///               });
-///             },
-///             child: Container(
-///               color: Colors.blue,
-///               child: Center(child: Text('Tap me')),
-///             ),
-///           ),
-///         ),
-///       ],
-///     ),
-///   );
-/// }
-///```
-/// {@end-tool}
-///
 /// See also:
 ///
 ///  * [AnimatedPositionedDirectional], which adapts to the ambient
@@ -1149,7 +1108,7 @@ class AnimatedPositioned extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The offset of the child's left edge from the left of the stack.
@@ -1284,7 +1243,7 @@ class AnimatedPositionedDirectional extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The offset of the child's start edge from the start of the stack.
@@ -1348,7 +1307,7 @@ class _AnimatedPositionedDirectionalState extends AnimatedWidgetBaseState<Animat
   Widget build(BuildContext context) {
     assert(debugCheckHasDirectionality(context));
     return Positioned.directional(
-      textDirection: Directionality.of(context),
+      textDirection: Directionality.of(context)!,
       child: widget.child,
       start: _start?.evaluate(animation!),
       top: _top?.evaluate(animation!),
@@ -1445,7 +1404,7 @@ class AnimatedOpacity extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// The target opacity.
@@ -1681,7 +1640,7 @@ class AnimatedDefaultTextStyle extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The target text style.
@@ -1813,7 +1772,7 @@ class AnimatedPhysicalModel extends ImplicitlyAnimatedWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget child;
 
   /// The type of shape.
@@ -1821,7 +1780,7 @@ class AnimatedPhysicalModel extends ImplicitlyAnimatedWidget {
   /// This property is not animated.
   final BoxShape shape;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none].
   final Clip clipBehavior;

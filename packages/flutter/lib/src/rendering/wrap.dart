@@ -331,7 +331,7 @@ class RenderWrap extends RenderBox
     }
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none], and must not be null.
   Clip get clipBehavior => _clipBehavior;

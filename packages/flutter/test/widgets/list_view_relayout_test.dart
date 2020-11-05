@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -78,7 +80,7 @@ void main() {
     );
 
     final RenderSliverList list = tester.renderObject(find.byType(SliverList));
-    expect(list.geometry!.scrollExtent, equals(100.0));
+    expect(list.geometry.scrollExtent, equals(100.0));
 
     await tester.pumpWidget(
       Directionality(
@@ -91,7 +93,7 @@ void main() {
         ),
       ),
     );
-    expect(list.geometry!.scrollExtent, equals(300.0));
+    expect(list.geometry.scrollExtent, equals(300.0));
 
     await tester.pumpWidget(
       Directionality(
@@ -101,7 +103,7 @@ void main() {
         ),
       ),
     );
-    expect(list.geometry!.scrollExtent, equals(0.0));
+    expect(list.geometry.scrollExtent, equals(0.0));
   });
 
   testWidgets('Overflowing ListView should relayout for missing children', (WidgetTester tester) async {

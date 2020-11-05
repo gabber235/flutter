@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:flutter_devicelab/framework/apk_utils.dart';
 import 'package:flutter_devicelab/framework/framework.dart';
 import 'package:flutter_devicelab/framework/task_result.dart';
@@ -18,12 +20,7 @@ Future<void> main() async {
     try {
       await runProjectTest((FlutterProject project) async {
         section('App bundle content for task bundleRelease without explicit target platform');
-
-        await inDirectory(project.rootPath, () {
-          return flutter('build', options: <String>[
-            'appbundle',
-          ]);
-        });
+        await project.runGradleTask('bundleRelease');
 
         final String releaseBundle = path.join(
           project.rootPath,
@@ -45,6 +42,10 @@ Future<void> main() async {
       });
 
       await runProjectTest((FlutterProject project) async {
+        if (Platform.isWindows) {
+          // https://github.com/flutter/flutter/issues/42985
+          return;
+        }
         section('App bundle content using flavors without explicit target platform');
         // Add a few flavors.
         await project.addProductFlavors(<String> [
@@ -54,13 +55,7 @@ Future<void> main() async {
           'flavor_underscore', // https://github.com/flutter/flutter/issues/36067
         ]);
         // Build the production flavor in release mode.
-        await inDirectory(project.rootPath, () {
-          return flutter('build', options: <String>[
-            'appbundle',
-            '--flavor',
-            'production',
-          ]);
-        });
+        await project.runGradleTask('bundleProductionRelease');
 
         final String bundleFromGradlePath = path.join(
           project.rootPath,
@@ -82,8 +77,9 @@ Future<void> main() async {
 
         section('Build app bundle using the flutter tool - flavor: flavor_underscore');
 
-        int exitCode = await inDirectory(project.rootPath, ()  {
-          return flutter(
+        int exitCode;
+        await inDirectory(project.rootPath, () async {
+          exitCode = await flutter(
             'build',
             options: <String>[
               'appbundle',
@@ -117,8 +113,8 @@ Future<void> main() async {
 
         section('Build app bundle using the flutter tool - flavor: production');
 
-        exitCode = await inDirectory(project.rootPath, () {
-          return flutter(
+        await inDirectory(project.rootPath, () async {
+          exitCode = await flutter(
             'build',
             options: <String>[
               'appbundle',
@@ -153,16 +149,8 @@ Future<void> main() async {
 
       await runProjectTest((FlutterProject project) async {
         section('App bundle content for task bundleRelease with target platform = android-arm');
-
-        await inDirectory(project.rootPath, () {
-          return flutter(
-            'build',
-            options: <String>[
-              'appbundle',
-              '--target-platform=android-arm',
-            ],
-          );
-        });
+        await project.runGradleTask('bundleRelease',
+            options: <String>['-Ptarget-platform=android-arm']);
 
         final String releaseBundle = path.join(
           project.rootPath,

@@ -7,6 +7,7 @@ import '../base/analyze_size.dart';
 import '../base/common.dart';
 import '../base/file_system.dart';
 import '../base/logger.dart';
+import '../base/process.dart';
 import '../base/utils.dart';
 import '../build_info.dart';
 import '../cache.dart';
@@ -93,7 +94,7 @@ Future<void> _runCmakeGeneration(String cmakePath, Directory buildDir, Directory
   await buildDir.create(recursive: true);
   int result;
   try {
-    result = await globals.processUtils.stream(
+    result = await processUtils.stream(
       <String>[
         cmakePath,
         '-S',
@@ -123,7 +124,7 @@ Future<void> _runBuild(String cmakePath, Directory buildDir, String buildModeNam
 
   int result;
   try {
-    result = await globals.processUtils.stream(
+    result = await processUtils.stream(
       <String>[
         cmakePath,
         '--build',

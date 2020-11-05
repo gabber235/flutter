@@ -181,7 +181,8 @@ class DefaultTextStyle extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return DefaultTextStyle(
+    final DefaultTextStyle? defaultTextStyle = context.findAncestorWidgetOfExactType<DefaultTextStyle>();
+    return identical(this, defaultTextStyle) ? child : DefaultTextStyle(
       style: style,
       textAlign: textAlign,
       softWrap: softWrap,
@@ -265,7 +266,8 @@ class DefaultTextHeightBehavior extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return DefaultTextHeightBehavior(
+    final DefaultTextHeightBehavior? defaultTextHeightBehavior = context.findAncestorWidgetOfExactType<DefaultTextHeightBehavior>();
+    return identical(this, defaultTextHeightBehavior) ? child : DefaultTextHeightBehavior(
       textHeightBehavior: textHeightBehavior,
       child: child,
     );

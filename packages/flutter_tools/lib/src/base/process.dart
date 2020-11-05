@@ -12,6 +12,7 @@ import 'common.dart';
 import 'context.dart';
 import 'io.dart';
 import 'logger.dart';
+import 'utils.dart';
 
 typedef StringConverter = String Function(String string);
 
@@ -179,6 +180,8 @@ class RunResult {
 
 typedef RunResultChecker = bool Function(int);
 
+ProcessUtils get processUtils => ProcessUtils.instance;
+
 abstract class ProcessUtils {
   factory ProcessUtils({
     @required ProcessManager processManager,
@@ -187,6 +190,8 @@ abstract class ProcessUtils {
     processManager: processManager,
     logger: logger,
   );
+
+  static ProcessUtils get instance => context.get<ProcessUtils>();
 
   /// Spawns a child process to run the command [cmd].
   ///
@@ -528,7 +533,7 @@ class _DefaultProcessUtils implements ProcessUtils {
 
     // Wait for stdout to be fully processed
     // because process.exitCode may complete first causing flaky tests.
-    await Future.wait<void>(<Future<void>>[
+    await waitGroup<void>(<Future<void>>[
       stdoutSubscription.asFuture<void>(),
       stderrSubscription.asFuture<void>(),
     ]);

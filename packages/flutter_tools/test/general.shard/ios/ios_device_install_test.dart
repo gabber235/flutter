@@ -318,6 +318,7 @@ IOSDevice setUpIOSDevice({
     ),
     iProxy: IProxy.test(logger: logger, processManager: processManager),
     interfaceType: interfaceType,
+    vmServiceConnectUri: (String string, {Log log}) async => MockVmService(),
   );
 }
 

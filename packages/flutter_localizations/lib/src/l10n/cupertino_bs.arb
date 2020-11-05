@@ -25,6 +25,5 @@
   "pasteButtonLabel": "Zalijepi",
   "selectAllButtonLabel": "Odaberi sve",
   "tabSemanticsLabel": "Kartica $tabIndex od $tabCount",
-  "modalBarrierDismissLabel": "Odbaci",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Odbaci"
 }

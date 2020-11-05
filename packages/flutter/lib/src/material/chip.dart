@@ -94,41 +94,12 @@ abstract class ChipAttributes {
   ///  * [MaterialState.pressed].
   TextStyle? get labelStyle;
 
-  /// The color and weight of the chip's outline.
+  /// The [ShapeBorder] to draw around the chip.
   ///
-  /// Defaults to the border side in the ambient [ChipThemeData]. If the theme
-  /// border side resolves to null, the default is the border side of [shape].
-  ///
-  /// This value is combined with [shape] to create a shape decorated with an
-  /// outline. If it is a [MaterialStateBorderSide],
-  /// [MaterialStateProperty.resolve] is used for the following
-  /// [MaterialState]s:
-  ///
-  ///  * [MaterialState.disabled].
-  ///  * [MaterialState.selected].
-  ///  * [MaterialState.hovered].
-  ///  * [MaterialState.focused].
-  ///  * [MaterialState.pressed].
-  BorderSide? get side;
+  /// Defaults to the shape in the ambient [ChipThemeData].
+  ShapeBorder? get shape;
 
-  /// The [OutlinedBorder] to draw around the chip.
-  ///
-  /// Defaults to the shape in the ambient [ChipThemeData]. If the theme
-  /// shape resolves to null, the default is [StadiumBorder].
-  ///
-  /// This shape is combined with [side] to create a shape decorated with an
-  /// outline. If it is a [MaterialStateOutlinedBorder],
-  /// [MaterialStateProperty.resolve] is used for the following
-  /// [MaterialState]s:
-  ///
-  ///  * [MaterialState.disabled].
-  ///  * [MaterialState.selected].
-  ///  * [MaterialState.hovered].
-  ///  * [MaterialState.focused].
-  ///  * [MaterialState.pressed].
-  OutlinedBorder? get shape;
-
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none], and must not be null.
   Clip get clipBehavior;
@@ -287,15 +258,7 @@ abstract class DeletableChipAttributes {
   /// [IconThemeData.color].
   Color? get deleteIconColor;
 
-  /// Whether to use a tooltip on the chip's delete button showing the
-  /// [deleteButtonTooltipMessage].
-  ///
-  /// Must not be null. Defaults to true.
-  bool get useDeleteButtonTooltip;
-
   /// The message to be used for the chip's delete button tooltip.
-  ///
-  /// This will be shown only if [useDeleteButtonTooltip] is true.
   String? get deleteButtonTooltipMessage;
 }
 
@@ -603,9 +566,7 @@ class Chip extends StatelessWidget implements ChipAttributes, DeletableChipAttri
     this.deleteIcon,
     this.onDeleted,
     this.deleteIconColor,
-    this.useDeleteButtonTooltip = true,
     this.deleteButtonTooltipMessage,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -620,7 +581,6 @@ class Chip extends StatelessWidget implements ChipAttributes, DeletableChipAttri
        assert(autofocus != null),
        assert(clipBehavior != null),
        assert(elevation == null || elevation >= 0.0),
-       assert(useDeleteButtonTooltip != null),
        super(key: key);
 
   @override
@@ -632,9 +592,7 @@ class Chip extends StatelessWidget implements ChipAttributes, DeletableChipAttri
   @override
   final EdgeInsetsGeometry? labelPadding;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -653,8 +611,6 @@ class Chip extends StatelessWidget implements ChipAttributes, DeletableChipAttri
   final VoidCallback? onDeleted;
   @override
   final Color? deleteIconColor;
-  @override
-  final bool useDeleteButtonTooltip;
   @override
   final String? deleteButtonTooltipMessage;
   @override
@@ -675,10 +631,8 @@ class Chip extends StatelessWidget implements ChipAttributes, DeletableChipAttri
       deleteIcon: deleteIcon,
       onDeleted: onDeleted,
       deleteIconColor: deleteIconColor,
-      useDeleteButtonTooltip: useDeleteButtonTooltip,
       deleteButtonTooltipMessage: deleteButtonTooltipMessage,
       tapEnabled: false,
-      side: side,
       shape: shape,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
@@ -768,14 +722,12 @@ class InputChip extends StatelessWidget
     this.deleteIcon,
     this.onDeleted,
     this.deleteIconColor,
-    this.useDeleteButtonTooltip = true,
     this.deleteButtonTooltipMessage,
     this.onPressed,
     this.pressElevation,
     this.disabledColor,
     this.selectedColor,
     this.tooltip,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -797,7 +749,6 @@ class InputChip extends StatelessWidget
        assert(autofocus != null),
        assert(pressElevation == null || pressElevation >= 0.0),
        assert(elevation == null || elevation >= 0.0),
-       assert(useDeleteButtonTooltip != null),
        super(key: key);
 
   @override
@@ -821,8 +772,6 @@ class InputChip extends StatelessWidget
   @override
   final Color? deleteIconColor;
   @override
-  final bool useDeleteButtonTooltip;
-  @override
   final String? deleteButtonTooltipMessage;
   @override
   final VoidCallback? onPressed;
@@ -835,9 +784,7 @@ class InputChip extends StatelessWidget
   @override
   final String? tooltip;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -876,7 +823,6 @@ class InputChip extends StatelessWidget
       deleteIcon: deleteIcon,
       onDeleted: onDeleted,
       deleteIconColor: deleteIconColor,
-      useDeleteButtonTooltip: useDeleteButtonTooltip,
       deleteButtonTooltipMessage: deleteButtonTooltipMessage,
       onSelected: onSelected,
       onPressed: onPressed,
@@ -886,7 +832,6 @@ class InputChip extends StatelessWidget
       disabledColor: disabledColor,
       selectedColor: selectedColor,
       tooltip: tooltip,
-      side: side,
       shape: shape,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
@@ -982,7 +927,6 @@ class ChoiceChip extends StatelessWidget
     this.selectedColor,
     this.disabledColor,
     this.tooltip,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -1024,9 +968,7 @@ class ChoiceChip extends StatelessWidget
   @override
   final String? tooltip;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -1068,7 +1010,6 @@ class ChoiceChip extends StatelessWidget
       showCheckmark: false,
       onDeleted: null,
       tooltip: tooltip,
-      side: side,
       shape: shape,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
@@ -1197,7 +1138,6 @@ class FilterChip extends StatelessWidget
     this.disabledColor,
     this.selectedColor,
     this.tooltip,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -1241,9 +1181,7 @@ class FilterChip extends StatelessWidget
   @override
   final String? tooltip;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -1286,7 +1224,6 @@ class FilterChip extends StatelessWidget
       pressElevation: pressElevation,
       selected: selected,
       tooltip: tooltip,
-      side: side,
       shape: shape,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
@@ -1370,7 +1307,6 @@ class ActionChip extends StatelessWidget implements ChipAttributes, TappableChip
     required this.onPressed,
     this.pressElevation,
     this.tooltip,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -1408,9 +1344,7 @@ class ActionChip extends StatelessWidget implements ChipAttributes, TappableChip
   @override
   final String? tooltip;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -1441,7 +1375,6 @@ class ActionChip extends StatelessWidget implements ChipAttributes, TappableChip
       tooltip: tooltip,
       labelStyle: labelStyle,
       backgroundColor: backgroundColor,
-      side: side,
       shape: shape,
       clipBehavior: clipBehavior,
       focusNode: focusNode,
@@ -1515,7 +1448,6 @@ class RawChip extends StatefulWidget
     Widget? deleteIcon,
     this.onDeleted,
     this.deleteIconColor,
-    this.useDeleteButtonTooltip = true,
     this.deleteButtonTooltipMessage,
     this.onPressed,
     this.onSelected,
@@ -1526,7 +1458,6 @@ class RawChip extends StatefulWidget
     this.disabledColor,
     this.selectedColor,
     this.tooltip,
-    this.side,
     this.shape,
     this.clipBehavior = Clip.none,
     this.focusNode,
@@ -1546,7 +1477,6 @@ class RawChip extends StatefulWidget
        assert(autofocus != null),
        assert(pressElevation == null || pressElevation >= 0.0),
        assert(elevation == null || elevation >= 0.0),
-       assert(useDeleteButtonTooltip != null),
        deleteIcon = deleteIcon ?? _kDefaultDeleteIcon,
        super(key: key);
 
@@ -1564,8 +1494,6 @@ class RawChip extends StatefulWidget
   final VoidCallback? onDeleted;
   @override
   final Color? deleteIconColor;
-  @override
-  final bool useDeleteButtonTooltip;
   @override
   final String? deleteButtonTooltipMessage;
   @override
@@ -1585,9 +1513,7 @@ class RawChip extends StatefulWidget
   @override
   final String? tooltip;
   @override
-  final BorderSide? side;
-  @override
-  final OutlinedBorder? shape;
+  final ShapeBorder? shape;
   @override
   final Clip clipBehavior;
   @override
@@ -1783,15 +1709,6 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
     });
   }
 
-  OutlinedBorder _getShape(ChipThemeData theme) {
-    final BorderSide? resolvedSide = MaterialStateProperty.resolveAs<BorderSide?>(widget.side, _states)
-      ?? MaterialStateProperty.resolveAs<BorderSide?>(theme.side, _states);
-    final OutlinedBorder resolvedShape = MaterialStateProperty.resolveAs<OutlinedBorder?>(widget.shape, _states)
-      ?? MaterialStateProperty.resolveAs<OutlinedBorder?>(theme.shape, _states)
-      ?? const StadiumBorder();
-    return resolvedShape.copyWith(side: resolvedSide);
-  }
-
   /// Picks between three different colors, depending upon the state of two
   /// different animations.
   Color? getBackgroundColor(ChipThemeData theme) {
@@ -1850,9 +1767,6 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
   }
 
   Widget? _wrapWithTooltip(String? tooltip, VoidCallback? callback, Widget? child) {
-    if(!widget.useDeleteButtonTooltip){
-      return child;
-    }
     if (child == null || callback == null || tooltip == null) {
       return child;
     }
@@ -1875,7 +1789,7 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
       container: true,
       button: true,
       child: _wrapWithTooltip(
-        widget.deleteButtonTooltipMessage ?? MaterialLocalizations.of(context).deleteButtonTooltip,
+        widget.deleteButtonTooltipMessage ?? MaterialLocalizations.of(context)?.deleteButtonTooltip,
         widget.onDeleted,
         GestureDetector(
           key: deleteIconKey,
@@ -1915,13 +1829,13 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
     final EdgeInsetsGeometry _defaultLabelPadding = EdgeInsets.lerp(
       const EdgeInsets.symmetric(horizontal: 8.0),
       const EdgeInsets.symmetric(horizontal: 4.0),
-      (MediaQuery.of(context).textScaleFactor - 1.0).clamp(0.0, 1.0),
+      (MediaQuery.of(context)!.textScaleFactor - 1.0).clamp(0.0, 1.0),
     )!;
 
-    final ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context)!;
     final ChipThemeData chipTheme = ChipTheme.of(context);
-    final TextDirection? textDirection = Directionality.maybeOf(context);
-    final OutlinedBorder resolvedShape = _getShape(chipTheme);
+    final TextDirection? textDirection = Directionality.of(context);
+    final ShapeBorder shape = widget.shape ?? chipTheme.shape;
     final double elevation = widget.elevation ?? chipTheme.elevation ?? _defaultElevation;
     final double pressElevation = widget.pressElevation ?? chipTheme.pressElevation ?? _defaultPressElevation;
     final Color shadowColor = widget.shadowColor ?? chipTheme.shadowColor ?? _defaultShadowColor;
@@ -1930,7 +1844,7 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
     final bool showCheckmark = widget.showCheckmark ?? chipTheme.showCheckmark ?? true;
 
     final TextStyle effectiveLabelStyle = widget.labelStyle ?? chipTheme.labelStyle;
-    final Color? resolvedLabelColor = MaterialStateProperty.resolveAs<Color?>(effectiveLabelStyle.color, _states);
+    final Color? resolvedLabelColor =  MaterialStateProperty.resolveAs<Color?>(effectiveLabelStyle.color, _states);
     final TextStyle resolvedLabelStyle = effectiveLabelStyle.copyWith(color: resolvedLabelColor);
     final EdgeInsetsGeometry labelPadding = widget.labelPadding ?? chipTheme.labelPadding ?? _defaultLabelPadding;
 
@@ -1938,7 +1852,7 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
       elevation: isTapping ? pressElevation : elevation,
       shadowColor: widget.selected ? selectedShadowColor : shadowColor,
       animationDuration: pressedAnimationDuration,
-      shape: resolvedShape,
+      shape: shape,
       clipBehavior: widget.clipBehavior,
       child: InkWell(
         onFocusChange: _handleFocus,
@@ -1954,13 +1868,13 @@ class _RawChipState extends State<RawChip> with TickerProviderStateMixin<RawChip
             context,
             deleteIconKey,
         ),
-        customBorder: resolvedShape,
+        customBorder: shape,
         child: AnimatedBuilder(
           animation: Listenable.merge(<Listenable>[selectController, enableController]),
           builder: (BuildContext context, Widget? child) {
             return Container(
               decoration: ShapeDecoration(
-                shape: resolvedShape,
+                shape: shape,
                 color: getBackgroundColor(chipTheme),
               ),
               child: child,
@@ -2129,7 +2043,7 @@ class _ChipRenderWidget extends RenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) {
     return _RenderChip(
       theme: theme,
-      textDirection: Directionality.of(context),
+      textDirection: Directionality.of(context)!,
       value: value,
       isEnabled: isEnabled,
       checkmarkAnimation: checkmarkAnimation,
@@ -2488,7 +2402,7 @@ class _RenderChip extends RenderBox {
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    final double overallPadding = theme.padding.horizontal +
+    final double overallPadding = theme.padding.vertical +
         theme.labelPadding.horizontal;
     return overallPadding +
         _maxWidth(avatar, height) +
@@ -2985,7 +2899,7 @@ class _LocationAwareInkRippleFactory extends InteractiveInkFeatureFactory {
         ? deleteIconKey.currentContext!
         : chipContext;
 
-    final InteractiveInkFeatureFactory splashFactory = Theme.of(splashContext).splashFactory;
+    final InteractiveInkFeatureFactory splashFactory = Theme.of(splashContext)!.splashFactory;
 
     if (tapIsOnDeleteIcon) {
       final RenderBox currentBox = referenceBox;

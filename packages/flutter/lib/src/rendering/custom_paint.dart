@@ -838,9 +838,6 @@ class RenderCustomPaint extends RenderProxyBox {
     if (properties.textField != null) {
       config.isTextField = properties.textField!;
     }
-    if (properties.slider != null) {
-      config.isSlider = properties.slider!;
-    }
     if (properties.readOnly != null) {
       config.isReadOnly = properties.readOnly!;
     }

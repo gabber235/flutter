@@ -23,6 +23,8 @@ import 'package:flutter_tools/src/test/coverage_collector.dart';
 import 'package:flutter_tools/src/test/runner.dart';
 import 'package:flutter_tools/src/test/test_wrapper.dart';
 
+// This was largely inspired by lib/src/commands/test.dart.
+
 const String _kOptionPackages = 'packages';
 const String _kOptionShell = 'shell';
 const String _kOptionTestDirectory = 'test-directory';
@@ -147,11 +149,12 @@ Future<void> run(List<String> args) async {
       watcher: collector,
       ipv6: false,
       enableObservatory: collector != null,
-      buildInfo: BuildInfo.debug,
+      buildMode: BuildMode.debug,
       precompiledDillFiles: tests,
       concurrency: math.max(1, globals.platform.numberOfProcessors - 2),
       icudtlPath: globals.fs.path.absolute(argResults[_kOptionIcudtl] as String),
       coverageDirectory: coverageDirectory,
+      extraFrontEndOptions: <String>[],
     );
 
     if (collector != null) {

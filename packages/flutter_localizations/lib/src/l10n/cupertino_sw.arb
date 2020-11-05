@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Bandika",
   "selectAllButtonLabel": "Teua Zote",
   "tabSemanticsLabel": "Kichupo cha $tabIndex kati ya $tabCount",
-  "modalBarrierDismissLabel": "Ondoa",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Ondoa"
 }

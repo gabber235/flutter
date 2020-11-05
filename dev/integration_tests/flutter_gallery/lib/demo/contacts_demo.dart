@@ -95,6 +95,7 @@ class ContactsDemo extends StatefulWidget {
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ContactsDemoState extends State<ContactsDemo> {
+  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final double _appBarHeight = 256.0;
 
   AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
@@ -108,6 +109,7 @@ class ContactsDemoState extends State<ContactsDemo> {
         platform: Theme.of(context).platform,
       ),
       child: Scaffold(
+        key: _scaffoldKey,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -120,7 +122,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                   icon: const Icon(Icons.create),
                   tooltip: 'Edit',
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    _scaffoldKey.currentState.showSnackBar(const SnackBar(
                       content: Text("Editing isn't supported in this screen."),
                     ));
                   },
@@ -188,7 +190,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                         icon: Icons.message,
                         tooltip: 'Send message',
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          _scaffoldKey.currentState.showSnackBar(const SnackBar(
                             content: Text('Pretend that this opened your SMS application.'),
                           ));
                         },
@@ -201,7 +203,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                         icon: Icons.message,
                         tooltip: 'Send message',
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          _scaffoldKey.currentState.showSnackBar(const SnackBar(
                             content: Text('A messaging app appears.'),
                           ));
                         },
@@ -214,7 +216,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                         icon: Icons.message,
                         tooltip: 'Send message',
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          _scaffoldKey.currentState.showSnackBar(const SnackBar(
                             content: Text('Imagine if you will, a messaging application.'),
                           ));
                         },
@@ -233,7 +235,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       icon: Icons.email,
                       tooltip: 'Send personal e-mail',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        _scaffoldKey.currentState.showSnackBar(const SnackBar(
                           content: Text('Here, your e-mail application would open.'),
                         ));
                       },
@@ -246,7 +248,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       icon: Icons.email,
                       tooltip: 'Send work e-mail',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        _scaffoldKey.currentState.showSnackBar(const SnackBar(
                           content: Text('Summon your favorite e-mail application here.'),
                         ));
                       },
@@ -264,7 +266,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       icon: Icons.map,
                       tooltip: 'Open map',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        _scaffoldKey.currentState.showSnackBar(const SnackBar(
                           content: Text('This would show a map of San Francisco.'),
                         ));
                       },
@@ -278,7 +280,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       icon: Icons.map,
                       tooltip: 'Open map',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        _scaffoldKey.currentState.showSnackBar(const SnackBar(
                           content: Text('This would show a map of Mountain View.'),
                         ));
                       },
@@ -292,7 +294,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       icon: Icons.map,
                       tooltip: 'Open map',
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        _scaffoldKey.currentState.showSnackBar(const SnackBar(
                           content: Text('This would also show a map, if this was not a demo.'),
                         ));
                       },

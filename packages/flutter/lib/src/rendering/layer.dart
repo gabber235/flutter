@@ -286,7 +286,7 @@ abstract class Layer extends AbstractNode with DiagnosticableTreeMixin {
   ///
   /// ## About layer annotations
   ///
-  /// {@template flutter.rendering.Layer.findAnnotations.aboutAnnotations}
+  /// {@template flutter.rendering.layer.findAnnotations.aboutAnnotations}
   /// An annotation is an optional object of any type that can be carried with a
   /// layer. An annotation can be found at a location as long as the owner layer
   /// contains the location and is walked to.
@@ -344,7 +344,7 @@ abstract class Layer extends AbstractNode with DiagnosticableTreeMixin {
   ///
   /// ## About layer annotations
   ///
-  /// {@macro flutter.rendering.Layer.findAnnotations.aboutAnnotations}
+  /// {@macro flutter.rendering.layer.findAnnotations.aboutAnnotations}
   ///
   /// See also:
   ///
@@ -370,7 +370,7 @@ abstract class Layer extends AbstractNode with DiagnosticableTreeMixin {
   ///
   /// ## About layer annotations
   ///
-  /// {@macro flutter.rendering.Layer.findAnnotations.aboutAnnotations}
+  /// {@macro flutter.rendering.layer.findAnnotations.aboutAnnotations}
   ///
   /// See also:
   ///
@@ -403,7 +403,7 @@ abstract class Layer extends AbstractNode with DiagnosticableTreeMixin {
   ///
   /// ## About layer annotations
   ///
-  /// {@macro flutter.rendering.Layer.findAnnotations.aboutAnnotations}
+  /// {@macro flutter.rendering.layer.findAnnotations.aboutAnnotations}
   ///
   /// See also:
   ///
@@ -601,7 +601,7 @@ class TextureLayer extends Layer {
   /// un-freezes it when it is certain that a frame with the new size is ready.
   final bool freeze;
 
-  /// {@macro flutter.widgets.Texture.filterQuality}
+  /// {@macro FilterQuality}
   final ui.FilterQuality filterQuality;
 
   @override
@@ -1246,7 +1246,7 @@ class ClipRectLayer extends ContainerLayer {
     }
   }
 
-  /// {@template flutter.rendering.ClipRectLayer.clipBehavior}
+  /// {@template flutter.clipper.clipBehavior}
   /// Controls how to clip.
   ///
   /// Must not be set to null or [Clip.none].
@@ -1334,7 +1334,7 @@ class ClipRRectLayer extends ContainerLayer {
     }
   }
 
-  /// {@macro flutter.rendering.ClipRectLayer.clipBehavior}
+  /// {@macro flutter.clipper.clipBehavior}
   ///
   /// Defaults to [Clip.antiAlias].
   Clip get clipBehavior => _clipBehavior;
@@ -1418,7 +1418,7 @@ class ClipPathLayer extends ContainerLayer {
     }
   }
 
-  /// {@macro flutter.rendering.ClipRectLayer.clipBehavior}
+  /// {@macro flutter.clipper.clipBehavior}
   ///
   /// Defaults to [Clip.antiAlias].
   Clip get clipBehavior => _clipBehavior;
@@ -1911,7 +1911,7 @@ class PhysicalModelLayer extends ContainerLayer {
     return clipPath!.transform(matrix.storage);
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   Clip get clipBehavior => _clipBehavior;
   Clip _clipBehavior;
   set clipBehavior(Clip value) {
@@ -2074,7 +2074,7 @@ class LeaderLayer extends ContainerLayer {
   /// pipeline.
   Offset offset;
 
-  /// {@macro flutter.rendering.FollowerLayer.alwaysNeedsAddToScene}
+  /// {@macro flutter.leaderFollower.alwaysNeedsAddToScene}
   @override
   bool get alwaysNeedsAddToScene => true;
 
@@ -2361,7 +2361,7 @@ class FollowerLayer extends ContainerLayer {
     _inverseDirty = true;
   }
 
-  /// {@template flutter.rendering.FollowerLayer.alwaysNeedsAddToScene}
+  /// {@template flutter.leaderFollower.alwaysNeedsAddToScene}
   /// This disables retained rendering.
   ///
   /// A [FollowerLayer] copies changes from a [LeaderLayer] that could be anywhere
@@ -2439,7 +2439,7 @@ class FollowerLayer extends ContainerLayer {
 /// of this layer's children, respecting their opacity. Then it adds this
 /// layer's annotation if all of the following restrictions are met:
 ///
-/// {@template flutter.rendering.AnnotatedRegionLayer.restrictions}
+/// {@template flutter.rendering.annotatedRegionLayer.restrictions}
 /// * The target type must be identical to the annotated type `T`.
 /// * If [size] is provided, the target position must be contained within the
 ///   rectangle formed by [size] and [offset].
@@ -2515,7 +2515,7 @@ class AnnotatedRegionLayer<T extends Object> extends ContainerLayer {
   /// return, this method then adds this layer's annotation if all of the
   /// following restrictions are met:
   ///
-  /// {@macro flutter.rendering.AnnotatedRegionLayer.restrictions}
+  /// {@macro flutter.rendering.annotatedRegionLayer.restrictions}
   ///
   /// This search process respects `onlyFirst`, meaning that when `onlyFirst` is
   /// true, the search will stop when it finds the first annotation from the

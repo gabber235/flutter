@@ -19,7 +19,7 @@ class DependentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color resolved = CupertinoDynamicColor.resolve(color, context);
+    final Color resolved = CupertinoDynamicColor.resolve(color, context, nullOk: false)!;
     return DecoratedBox(
       decoration: BoxDecoration(color: resolved),
       child: const SizedBox.expand(),
@@ -165,7 +165,7 @@ void main() {
   });
 
   test('can resolve null color', () {
-    expect(CupertinoDynamicColor.maybeResolve(null, _NullElement.instance), isNull);
+    expect(CupertinoDynamicColor.resolve(null, _NullElement.instance), isNull);
   });
 
   test('withVibrancy constructor creates colors that may depend on vibrancy', () {
@@ -280,6 +280,10 @@ void main() {
       expect(tester.takeException(), null);
       expect(find.byType(DependentWidget), paints..rect(color: color0));
       expect(find.byType(DependentWidget), isNot(paints..rect(color: color1)));
+
+      // Asserts when the required dependency is missing.
+      await tester.pumpWidget(const DependentWidget(color: contrastDependentColor1));
+      expect(tester.takeException()?.toString(), contains('does not contain a MediaQuery'));
   });
 
   testWidgets(
@@ -308,6 +312,10 @@ void main() {
       expect(tester.takeException(), null);
       expect(find.byType(DependentWidget), paints..rect(color: color0));
       expect(find.byType(DependentWidget), isNot(paints..rect(color: color1)));
+
+      // Asserts when the required dependency is missing.
+      await tester.pumpWidget(const DependentWidget(color: elevationDependentColor1));
+      expect(tester.takeException()?.toString(), contains('does not contain a CupertinoUserInterfaceLevel'));
   });
 
   testWidgets('Dynamic color with all 3 dependencies works', (WidgetTester tester) async {

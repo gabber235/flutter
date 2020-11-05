@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -165,7 +167,7 @@ class _PageView62209State extends State<PageView62209> {
 }
 
 class Carousel62209Page extends StatelessWidget {
-  const Carousel62209Page({required this.number, Key? key}) : super(key: key);
+  const Carousel62209Page({this.number, Key key}) : super(key: key);
 
   final int number;
 
@@ -176,7 +178,7 @@ class Carousel62209Page extends StatelessWidget {
 }
 
 class Carousel62209 extends StatefulWidget {
-  const Carousel62209({Key? key, required this.pages}) : super(key: key);
+  const Carousel62209({Key key, this.pages}) : super(key: key);
 
   final List<Carousel62209Page> pages;
 
@@ -186,11 +188,11 @@ class Carousel62209 extends StatefulWidget {
 
 class _Carousel62209State extends State<Carousel62209> {
   // page variables
-  late PageController _pageController;
+  PageController _pageController;
   int _currentPage = 0;
 
   // controls updates outside of user interaction
-  late List<Carousel62209Page> _pages;
+  List<Carousel62209Page> _pages;
   bool _jumpingToPage = false;
 
   @override
@@ -214,13 +216,13 @@ class _Carousel62209State extends State<Carousel62209> {
         _pages = widget.pages.toList();
       } else {
         _jumpingToPage = true;
-        SchedulerBinding.instance!.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
             setState(() {
               _pages = widget.pages.toList();
               _currentPage = newPage;
               _pageController.jumpToPage(_currentPage);
-              SchedulerBinding.instance!.addPostFrameCallback((_) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
                 _jumpingToPage = false;
               });
             });
@@ -238,7 +240,7 @@ class _Carousel62209State extends State<Carousel62209> {
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      final int page = _pageController.page!.round();
+      final int page = _pageController.page.round();
       if (!_jumpingToPage && _currentPage != page) {
         _currentPage = page;
       }

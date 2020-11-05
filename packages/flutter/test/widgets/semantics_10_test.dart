@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
@@ -34,11 +36,7 @@ void main() {
   });
 }
 
-Widget buildTestWidgets({
-  required bool excludeSemantics,
-  required String label,
-  required bool isSemanticsBoundary,
-}) {
+Widget buildTestWidgets({ bool excludeSemantics, String label, bool isSemanticsBoundary }) {
   return Directionality(
     textDirection: TextDirection.ltr,
     child: Semantics(
@@ -67,10 +65,10 @@ Widget buildTestWidgets({
 
 class TestWidget extends SingleChildRenderObjectWidget {
   const TestWidget({
-    Key? key,
-    required Widget child,
-    required this.label,
-    required this.isSemanticBoundary,
+    Key key,
+    Widget child,
+    this.label,
+    this.isSemanticBoundary,
   }) : super(key: key, child: child);
 
   final String label;

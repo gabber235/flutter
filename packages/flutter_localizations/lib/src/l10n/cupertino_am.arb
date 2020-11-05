@@ -20,6 +20,5 @@
   "pasteButtonLabel": "ለጥፍ",
   "selectAllButtonLabel": "ሁሉንም ምረጥ",
   "tabSemanticsLabel": "ትር $tabIndex ከ$tabCount",
-  "modalBarrierDismissLabel": "አሰናብት",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "አሰናብት"
 }

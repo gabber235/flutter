@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 @TestOn('chrome')
 
 import 'dart:ui';
@@ -12,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class OnTapPage extends StatelessWidget {
-  const OnTapPage({Key? key, required this.id, required this.onTap}) : super(key: key);
+  const OnTapPage({Key key, this.id, this.onTap}) : super(key: key);
 
   final String id;
   final VoidCallback onTap;
@@ -269,7 +271,7 @@ void main() {
     final SimpleRouterDelegate delegate = SimpleRouterDelegate(
       reportConfiguration: true,
       builder: (BuildContext context, RouteInformation information) {
-        return Text(information.location!);
+        return Text(information.location);
       }
     );
 
@@ -321,24 +323,24 @@ class SimpleRouteInformationParser extends RouteInformationParser<RouteInformati
 
 class SimpleRouterDelegate extends RouterDelegate<RouteInformation> with ChangeNotifier {
   SimpleRouterDelegate({
-    required this.builder,
+    @required this.builder,
     this.onPopRoute,
     this.reportConfiguration = false,
   });
 
   RouteInformation get routeInformation => _routeInformation;
-  late RouteInformation _routeInformation;
+  RouteInformation _routeInformation;
   set routeInformation(RouteInformation newValue) {
     _routeInformation = newValue;
     notifyListeners();
   }
 
   SimpleRouterDelegateBuilder builder;
-  SimpleRouterDelegatePopRoute? onPopRoute;
+  SimpleRouterDelegatePopRoute onPopRoute;
   final bool reportConfiguration;
 
   @override
-  RouteInformation? get currentConfiguration {
+  RouteInformation get currentConfiguration {
     if (reportConfiguration)
       return routeInformation;
     return null;
@@ -353,7 +355,7 @@ class SimpleRouterDelegate extends RouterDelegate<RouteInformation> with ChangeN
   @override
   Future<bool> popRoute() {
     if (onPopRoute != null)
-      return onPopRoute!();
+      return onPopRoute();
     return SynchronousFuture<bool>(true);
   }
 
@@ -362,7 +364,7 @@ class SimpleRouterDelegate extends RouterDelegate<RouteInformation> with ChangeN
 }
 
 class TestPage extends Page<void> {
-  const TestPage({LocalKey? key, String? name}) : super(key: key, name: name);
+  const TestPage({LocalKey key, String name}) : super(key: key, name: name);
 
   @override
   Route<void> createRoute(BuildContext context) {

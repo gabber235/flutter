@@ -66,7 +66,6 @@ class Checkbox extends StatefulWidget {
     this.checkColor,
     this.focusColor,
     this.hoverColor,
-    this.splashRadius,
     this.materialTapTargetSize,
     this.visualDensity,
     this.focusNode,
@@ -174,11 +173,6 @@ class Checkbox extends StatefulWidget {
   /// The color for the checkbox's [Material] when a pointer is hovering over it.
   final Color? hoverColor;
 
-  /// The splash radius of the circular [Material] ink response.
-  ///
-  /// If null, then [kRadialReactionRadius] is used.
-  final double? splashRadius;
-
   /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
@@ -239,17 +233,17 @@ class _CheckboxState extends State<Checkbox> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData? themeData = Theme.of(context);
     Size size;
-    switch (widget.materialTapTargetSize ?? themeData.materialTapTargetSize) {
+    switch (widget.materialTapTargetSize ?? themeData!.materialTapTargetSize) {
       case MaterialTapTargetSize.padded:
-        size = const Size(kMinInteractiveDimension, kMinInteractiveDimension);
+        size = const Size(2 * kRadialReactionRadius + 8.0, 2 * kRadialReactionRadius + 8.0);
         break;
       case MaterialTapTargetSize.shrinkWrap:
-        size = const Size(kMinInteractiveDimension - 8.0, kMinInteractiveDimension - 8.0);
+        size = const Size(2 * kRadialReactionRadius, 2 * kRadialReactionRadius);
         break;
     }
-    size += (widget.visualDensity ?? themeData.visualDensity).baseSizeAdjustment;
+    size += (widget.visualDensity ?? themeData!.visualDensity).baseSizeAdjustment;
     final BoxConstraints additionalConstraints = BoxConstraints.tight(size);
     final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
       widget.mouseCursor ?? MaterialStateMouseCursor.clickable,
@@ -274,12 +268,11 @@ class _CheckboxState extends State<Checkbox> with TickerProviderStateMixin {
           return _CheckboxRenderObjectWidget(
             value: widget.value,
             tristate: widget.tristate,
-            activeColor: widget.activeColor ?? themeData.toggleableActiveColor,
+            activeColor: widget.activeColor ?? themeData!.toggleableActiveColor,
             checkColor: widget.checkColor ?? const Color(0xFFFFFFFF),
-            inactiveColor: enabled ? themeData.unselectedWidgetColor : themeData.disabledColor,
+            inactiveColor: enabled ? themeData!.unselectedWidgetColor : themeData!.disabledColor,
             focusColor: widget.focusColor ?? themeData.focusColor,
             hoverColor: widget.hoverColor ?? themeData.hoverColor,
-            splashRadius: widget.splashRadius ?? kRadialReactionRadius,
             onChanged: widget.onChanged,
             additionalConstraints: additionalConstraints,
             vsync: this,
@@ -302,7 +295,6 @@ class _CheckboxRenderObjectWidget extends LeafRenderObjectWidget {
     required this.inactiveColor,
     required this.focusColor,
     required this.hoverColor,
-    required this.splashRadius,
     required this.onChanged,
     required this.vsync,
     required this.additionalConstraints,
@@ -324,7 +316,6 @@ class _CheckboxRenderObjectWidget extends LeafRenderObjectWidget {
   final Color inactiveColor;
   final Color focusColor;
   final Color hoverColor;
-  final double splashRadius;
   final ValueChanged<bool?>? onChanged;
   final TickerProvider vsync;
   final BoxConstraints additionalConstraints;
@@ -338,7 +329,6 @@ class _CheckboxRenderObjectWidget extends LeafRenderObjectWidget {
     inactiveColor: inactiveColor,
     focusColor: focusColor,
     hoverColor: hoverColor,
-    splashRadius: splashRadius,
     onChanged: onChanged,
     vsync: vsync,
     additionalConstraints: additionalConstraints,
@@ -358,7 +348,6 @@ class _CheckboxRenderObjectWidget extends LeafRenderObjectWidget {
       ..inactiveColor = inactiveColor
       ..focusColor = focusColor
       ..hoverColor = hoverColor
-      ..splashRadius = splashRadius
       ..onChanged = onChanged
       ..additionalConstraints = additionalConstraints
       ..vsync = vsync
@@ -380,7 +369,6 @@ class _RenderCheckbox extends RenderToggleable {
     required Color inactiveColor,
     Color? focusColor,
     Color? hoverColor,
-    required double splashRadius,
     required BoxConstraints additionalConstraints,
     ValueChanged<bool?>? onChanged,
     required bool hasFocus,
@@ -394,7 +382,6 @@ class _RenderCheckbox extends RenderToggleable {
          inactiveColor: inactiveColor,
          focusColor: focusColor,
          hoverColor: hoverColor,
-         splashRadius: splashRadius,
          onChanged: onChanged,
          additionalConstraints: additionalConstraints,
          vsync: vsync,

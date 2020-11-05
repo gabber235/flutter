@@ -15,7 +15,7 @@ import 'recognizer.dart';
 class EagerGestureRecognizer extends OneSequenceGestureRecognizer {
   /// Create an eager gesture recognizer.
   ///
-  /// {@macro flutter.gestures.GestureRecognizer.kind}
+  /// {@macro flutter.gestures.gestureRecognizer.kind}
   EagerGestureRecognizer({ PointerDeviceKind? kind }) : super(kind: kind);
 
   @override

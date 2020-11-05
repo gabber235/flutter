@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/src/physics/utils.dart' show nearEqual;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,10 +21,10 @@ ScrollbarPainter _buildPainter({
   double thickness = _kThickness,
   double mainAxisMargin = 0.0,
   double crossAxisMargin = 0.0,
-  Radius? radius,
+  Radius radius,
   double minLength = _kMinThumbExtent,
-  double? minOverscrollLength,
-  required ScrollMetrics scrollMetrics,
+  double minOverscrollLength,
+  ScrollMetrics scrollMetrics,
 }) {
   return ScrollbarPainter(
     color: color,
@@ -54,6 +56,7 @@ void main() {
   Rect captureRect() => testCanvas.rects.removeLast();
 
   tearDown(() {
+    painter = null;
     testCanvas.rects.clear();
   });
 
@@ -133,14 +136,14 @@ void main() {
         startingMetrics.copyWith(pixels: maxExtent - 0.01),
       ];
 
-      late double lastCoefficient;
+      double lastCoefficient;
       for (final ScrollMetrics metrics in metricsList) {
         painter.update(metrics, metrics.axisDirection);
         painter.paint(testCanvas, size);
 
         final Rect rect = captureRect();
         final double newCoefficient = metrics.pixels/rect.top;
-        lastCoefficient = newCoefficient;
+        lastCoefficient ??= newCoefficient;
 
         expect(rect.top >= 0, true);
         expect(rect.bottom <= maxExtent, true);
@@ -480,12 +483,13 @@ void main() {
         )
         .takeWhile((ScrollMetrics metrics) => !metrics.outOfRange);
 
-        Rect? previousRect;
+        Rect previousRect;
 
         for (final ScrollMetrics metrics in metricsList) {
           painter.update(metrics, metrics.axisDirection);
           painter.paint(testCanvas, size);
           final Rect rect = captureRect();
+
           if (previousRect != null) {
             if (rect.height == size.height) {
               // Size of the scrollbar is too large for the view port

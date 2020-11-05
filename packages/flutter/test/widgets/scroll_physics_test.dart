@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,20 +12,20 @@ import 'package:flutter_test/flutter_test.dart';
 
 class TestScrollPhysics extends ScrollPhysics {
   const TestScrollPhysics({
-    required this.name,
-    ScrollPhysics? parent
+    this.name,
+    ScrollPhysics parent
   }) : super(parent: parent);
   final String name;
 
   @override
-  TestScrollPhysics applyTo(ScrollPhysics? ancestor) {
+  TestScrollPhysics applyTo(ScrollPhysics ancestor) {
     return TestScrollPhysics(
       name: name,
-      parent: parent?.applyTo(ancestor) ?? ancestor!,
+      parent: parent?.applyTo(ancestor) ?? ancestor,
     );
   }
 
-  TestScrollPhysics get namedParent => parent! as TestScrollPhysics;
+  TestScrollPhysics get namedParent => parent as TestScrollPhysics;
   String get names => parent == null ? name : '$name ${namedParent.names}';
 
   @override
@@ -67,7 +69,7 @@ void main() {
     const ScrollPhysics always = AlwaysScrollableScrollPhysics();
     const ScrollPhysics page = PageScrollPhysics();
 
-    String types(ScrollPhysics? value) => value!.parent == null ? '${value.runtimeType}' : '${value.runtimeType} ${types(value.parent)}';
+    String types(ScrollPhysics s) => s.parent == null ? '${s.runtimeType}' : '${s.runtimeType} ${types(s.parent)}';
 
     expect(
       types(bounce.applyTo(clamp.applyTo(never.applyTo(always.applyTo(page))))),
@@ -110,13 +112,13 @@ void main() {
 
     // Calls to createBallisticSimulation may happen on every frame (i.e. when the maxScrollExtent changes)
     // Changing velocity for time 0 may cause a sudden, unwanted damping/speedup effect
-    expect(bounce.createBallisticSimulation(position, 1000)!.dx(0), moreOrLessEquals(1000));
-    expect(clamp.createBallisticSimulation(position, 1000)!.dx(0), moreOrLessEquals(1000));
-    expect(page.createBallisticSimulation(position, 1000)!.dx(0), moreOrLessEquals(1000));
+    expect(bounce.createBallisticSimulation(position, 1000).dx(0), moreOrLessEquals(1000));
+    expect(clamp.createBallisticSimulation(position, 1000).dx(0), moreOrLessEquals(1000));
+    expect(page.createBallisticSimulation(position, 1000).dx(0), moreOrLessEquals(1000));
   });
 
   group('BouncingScrollPhysics test', () {
-    late BouncingScrollPhysics physicsUnderTest;
+    BouncingScrollPhysics physicsUnderTest;
 
     setUp(() {
       physicsUnderTest = const BouncingScrollPhysics();
@@ -251,7 +253,7 @@ void main() {
       axisDirection: AxisDirection.down,
     );
     expect(position.pixels, pixels);
-    late FlutterError error;
+    FlutterError error;
     try {
       physics.applyBoundaryConditions(position, pixels);
     } on FlutterError catch (e) {

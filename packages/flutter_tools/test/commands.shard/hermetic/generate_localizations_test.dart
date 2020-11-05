@@ -16,8 +16,7 @@ void main() {
     final MemoryFileSystem fileSystem = MemoryFileSystem.test();
     final File arbFile = fileSystem.file(fileSystem.path.join('lib', 'l10n', 'app_en.arb'))
       ..createSync(recursive: true);
-    arbFile.writeAsStringSync('''
-{
+    arbFile.writeAsStringSync('''{
   "helloWorld": "Hello, World!",
   "@helloWorld": {
     "description": "Sample description"
@@ -53,8 +52,7 @@ void main() {
       'app_en.arb',
     )..createSync(recursive: true);
 
-    arbFile.writeAsStringSync('''
-{
+    arbFile.writeAsStringSync('''{
   "helloWorld": "Hello, World!",
   "@helloWorld": {
     "description": "Sample description"
@@ -87,8 +85,7 @@ void main() {
     final MemoryFileSystem fileSystem = MemoryFileSystem.test();
     final File arbFile = fileSystem.file(fileSystem.path.join('lib', 'l10n', 'app_en.arb'))
       ..createSync(recursive: true);
-    arbFile.writeAsStringSync('''
-{
+    arbFile.writeAsStringSync('''{
   "helloWorld": "Hello, World!",
   "@helloWorld": {
     "description": "Sample description"

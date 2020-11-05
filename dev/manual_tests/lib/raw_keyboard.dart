@@ -37,11 +37,11 @@ class _HardwareKeyDemoState extends State<RawKeyboardDemo> {
     super.dispose();
   }
 
-  KeyEventResult _handleKeyEvent(FocusNode node, RawKeyEvent event) {
+  bool _handleKeyEvent(FocusNode node, RawKeyEvent event) {
     setState(() {
       _event = event;
     });
-    return KeyEventResult.ignored;
+    return false;
   }
 
   String _asHex(int value) => value != null ? '0x${value.toRadixString(16)}' : 'null';

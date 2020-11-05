@@ -32,8 +32,8 @@ void main() {
           '   If multiple keyed nodes exist as children of another node, they\n'
           '   must have unique keys.\n'
           '   Flex(direction: vertical, mainAxisAlignment: start,\n'
-          '   crossAxisAlignment: center) has multiple children with key\n'
-          '   [<\'key\'>].\n',
+          '   crossAxisAlignment: center, textBaseline: alphabetic) has\n'
+          "   multiple children with key [<'key'>].\n",
         ),
       );
     }
@@ -111,29 +111,23 @@ void main() {
             expect(
               error.diagnostics.last.toStringDeep(),
               equalsIgnoringHashCodes(
-                'No MediaQuery ancestor could be found starting from the context\n'
-                'that was passed to MediaQuery.of(). This can happen because you\n'
-                'have not added a WidgetsApp, CupertinoApp, or MaterialApp widget\n'
-                '(those widgets introduce a MediaQuery), or it can happen if the\n'
-                'context you use comes from a widget above those widgets.\n'
+                'Typically, the MediaQuery widget is introduced by the MaterialApp\n'
+                'or WidgetsApp widget at the top of your application widget tree.\n'
               ),
             );
             expect(
               error.toStringDeep(),
               equalsIgnoringHashCodes(
                 'FlutterError\n'
-                '   No MediaQuery widget ancestor found.\n'
+                '   No MediaQuery widget found.\n'
                 '   Builder widgets require a MediaQuery widget ancestor.\n'
                 '   The specific widget that could not find a MediaQuery ancestor\n'
                 '   was:\n'
                 '     Builder\n'
                 '   The ownership chain for the affected widget is: "Builder ←\n'
                 '     [root]"\n'
-                '   No MediaQuery ancestor could be found starting from the context\n'
-                '   that was passed to MediaQuery.of(). This can happen because you\n'
-                '   have not added a WidgetsApp, CupertinoApp, or MaterialApp widget\n'
-                '   (those widgets introduce a MediaQuery), or it can happen if the\n'
-                '   context you use comes from a widget above those widgets.\n'
+                '   Typically, the MediaQuery widget is introduced by the MaterialApp\n'
+                '   or WidgetsApp widget at the top of your application widget tree.\n'
               ),
             );
           }
@@ -219,33 +213,6 @@ void main() {
         ),
       );
     }
-  });
-
-  testWidgets('debugCheckHasWidgetsLocalizations throws', (WidgetTester tester) async {
-    final GlobalKey noLocalizationsAvailable = GlobalKey();
-    final GlobalKey localizationsAvailable = GlobalKey();
-
-    await tester.pumpWidget(
-      Container(
-        key: noLocalizationsAvailable,
-        child: WidgetsApp(
-          builder: (BuildContext context, Widget? child) {
-            return Container(
-              key: localizationsAvailable,
-            );
-          },
-          color: const Color(0xFF4CAF50),
-        ),
-      ),
-    );
-
-    expect(() => debugCheckHasWidgetsLocalizations(noLocalizationsAvailable.currentContext!), throwsA(isAssertionError.having(
-      (AssertionError e) => e.message,
-      'message',
-      contains('No WidgetsLocalizations found'),
-    )));
-
-    expect(debugCheckHasWidgetsLocalizations(localizationsAvailable.currentContext!), isTrue);
   });
 
   test('debugAssertAllWidgetVarsUnset', () {

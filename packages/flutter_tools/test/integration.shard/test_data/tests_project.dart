@@ -29,7 +29,6 @@ class TestsProject extends Project {
   String get main => '// Unused';
 
   final String testContent = r'''
-  // @dart = 2.8
   import 'package:flutter_test/flutter_test.dart';
 
   void main() {

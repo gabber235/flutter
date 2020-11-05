@@ -448,9 +448,12 @@ void paintImage({
   Size inputSize = Size(image.width.toDouble(), image.height.toDouble());
   Offset? sliceBorder;
   if (centerSlice != null) {
-    sliceBorder = inputSize / scale - centerSlice.size as Offset;
+    sliceBorder = Offset(
+      centerSlice.left + inputSize.width - centerSlice.right,
+      centerSlice.top + inputSize.height - centerSlice.bottom,
+    );
     outputSize = outputSize - sliceBorder as Size;
-    inputSize = inputSize - sliceBorder * scale as Size;
+    inputSize = inputSize - sliceBorder as Size;
   }
   fit ??= centerSlice == null ? BoxFit.scaleDown : BoxFit.fill;
   assert(centerSlice == null || (fit != BoxFit.none && fit != BoxFit.cover));
@@ -556,7 +559,7 @@ void paintImage({
     }
   }
 
-  final bool needSave = centerSlice != null || repeat != ImageRepeat.noRepeat || flipHorizontally;
+  final bool needSave = repeat != ImageRepeat.noRepeat || flipHorizontally;
   if (needSave)
     canvas.save();
   if (repeat != ImageRepeat.noRepeat)
@@ -578,12 +581,11 @@ void paintImage({
         canvas.drawImageRect(image, sourceRect, tileRect, paint);
     }
   } else {
-    canvas.scale(1 / scale);
     if (repeat == ImageRepeat.noRepeat) {
-      canvas.drawImageNine(image, _scaleRect(centerSlice, scale), _scaleRect(destinationRect, scale), paint);
+      canvas.drawImageNine(image, centerSlice, destinationRect, paint);
     } else {
       for (final Rect tileRect in _generateImageTileRects(rect, destinationRect, repeat))
-        canvas.drawImageNine(image, _scaleRect(centerSlice, scale), _scaleRect(tileRect, scale), paint);
+        canvas.drawImageNine(image, centerSlice, tileRect, paint);
     }
   }
   if (needSave)
@@ -617,5 +619,3 @@ Iterable<Rect> _generateImageTileRects(Rect outputRect, Rect fundamentalRect, Im
       yield fundamentalRect.shift(Offset(i * strideX, j * strideY));
   }
 }
-
-Rect _scaleRect(Rect rect, double scale) => Rect.fromLTRB(rect.left * scale, rect.top * scale, rect.right * scale, rect.bottom * scale);

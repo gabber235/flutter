@@ -67,7 +67,7 @@ Future<void> main() async {
           'build',
           options: <String>[
             'ios-framework',
-            '--universal',
+            '--xcframework',
             '--output=$outputDirectoryName'
           ],
         );
@@ -352,7 +352,6 @@ Future<void> main() async {
           options: <String>[
             'ios-framework',
             '--cocoapods',
-            '--universal',
             '--force', // Allow podspec creation on master.
             '--output=$cocoapodsOutputDirectoryName'
           ],

@@ -150,14 +150,6 @@ class GenerateLocalizationsCommand extends FlutterCommand {
         '\n\n'
         'When null, the relative path to the present working directory will be used.'
     );
-    argParser.addFlag(
-      'required-resource-attributes',
-      help: 'Requires all resource ids to contain a corresponding resource attribute.\n\n'
-        'By default, simple messages will not require metadata, but it is highly '
-        'recommended as this provides context for the meaning of a message to '
-        'readers.\n\n'
-        'Resource attributes are still required for plural messages.'
-    );
   }
 
   final FileSystem _fileSystem;
@@ -186,7 +178,6 @@ class GenerateLocalizationsCommand extends FlutterCommand {
     final String inputsAndOutputsListPath = stringArg('gen-inputs-and-outputs-list');
     final bool useSyntheticPackage = boolArg('synthetic-package');
     final String projectPathString = stringArg('project-dir');
-    final bool areResourceAttributesRequired = boolArg('required-resource-attributes');
 
     final LocalizationsGenerator localizationsGenerator = LocalizationsGenerator(_fileSystem);
 
@@ -205,7 +196,6 @@ class GenerateLocalizationsCommand extends FlutterCommand {
           inputsAndOutputsListPath: inputsAndOutputsListPath,
           useSyntheticPackage: useSyntheticPackage,
           projectPathString: projectPathString,
-          areResourceAttributesRequired: areResourceAttributesRequired,
         )
         ..loadResources()
         ..writeOutputFiles()

@@ -147,12 +147,13 @@ class PopupMenuTheme extends InheritedTheme {
   /// ```
   static PopupMenuThemeData of(BuildContext context) {
     final PopupMenuTheme? popupMenuTheme = context.dependOnInheritedWidgetOfExactType<PopupMenuTheme>();
-    return popupMenuTheme?.data ?? Theme.of(context).popupMenuTheme;
+    return popupMenuTheme?.data ?? Theme.of(context)!.popupMenuTheme;
   }
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    return PopupMenuTheme(data: data, child: child);
+    final PopupMenuTheme? ancestorTheme = context.findAncestorWidgetOfExactType<PopupMenuTheme>();
+    return identical(this, ancestorTheme) ? child : PopupMenuTheme(data: data, child: child);
   }
 
   @override

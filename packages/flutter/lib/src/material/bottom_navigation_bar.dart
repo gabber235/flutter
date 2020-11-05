@@ -140,7 +140,7 @@ class BottomNavigationBar extends StatefulWidget {
   /// Creates a bottom navigation bar which is typically used as a
   /// [Scaffold]'s [Scaffold.bottomNavigationBar] argument.
   ///
-  /// The length of [items] must be at least two and each item's icon and label
+  /// The length of [items] must be at least two and each item's icon and title
   /// must not be null.
   ///
   /// If [type] is null then [BottomNavigationBarType.fixed] is used when there
@@ -164,14 +164,10 @@ class BottomNavigationBar extends StatefulWidget {
   /// former is preferred, [fixedColor] only exists for the sake of
   /// backwards compatibility.
   ///
-  /// If [showSelectedLabels] is `null`, [BottomNavigationBarThemeData.showSelectedLabels]
-  /// is used. If [BottomNavigationBarThemeData.showSelectedLabels]  is null,
-  /// then [showSelectedLabels] defaults to `true`.
+  /// The [showSelectedLabels] argument must be non-null.
   ///
-  /// If [showUnselectedLabels] is `null`, [BottomNavigationBarThemeData.showUnselectedLabels]
-  /// is used. If [BottomNavigationBarThemeData.showSelectedLabels] is null,
-  /// then [showUnselectedLabels] defaults to `true` when [type] is
-  /// [BottomNavigationBarType.fixed] and `false` when [type] is
+  /// The [showUnselectedLabels] argument defaults to `true` if [type] is
+  /// [BottomNavigationBarType.fixed] and `false` if [type] is
   /// [BottomNavigationBarType.shifting].
   BottomNavigationBar({
     Key? key,
@@ -191,7 +187,7 @@ class BottomNavigationBar extends StatefulWidget {
     this.unselectedFontSize = 12.0,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
-    this.showSelectedLabels,
+    this.showSelectedLabels = true,
     this.showUnselectedLabels,
     this.mouseCursor,
   }) : assert(items != null),
@@ -210,6 +206,7 @@ class BottomNavigationBar extends StatefulWidget {
        ),
        assert(selectedFontSize != null && selectedFontSize >= 0.0),
        assert(unselectedFontSize != null && unselectedFontSize >= 0.0),
+       assert(showSelectedLabels != null),
        selectedItemColor = selectedItemColor ?? fixedColor,
        super(key: key);
 
@@ -289,7 +286,7 @@ class BottomNavigationBar extends StatefulWidget {
   ///
   /// It this field is provided, it must contain non-null [IconThemeData.size]
   /// and [IconThemeData.color] properties. Also, if this field is supplied,
-  /// [selectedIconTheme] must be provided.
+  /// [unselectedIconTheme] must be provided.
   final IconThemeData? unselectedIconTheme;
 
   /// The [TextStyle] of the [BottomNavigationBarItem] labels when they are
@@ -321,7 +318,7 @@ class BottomNavigationBar extends StatefulWidget {
   final bool? showUnselectedLabels;
 
   /// Whether the labels are shown for the selected [BottomNavigationBarItem].
-  final bool? showSelectedLabels;
+  final bool showSelectedLabels;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// tiles.
@@ -349,8 +346,8 @@ class _BottomNavigationTile extends StatelessWidget {
     required this.unselectedLabelStyle,
     required this.selectedIconTheme,
     required this.unselectedIconTheme,
-    required this.showSelectedLabels,
-    required this.showUnselectedLabels,
+    this.showSelectedLabels,
+    this.showUnselectedLabels,
     this.indexLabel,
     required this.mouseCursor,
     }) : assert(type != null),
@@ -374,8 +371,8 @@ class _BottomNavigationTile extends StatelessWidget {
   final TextStyle selectedLabelStyle;
   final TextStyle unselectedLabelStyle;
   final String? indexLabel;
-  final bool showSelectedLabels;
-  final bool showUnselectedLabels;
+  final bool? showSelectedLabels;
+  final bool? showUnselectedLabels;
   final MouseCursor mouseCursor;
 
   @override
@@ -386,10 +383,16 @@ class _BottomNavigationTile extends StatelessWidget {
     // (which is an integer) by a large number.
     final int size;
 
+    final BottomNavigationBarThemeData bottomTheme = BottomNavigationBarTheme.of(context);
+
     final double selectedFontSize = selectedLabelStyle.fontSize!;
 
-    final double selectedIconSize = selectedIconTheme?.size ?? iconSize;
-    final double unselectedIconSize = unselectedIconTheme?.size ?? iconSize;
+    final double selectedIconSize = selectedIconTheme?.size
+      ?? bottomTheme.selectedIconTheme?.size
+      ?? iconSize;
+    final double unselectedIconSize = unselectedIconTheme?.size
+      ?? bottomTheme.unselectedIconTheme?.size
+      ?? iconSize;
 
     // The amount that the selected icon is bigger than the unselected icons,
     // (or zero if the selected icon is not bigger than the unselected icons).
@@ -415,9 +418,9 @@ class _BottomNavigationTile extends StatelessWidget {
     // | text
     // |      <-- Padding equal to 1/2 text height + 1/2 unselectedIconDiff.
     // =======
-    double bottomPadding;
-    double topPadding;
-    if (showSelectedLabels && !showUnselectedLabels) {
+    final double bottomPadding;
+    final double topPadding;
+    if (showSelectedLabels! && !showUnselectedLabels!) {
       bottomPadding = Tween<double>(
         begin: selectedIconDiff / 2.0,
         end: selectedFontSize / 2.0 - unselectedIconDiff / 2.0,
@@ -426,7 +429,7 @@ class _BottomNavigationTile extends StatelessWidget {
         begin: selectedFontSize + selectedIconDiff / 2.0,
         end: selectedFontSize / 2.0 - unselectedIconDiff / 2.0,
       ).evaluate(animation);
-    } else if (!showSelectedLabels && !showUnselectedLabels) {
+    } else if (!showSelectedLabels! && !showUnselectedLabels!) {
       bottomPadding = Tween<double>(
         begin: selectedIconDiff / 2.0,
         end: unselectedIconDiff / 2.0,
@@ -471,8 +474,8 @@ class _BottomNavigationTile extends StatelessWidget {
               iconSize: iconSize,
               selected: selected,
               item: item,
-              selectedIconTheme: selectedIconTheme,
-              unselectedIconTheme: unselectedIconTheme,
+              selectedIconTheme: selectedIconTheme ?? bottomTheme.selectedIconTheme,
+              unselectedIconTheme: unselectedIconTheme ?? bottomTheme.unselectedIconTheme,
             ),
             _Label(
               colorTween: colorTween!,
@@ -480,8 +483,8 @@ class _BottomNavigationTile extends StatelessWidget {
               item: item,
               selectedLabelStyle: selectedLabelStyle,
               unselectedLabelStyle: unselectedLabelStyle,
-              showSelectedLabels: showSelectedLabels,
-              showUnselectedLabels: showUnselectedLabels,
+              showSelectedLabels: showSelectedLabels ?? bottomTheme.showUnselectedLabels!,
+              showUnselectedLabels: showUnselectedLabels ?? bottomTheme.showUnselectedLabels!,
             ),
           ],
         ),
@@ -657,7 +660,7 @@ class _Label extends StatelessWidget {
     if (item.label != null) {
       // Do not grow text in bottom navigation bar when we can show a tooltip
       // instead.
-      final MediaQueryData mediaQueryData = MediaQuery.of(context);
+      final MediaQueryData mediaQueryData = MediaQuery.of(context)!;
       text = MediaQuery(
         data: mediaQueryData.copyWith(
           textScaleFactor: math.min(1.0, mediaQueryData.textScaleFactor),
@@ -820,10 +823,10 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> with TickerPr
   }
 
   List<Widget> _createTiles() {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations = MaterialLocalizations.of(context)!;
     assert(localizations != null);
 
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData themeData = Theme.of(context)!;
     final BottomNavigationBarThemeData bottomTheme = BottomNavigationBarTheme.of(context);
 
     final TextStyle effectiveSelectedLabelStyle =
@@ -891,7 +894,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> with TickerPr
         colorTween: colorTween,
         flex: _evaluateFlex(_animations[i]),
         selected: i == widget.currentIndex,
-        showSelectedLabels: widget.showSelectedLabels ?? bottomTheme.showSelectedLabels ?? true,
+        showSelectedLabels: widget.showSelectedLabels,
         showUnselectedLabels: widget.showUnselectedLabels ?? bottomTheme.showUnselectedLabels ?? _defaultShowUnselected,
         indexLabel: localizations.tabLabel(tabIndex: i + 1, tabCount: widget.items.length),
         mouseCursor: effectiveMouseCursor,
@@ -920,7 +923,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> with TickerPr
     final BottomNavigationBarThemeData bottomTheme = BottomNavigationBarTheme.of(context);
 
     // Labels apply up to _bottomMargin padding. Remainder is media padding.
-    final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - widget.selectedFontSize / 2.0, 0.0);
+    final double additionalBottomPadding = math.max(MediaQuery.of(context)!.padding.bottom - widget.selectedFontSize / 2.0, 0.0);
     Color? backgroundColor;
     switch (_effectiveType) {
       case BottomNavigationBarType.fixed:
@@ -940,7 +943,7 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> with TickerPr
           child: CustomPaint(
             painter: _RadialPainter(
               circles: _circles.toList(),
-              textDirection: Directionality.of(context),
+              textDirection: Directionality.of(context)!,
             ),
             child: Material( // Splashes.
               type: MaterialType.transparency,

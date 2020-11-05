@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Plakken",
   "selectAllButtonLabel": "Alles selecteren",
   "tabSemanticsLabel": "Tabblad $tabIndex van $tabCount",
-  "modalBarrierDismissLabel": "Sluiten",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Sluiten"
 }

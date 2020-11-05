@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/rendering.dart';
@@ -22,7 +24,7 @@ class TestSliverChildListDelegate extends SliverChildListDelegate {
 }
 
 class Alive extends StatefulWidget {
-  const Alive(this.alive, this.index, { Key? key }) : super(key: key);
+  const Alive(this.alive, this.index, { Key key }) : super(key: key);
   final bool alive;
   final int index;
 
@@ -369,7 +371,7 @@ void main() {
   });
 
   testWidgets('ListView automatically pad MediaQuery on axis', (WidgetTester tester) async {
-    EdgeInsets? innerMediaQueryPadding;
+    EdgeInsets innerMediaQueryPadding;
 
     await tester.pumpWidget(
       Directionality(
@@ -543,7 +545,7 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/43380.
     final ScrollController controller = ScrollController();
 
-    Widget buildListView({ required Axis scrollDirection }) {
+    Widget buildListView({@required Axis scrollDirection}) {
       assert(scrollDirection != null);
       return Directionality(
         textDirection: TextDirection.ltr,

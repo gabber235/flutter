@@ -461,6 +461,18 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
 
     assert(() {
       registerBoolServiceExtension(
+        name: 'invertOversizedImages',
+        getter: () async => debugInvertOversizedImages,
+        setter: (bool value) async {
+          if (debugInvertOversizedImages != value) {
+            debugInvertOversizedImages = value;
+            return _forceRebuild();
+          }
+          return Future<void>.value();
+        },
+      );
+
+      registerBoolServiceExtension(
         name: 'debugAllowBanner',
         getter: () => Future<bool>.value(WidgetsApp.debugAllowBannerOverride),
         setter: (bool value) {
@@ -698,7 +710,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
 
   /// Whether the Flutter engine has rasterized the first frame.
   ///
-  /// {@macro flutter.flutter_driver.WaitUntilFirstFrameRasterized}
+  /// {@macro flutter.frame_rasterized_vs_presented}
   ///
   /// See also:
   ///
@@ -709,7 +721,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
   /// A future that completes when the Flutter engine has rasterized the first
   /// frame.
   ///
-  /// {@macro flutter.flutter_driver.WaitUntilFirstFrameRasterized}
+  /// {@macro flutter.frame_rasterized_vs_presented}
   ///
   /// See also:
   ///
@@ -1080,7 +1092,7 @@ class RenderObjectToWidgetAdapter<T extends RenderObject> extends RenderObjectWi
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.child}
   final Widget? child;
 
   /// The [RenderObject] that is the parent of the [Element] created by this widget.

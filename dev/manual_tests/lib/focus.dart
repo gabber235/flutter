@@ -97,7 +97,7 @@ class _FocusDemoState extends State<FocusDemo> {
     super.dispose();
   }
 
-  KeyEventResult _handleKeyPress(FocusNode node, RawKeyEvent event) {
+  bool _handleKeyPress(FocusNode node, RawKeyEvent event) {
     if (event is RawKeyDownEvent) {
       print('Scope got key event: ${event.logicalKey}, $node');
       print('Keys down: ${RawKeyboard.instance.keysPressed}');
@@ -106,31 +106,31 @@ class _FocusDemoState extends State<FocusDemo> {
         if (event.isShiftPressed) {
           print('Moving to previous.');
           node.previousFocus();
-          return KeyEventResult.handled;
+          return true;
         } else {
           print('Moving to next.');
           node.nextFocus();
-          return KeyEventResult.handled;
+          return true;
         }
       }
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
         node.focusInDirection(TraversalDirection.left);
-        return KeyEventResult.handled;
+        return true;
       }
       if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
         node.focusInDirection(TraversalDirection.right);
-        return KeyEventResult.handled;
+        return true;
       }
       if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
         node.focusInDirection(TraversalDirection.up);
-        return KeyEventResult.handled;
+        return true;
       }
       if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
         node.focusInDirection(TraversalDirection.down);
-        return KeyEventResult.handled;
+        return true;
       }
     }
-    return KeyEventResult.ignored;
+    return false;
   }
 
   @override

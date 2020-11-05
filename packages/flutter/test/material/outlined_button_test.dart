@@ -11,7 +11,12 @@ import '../rendering/mock_canvas.dart';
 import '../widgets/semantics_tester.dart';
 
 void main() {
-  testWidgets('OutlinedButton, OutlinedButton.icon defaults', (WidgetTester tester) async {
+  testWidgets('OutlinedButton defaults', (WidgetTester tester) async {
+    final Finder rawButtonMaterial = find.descendant(
+      of: find.byType(OutlinedButton),
+      matching: find.byType(Material),
+    );
+
     const ColorScheme colorScheme = ColorScheme.light();
 
     // Enabled OutlinedButton
@@ -27,12 +32,7 @@ void main() {
       ),
     );
 
-    final Finder buttonMaterial = find.descendant(
-      of: find.byType(OutlinedButton),
-      matching: find.byType(Material),
-    );
-
-    Material material = tester.widget<Material>(buttonMaterial);
+    Material material = tester.widget<Material>(rawButtonMaterial);
     expect(material.animationDuration, const Duration(milliseconds: 200));
     expect(material.borderOnForeground, true);
     expect(material.borderRadius, null);
@@ -63,49 +63,7 @@ void main() {
     await gesture.up();
     await tester.pumpAndSettle();
     // No change vs enabled and not pressed.
-    material = tester.widget<Material>(buttonMaterial);
-    expect(material.animationDuration, const Duration(milliseconds: 200));
-    expect(material.borderOnForeground, true);
-    expect(material.borderRadius, null);
-    expect(material.clipBehavior, Clip.none);
-    expect(material.color, Colors.transparent);
-    expect(material.elevation, 0.0);
-    expect(material.shadowColor, const Color(0xff000000));
-    expect(material.shape, RoundedRectangleBorder(
-      side: BorderSide(
-        width: 1,
-        color: colorScheme.onSurface.withOpacity(0.12),
-      ),
-      borderRadius: BorderRadius.circular(4.0),
-    ));
-    expect(material.textStyle!.color, colorScheme.primary);
-    expect(material.textStyle!.fontFamily, 'Roboto');
-    expect(material.textStyle!.fontSize, 14);
-    expect(material.textStyle!.fontWeight, FontWeight.w500);
-    expect(material.type, MaterialType.button);
-
-    // Enabled OutlinedButton.icon
-    final Key iconButtonKey = UniqueKey();
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: ThemeData.from(colorScheme: colorScheme),
-        home: Center(
-          child: OutlinedButton.icon(
-            key: iconButtonKey,
-            onPressed: () { },
-            icon: const Icon(Icons.add),
-            label: const Text('label'),
-          ),
-        ),
-      ),
-    );
-
-    final Finder iconButtonMaterial = find.descendant(
-      of: find.byKey(iconButtonKey),
-      matching: find.byType(Material),
-    );
-
-    material = tester.widget<Material>(iconButtonMaterial);
+    material = tester.widget<Material>(rawButtonMaterial);
     expect(material.animationDuration, const Duration(milliseconds: 200));
     expect(material.borderOnForeground, true);
     expect(material.borderRadius, null);
@@ -139,7 +97,7 @@ void main() {
       ),
     );
 
-    material = tester.widget<Material>(buttonMaterial);
+    material = tester.widget<Material>(rawButtonMaterial);
     expect(material.animationDuration, const Duration(milliseconds: 200));
     expect(material.borderOnForeground, true);
     expect(material.borderRadius, null);
@@ -1051,7 +1009,7 @@ void main() {
                 home: Builder(
                   builder: (BuildContext context) {
                     return MediaQuery(
-                      data: MediaQuery.of(context).copyWith(
+                      data: MediaQuery.of(context)!.copyWith(
                         textScaleFactor: textScaleFactor,
                       ),
                       child: Directionality(
@@ -1190,7 +1148,7 @@ void main() {
         home: Builder(
           builder: (BuildContext context) {
             return MediaQuery(
-              data: MediaQuery.of(context).copyWith(
+              data: MediaQuery.of(context)!.copyWith(
                 textScaleFactor: 2,
               ),
               child: Scaffold(

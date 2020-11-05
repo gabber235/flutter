@@ -20,6 +20,5 @@
   "pasteButtonLabel": "I-paste",
   "selectAllButtonLabel": "Piliin Lahat",
   "tabSemanticsLabel": "Tab $tabIndex ng $tabCount",
-  "modalBarrierDismissLabel": "I-dismiss",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "I-dismiss"
 }

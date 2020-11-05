@@ -45,17 +45,13 @@ import 'ticker_provider.dart';
 /// if widgets in an overlay entry with [maintainState] set to true repeatedly
 /// call [State.setState], the user's battery will be drained unnecessarily.
 ///
-/// [OverlayEntry] is a [ChangeNotifier] that notifies when the widget built by
-/// [builder] is mounted or unmounted, whose exact state can be queried by
-/// [mounted].
-///
 /// See also:
 ///
 ///  * [Overlay]
 ///  * [OverlayState]
 ///  * [WidgetsApp]
 ///  * [MaterialApp]
-class OverlayEntry extends ChangeNotifier {
+class OverlayEntry {
   /// Creates an overlay entry.
   ///
   /// To insert the entry into an [Overlay], first find the overlay using
@@ -115,19 +111,6 @@ class OverlayEntry extends ChangeNotifier {
     _maintainState = value;
     assert(_overlay != null);
     _overlay!._didChangeEntryOpacity();
-  }
-
-  /// Whether the [OverlayEntry] is currently mounted in the widget tree.
-  ///
-  /// The [OverlayEntry] notifies its listeners when this value changes.
-  bool get mounted => _mounted;
-  bool _mounted = false;
-  void _updateMounted(bool value) {
-    if (value == _mounted) {
-      return;
-    }
-    _mounted = value;
-    notifyListeners();
   }
 
   OverlayState? _overlay;
@@ -190,18 +173,6 @@ class _OverlayEntryWidget extends StatefulWidget {
 
 class _OverlayEntryWidgetState extends State<_OverlayEntryWidget> {
   @override
-  void initState() {
-    super.initState();
-    widget.entry._updateMounted(true);
-  }
-
-  @override
-  void dispose() {
-    widget.entry._updateMounted(false);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return TickerMode(
       enabled: widget.tickerEnabled,
@@ -262,7 +233,7 @@ class Overlay extends StatefulWidget {
   /// To remove an entry from an [Overlay], use [OverlayEntry.remove].
   final List<OverlayEntry> initialEntries;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
   final Clip clipBehavior;
@@ -547,7 +518,7 @@ class _Theatre extends MultiChildRenderObjectWidget {
   _RenderTheatre createRenderObject(BuildContext context) {
     return _RenderTheatre(
       skipCount: skipCount,
-      textDirection: Directionality.of(context),
+      textDirection: Directionality.of(context)!,
       clipBehavior: clipBehavior,
     );
   }
@@ -556,7 +527,7 @@ class _Theatre extends MultiChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, _RenderTheatre renderObject) {
     renderObject
       ..skipCount = skipCount
-      ..textDirection = Directionality.of(context)
+      ..textDirection = Directionality.of(context)!
       ..clipBehavior = clipBehavior;
   }
 
@@ -639,7 +610,7 @@ class _RenderTheatre extends RenderBox with ContainerRenderObjectMixin<RenderBox
     }
   }
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
   Clip get clipBehavior => _clipBehavior;

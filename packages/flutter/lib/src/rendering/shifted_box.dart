@@ -653,7 +653,7 @@ class RenderUnconstrainedBox extends RenderAligningShiftedBox with DebugOverflow
   Rect _overflowChildRect = Rect.zero;
   bool _isOverflowing = false;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.none], and must not be null.
   Clip get clipBehavior => _clipBehavior;

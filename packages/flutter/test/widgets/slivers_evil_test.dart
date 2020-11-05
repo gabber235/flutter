@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/physics.dart';
@@ -44,10 +46,10 @@ class TestBehavior extends ScrollBehavior {
 }
 
 class TestScrollPhysics extends ClampingScrollPhysics {
-  const TestScrollPhysics({ ScrollPhysics? parent }) : super(parent: parent);
+  const TestScrollPhysics({ ScrollPhysics parent }) : super(parent: parent);
 
   @override
-  TestScrollPhysics applyTo(ScrollPhysics? ancestor) {
+  TestScrollPhysics applyTo(ScrollPhysics ancestor) {
     return TestScrollPhysics(parent: parent?.applyTo(ancestor) ?? ancestor);
   }
 
@@ -57,9 +59,9 @@ class TestScrollPhysics extends ClampingScrollPhysics {
 
 class TestViewportScrollPosition extends ScrollPositionWithSingleContext {
   TestViewportScrollPosition({
-    required ScrollPhysics physics,
-    required ScrollContext context,
-    ScrollPosition? oldPosition,
+    ScrollPhysics physics,
+    ScrollContext context,
+    ScrollPosition oldPosition,
   }) : super(physics: physics, context: context, oldPosition: oldPosition);
 
   @override

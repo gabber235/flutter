@@ -83,7 +83,7 @@ abstract class DeviceDiscovery {
   /// returned. For such behavior see [workingDevice].
   Future<void> chooseWorkingDevice();
 
-  /// Selects a device to work with by device ID.
+  /// Select the device with ID strati with deviceId, return the device.
   Future<void> chooseWorkingDeviceById(String deviceId);
 
   /// A device to work with.
@@ -130,9 +130,6 @@ abstract class Device {
   ///
   /// Assumes the device doesn't have a secure unlock pattern.
   Future<void> unlock();
-
-  /// Attempt to reboot the phone, if possible.
-  Future<void> reboot();
 
   /// Emulate a tap on the touch screen.
   Future<void> tap(int x, int y);
@@ -578,11 +575,6 @@ class AndroidDevice extends Device {
   String toString() {
     return '$deviceId $deviceInfo';
   }
-
-  @override
-  Future<void> reboot() {
-    return adb(<String>['reboot']);
-  }
 }
 
 class IosDeviceDiscovery implements DeviceDiscovery {
@@ -644,7 +636,7 @@ class IosDeviceDiscovery implements DeviceDiscovery {
   Future<List<String>> discoverDevices() async {
     final List<dynamic> results = json.decode(await eval(
       path.join(flutterDirectory.path, 'bin', 'flutter'),
-      <String>['devices', '--machine', '--suppress-analytics', '--device-timeout', '5'],
+      <String>['devices', '--machine', '--suppress-analytics', '--timeout', '10'],
     )) as List<dynamic>;
 
     // [
@@ -748,11 +740,6 @@ class IosDevice extends Device {
 
   @override
   Future<void> stop(String packageName) async {}
-
-  @override
-  Future<void> reboot() {
-    return Process.run('idevicesyslog', <String>['reboot', '-u', deviceId]);
-  }
 }
 
 /// Fuchsia device.
@@ -795,11 +782,6 @@ class FuchsiaDevice extends Device {
   @override
   Stream<String> get logcat {
     throw UnimplementedError();
-  }
-
-  @override
-  Future<void> reboot() async {
-    // Unsupported.
   }
 }
 
@@ -864,11 +846,6 @@ class FakeDevice extends Device {
 
   @override
   Future<void> stop(String packageName) async {}
-
-  @override
-  Future<void> reboot() async {
-    // Unsupported.
-  }
 }
 
 class FakeDeviceDiscovery implements DeviceDiscovery {

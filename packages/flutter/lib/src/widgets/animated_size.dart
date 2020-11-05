@@ -103,7 +103,7 @@ class AnimatedSize extends SingleChildRenderObjectWidget {
   /// The [TickerProvider] for this widget.
   final TickerProvider vsync;
 
-  /// {@macro flutter.material.Material.clipBehavior}
+  /// {@macro flutter.widgets.Clip}
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
   final Clip clipBehavior;
@@ -116,7 +116,7 @@ class AnimatedSize extends SingleChildRenderObjectWidget {
       reverseDuration: reverseDuration,
       curve: curve,
       vsync: vsync,
-      textDirection: Directionality.maybeOf(context),
+      textDirection: Directionality.of(context),
       clipBehavior: clipBehavior,
     );
   }
@@ -129,7 +129,7 @@ class AnimatedSize extends SingleChildRenderObjectWidget {
       ..reverseDuration = reverseDuration
       ..curve = curve
       ..vsync = vsync
-      ..textDirection = Directionality.maybeOf(context)
+      ..textDirection = Directionality.of(context)
       ..clipBehavior = clipBehavior;
   }
 

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// @dart = 2.8
+
 @TestOn('!chrome') // diagnostics use Platform.operatingSystem.
 import 'dart:io' show Platform;
 
@@ -9,10 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/widgets.dart';
 
 class Leaf extends StatefulWidget {
-  const Leaf({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const Leaf({ Key key, this.child }) : super(key: key);
   final Widget child;
   @override
   _LeafState createState() => _LeafState();
@@ -74,7 +73,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(true);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(true);
     await tester.drag(find.byType(ListView), const Offset(0.0, 300.0)); // back to top
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
@@ -84,7 +83,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61), skipOffstage: false), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(false);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(false);
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(30)), findsOneWidget);
@@ -121,7 +120,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(true);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(true);
     await tester.drag(find.byType(ListView), const Offset(0.0, 300.0)); // back to top
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
@@ -131,7 +130,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61), skipOffstage: false), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(false);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(false);
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(30)), findsOneWidget);
@@ -170,7 +169,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(true);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(true);
     await tester.drag(find.byType(GridView), const Offset(0.0, 300.0)); // back to top
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
@@ -180,7 +179,7 @@ void main() {
     expect(find.byKey(const GlobalObjectKey<_LeafState>(60)), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(61), skipOffstage: false), findsNothing);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(90), skipOffstage: false), findsNothing);
-    const GlobalObjectKey<_LeafState>(60).currentState!.setKeepAlive(false);
+    const GlobalObjectKey<_LeafState>(60).currentState.setKeepAlive(false);
     await tester.pump();
     expect(find.byKey(const GlobalObjectKey<_LeafState>(3)), findsOneWidget);
     expect(find.byKey(const GlobalObjectKey<_LeafState>(30)), findsOneWidget);
@@ -346,10 +345,10 @@ void main() {
       '                             constraints: BoxConstraints(w=800.0, h=400.0)\n'
       '                             size: Size(800.0, 400.0)\n'
     ));
-    const GlobalObjectKey<_LeafState>(0).currentState!.setKeepAlive(true);
+    const GlobalObjectKey<_LeafState>(0).currentState.setKeepAlive(true);
     await tester.drag(find.byType(ListView), const Offset(0.0, -1000.0));
     await tester.pump();
-    const GlobalObjectKey<_LeafState>(3).currentState!.setKeepAlive(true);
+    const GlobalObjectKey<_LeafState>(3).currentState.setKeepAlive(true);
     await tester.drag(find.byType(ListView), const Offset(0.0, -1000.0));
     await tester.pump();
     expect(tester.binding.renderView.toStringDeep(minLevel: DiagnosticLevel.info), equalsIgnoringHashCodes(

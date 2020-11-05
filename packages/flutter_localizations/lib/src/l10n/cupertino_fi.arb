@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Liitä",
   "selectAllButtonLabel": "Valitse kaikki",
   "tabSemanticsLabel": "Välilehti $tabIndex/$tabCount",
-  "modalBarrierDismissLabel": "Ohita",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Ohita"
 }

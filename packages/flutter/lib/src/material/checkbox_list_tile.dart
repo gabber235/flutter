@@ -262,7 +262,6 @@ class CheckboxListTile extends StatelessWidget {
     required this.onChanged,
     this.activeColor,
     this.checkColor,
-    this.tileColor,
     this.title,
     this.subtitle,
     this.isThreeLine = false,
@@ -274,7 +273,6 @@ class CheckboxListTile extends StatelessWidget {
     this.contentPadding,
     this.tristate = false,
     this.shape,
-    this.selectedTileColor,
   }) : assert(tristate != null),
        assert(tristate || value != null),
        assert(isThreeLine != null),
@@ -321,9 +319,6 @@ class CheckboxListTile extends StatelessWidget {
   ///
   /// Defaults to Color(0xFFFFFFFF).
   final Color? checkColor;
-
-  /// {@macro flutter.material.ListTile.tileColor}
-  final Color? tileColor;
 
   /// The primary content of the list tile.
   ///
@@ -386,11 +381,8 @@ class CheckboxListTile extends StatelessWidget {
   /// If tristate is false (the default), [value] must not be null.
   final bool tristate;
 
-  /// {@macro flutter.material.ListTileTheme.shape}
+  /// {@macro flutter.material.ListTile.shape}
   final ShapeBorder? shape;
-
-  /// If non-null, defines the background color when [CheckboxListTile.selected] is true.
-  final Color? selectedTileColor;
 
   void _handleValueChange() {
     assert(onChanged != null);
@@ -432,7 +424,7 @@ class CheckboxListTile extends StatelessWidget {
     }
     return MergeSemantics(
       child: ListTileTheme.merge(
-        selectedColor: activeColor ?? Theme.of(context).accentColor,
+        selectedColor: activeColor ?? Theme.of(context)!.accentColor,
         child: ListTile(
           leading: leading,
           title: title,
@@ -446,8 +438,6 @@ class CheckboxListTile extends StatelessWidget {
           autofocus: autofocus,
           contentPadding: contentPadding,
           shape: shape,
-          selectedTileColor: selectedTileColor,
-          tileColor: tileColor,
         ),
       ),
     );

@@ -40,15 +40,17 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
       keyboardType: TextInputType.multiline,
       prefix: const Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
       suffix: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: CupertinoButton(
+          color: CupertinoColors.activeGreen,
           minSize: 0.0,
           child: const Icon(
-            CupertinoIcons.arrow_up_circle_fill,
-            size: 28.0,
-            color: CupertinoColors.activeGreen,
+            CupertinoIcons.up_arrow,
+            size: 21.0,
+            color: CupertinoColors.white,
           ),
-          padding: const EdgeInsets.only(bottom: 4),
+          padding: const EdgeInsets.all(2.0),
+          borderRadius: BorderRadius.circular(15.0),
           onPressed: ()=> setState(()=> _chatTextController.clear()),
         ),
       ),
@@ -61,7 +63,7 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
   Widget _buildNameField() {
     return const CupertinoTextField(
       prefix: Icon(
-        CupertinoIcons.person_fill,
+        CupertinoIcons.person_solid,
         color: CupertinoColors.lightBackgroundGray,
         size: 28.0,
       ),
@@ -79,9 +81,9 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
   Widget _buildEmailField() {
     return const CupertinoTextField(
       prefix: Icon(
-        CupertinoIcons.envelope_fill,
+        CupertinoIcons.mail_solid,
         color: CupertinoColors.lightBackgroundGray,
-        size: 26,
+        size: 28.0,
       ),
       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
       clearButtonMode: OverlayVisibilityMode.editing,
@@ -98,9 +100,9 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
     return CupertinoTextField(
       controller: _locationTextController,
       prefix: const Icon(
-        CupertinoIcons.location_fill,
+        CupertinoIcons.location_solid,
         color: CupertinoColors.lightBackgroundGray,
-        size: 26,
+        size: 28.0,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
       clearButtonMode: OverlayVisibilityMode.editing,
@@ -115,9 +117,9 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
   Widget _buildPinField() {
     return const CupertinoTextField(
       prefix: Icon(
-        CupertinoIcons.lock_open_fill,
+        CupertinoIcons.padlock_solid,
         color: CupertinoColors.lightBackgroundGray,
-        size: 26,
+        size: 28.0,
       ),
       padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),
       clearButtonMode: OverlayVisibilityMode.editing,
@@ -135,9 +137,9 @@ class _CupertinoTextFieldDemoState extends State<CupertinoTextFieldDemo> {
     return CupertinoTextField(
       controller: TextEditingController(text: 'colleague, reading club'),
       prefix: const Icon(
-        CupertinoIcons.tag_fill,
+        CupertinoIcons.tags_solid,
         color: CupertinoColors.lightBackgroundGray,
-        size: 26,
+        size: 28.0,
       ),
       enabled: false,
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 12.0),

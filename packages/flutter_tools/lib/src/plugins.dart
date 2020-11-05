@@ -1145,12 +1145,11 @@ void _createPlatformPluginSymlinks(Directory symlinkDirectory, List<dynamic> pla
 /// Rewrites the `.flutter-plugins` file of [project] based on the plugin
 /// dependencies declared in `pubspec.yaml`.
 ///
+/// If `checkProjects` is true, then plugins are only injected into directories
+/// which already exist.
+///
 /// Assumes `pub get` has been executed since last change to `pubspec.yaml`.
-Future<void> refreshPluginsList(
-  FlutterProject project, {
-  bool iosPlatform = false,
-  bool macOSPlatform = false,
-}) async {
+Future<void> refreshPluginsList(FlutterProject project, {bool checkProjects = false}) async {
   final List<Plugin> plugins = await findPlugins(project);
 
   // TODO(franciscojma): Remove once migration is complete.
@@ -1160,10 +1159,12 @@ Future<void> refreshPluginsList(
   final bool changed = _writeFlutterPluginsList(project, plugins);
   if (changed || legacyChanged) {
     createPluginSymlinks(project, force: true);
-    if (iosPlatform) {
+    if (!checkProjects || project.ios.existsSync()) {
       globals.cocoaPods.invalidatePodInstallOutput(project.ios);
     }
-    if (macOSPlatform) {
+    // TODO(stuartmorgan): Potentially add checkProjects once a decision has
+    // made about how to handle macOS in existing projects.
+    if (project.macos.existsSync()) {
       globals.cocoaPods.invalidatePodInstallOutput(project.macos);
     }
   }
@@ -1171,40 +1172,34 @@ Future<void> refreshPluginsList(
 
 /// Injects plugins found in `pubspec.yaml` into the platform-specific projects.
 ///
+/// If `checkProjects` is true, then plugins are only injected into directories
+/// which already exist.
+///
 /// Assumes [refreshPluginsList] has been called since last change to `pubspec.yaml`.
-Future<void> injectPlugins(
-  FlutterProject project, {
-  bool androidPlatform = false,
-  bool iosPlatform = false,
-  bool linuxPlatform = false,
-  bool macOSPlatform = false,
-  bool windowsPlatform = false,
-  bool webPlatform = false,
-}) async {
+Future<void> injectPlugins(FlutterProject project, {bool checkProjects = false}) async {
   final List<Plugin> plugins = await findPlugins(project);
   // Sort the plugins by name to keep ordering stable in generated files.
   plugins.sort((Plugin left, Plugin right) => left.name.compareTo(right.name));
-  if (androidPlatform) {
+  if ((checkProjects && project.android.existsSync()) || !checkProjects) {
     await _writeAndroidPluginRegistrant(project, plugins);
   }
-  if (iosPlatform) {
+  if ((checkProjects && project.ios.existsSync()) || !checkProjects) {
     await _writeIOSPluginRegistrant(project, plugins);
   }
-  if (linuxPlatform) {
+  // TODO(stuartmorgan): Revisit the conditions here once the plans for handling
+  // desktop in existing projects are in place. For now, ignore checkProjects
+  // on desktop and always treat it as true.
+  if (featureFlags.isLinuxEnabled && project.linux.existsSync()) {
     await _writeLinuxPluginFiles(project, plugins);
   }
-  if (macOSPlatform) {
+  if (featureFlags.isMacOSEnabled && project.macos.existsSync()) {
     await _writeMacOSPluginRegistrant(project, plugins);
   }
-  if (windowsPlatform) {
+  if (featureFlags.isWindowsEnabled && project.windows.existsSync()) {
     await _writeWindowsPluginFiles(project, plugins);
   }
-  if (!project.isModule) {
-    final List<XcodeBasedProject> darwinProjects = <XcodeBasedProject>[
-      if (iosPlatform) project.ios,
-      if (macOSPlatform) project.macos,
-    ];
-    for (final XcodeBasedProject subproject in darwinProjects) {
+  for (final XcodeBasedProject subproject in <XcodeBasedProject>[project.ios, project.macos]) {
+    if (!project.isModule && (!checkProjects || subproject.existsSync())) {
       if (plugins.isNotEmpty) {
         await globals.cocoaPods.setupPodfile(subproject);
       }
@@ -1215,7 +1210,7 @@ Future<void> injectPlugins(
       }
     }
   }
-  if (webPlatform) {
+  if (featureFlags.isWebEnabled && project.web.existsSync()) {
     await _writeWebPluginRegistrant(project, plugins);
   }
 }

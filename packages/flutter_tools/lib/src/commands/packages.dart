@@ -117,6 +117,7 @@ class PackagesGetCommand extends FlutterCommand {
         directory: directory,
         upgrade: upgrade ,
         offline: boolArg('offline'),
+        checkLastModified: false,
         generateSyntheticPackage: flutterProject.manifest.generateSyntheticPackage,
       );
       pubGetTimer.stop();
@@ -146,13 +147,13 @@ class PackagesGetCommand extends FlutterCommand {
     final FlutterProject rootProject = FlutterProject.fromPath(target);
 
     await _runPubGet(target, rootProject);
-    await rootProject.regeneratePlatformSpecificTooling();
+    await rootProject.ensureReadyForPlatformSpecificTooling(checkProjects: true);
 
     // Get/upgrade packages in example app as well
     if (rootProject.hasExampleApp) {
       final FlutterProject exampleProject = rootProject.example;
       await _runPubGet(exampleProject.directory.path, exampleProject);
-      await exampleProject.regeneratePlatformSpecificTooling();
+      await exampleProject.ensureReadyForPlatformSpecificTooling(checkProjects: true);
     }
 
     return FlutterCommandResult.success();

@@ -20,6 +20,5 @@
   "pasteButtonLabel": "Чаптоо",
   "selectAllButtonLabel": "Баарын тандоо",
   "tabSemanticsLabel": "$tabCount ичинен $tabIndex-өтмөк",
-  "modalBarrierDismissLabel": "Жабуу",
-  "searchTextFieldPlaceholerLabel": "Search"
+  "modalBarrierDismissLabel": "Жабуу"
 }

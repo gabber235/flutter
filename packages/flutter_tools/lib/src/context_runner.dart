@@ -88,13 +88,7 @@ Future<T> runInContext<T>(
         androidSdk: globals.androidSdk,
         featureFlags: featureFlags,
       ),
-      ApplicationPackageFactory: () => ApplicationPackageFactory(
-        userMessages: globals.userMessages,
-        processManager: globals.processManager,
-        logger: globals.logger,
-        fileSystem: globals.fs,
-        androidSdk: globals.androidSdk,
-      ),
+      ApplicationPackageFactory: () => ApplicationPackageFactory(),
       Artifacts: () => CachedArtifacts(
         fileSystem: globals.fs,
         cache: globals.cache,
@@ -240,6 +234,8 @@ Future<T> runInContext<T>(
         botDetector: globals.botDetector,
         platform: globals.platform,
         usage: globals.flutterUsage,
+        // Avoid a circular dependency by making this access lazy.
+        toolStampFile: () => globals.cache.getStampFileFor('flutter_tools'),
       ),
       ShutdownHooks: () => ShutdownHooks(logger: globals.logger),
       Stdio: () => Stdio(),
